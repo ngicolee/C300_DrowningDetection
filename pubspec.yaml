@@ -74,9 +74,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: orilla
+    - family: custom
       fonts:
-      - asset: assets/fonts/orilla.ttf
+      - asset: assets/fonts/custom-fonts.ttf
+    - family: Raleway
+      fonts:
+      - asset: assets/fonts/Raleway-Regular.ttf
+      - asset: assets/fonts/Raleway-Bold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
