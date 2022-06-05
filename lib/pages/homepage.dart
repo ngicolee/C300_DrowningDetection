@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, unnecessary_this
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/iconhelper.dart';
@@ -7,12 +7,11 @@ import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/selectedcategorypage.dart';
 import 'package:c300drowningdetection/widgets/categorybtmbar.dart';
 import 'package:c300drowningdetection/widgets/categorypages.dart';
-import 'package:c300drowningdetection/widgets/iconfont.dart';
+import 'package:c300drowningdetection/widgets/mainappbar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
 
   List<HomeCategory> categories = Utils.getCategories();
 
@@ -20,21 +19,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: const Drawer(),
-        appBar: AppBar(
-            title: IconFont(
-                iconName: IconFontHelper.APP_ICON,
-                color: AppColors.MAIN_COLOR,
-                size: 50),
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            centerTitle: true,
-            iconTheme: const IconThemeData(color: AppColors.MAIN_COLOR),
-            actions: [
-              Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  padding: const EdgeInsets.all(10),
-                  child: ClipOval(child: Image.asset('assets/imgs/Sample.png')))
-            ]),
+        appBar: MainAppBar(),
         body: Container(
             child: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -56,7 +41,7 @@ class HomePage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    SelectedCategoryPage()));
+                                    SelectedCategoryPage(selectedCategory: this.categories[index],)));
                       });
                   // Required to Navigate to Another Page
                 },

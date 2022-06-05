@@ -7,7 +7,7 @@ void main() {
   runApp(MaterialApp(
       theme: ThemeData(fontFamily: 'Raleway'),
       debugShowCheckedModeBanner: false,
-      home: SplashPage(duration: 4, goToPage: const WelcomePage())));
+      home: SplashPage(duration: 4, goToPage: WelcomePage())));
 }
 // ignore: must_be_immutable
 

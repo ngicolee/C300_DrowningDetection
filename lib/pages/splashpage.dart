@@ -5,8 +5,8 @@ class SplashPage extends StatelessWidget {
   int duration = 0;
   Widget goToPage;
 
-  SplashPage({Key? key, required this.goToPage, required this.duration})
-      : super(key: key);
+  // ignore: use_key_in_widget_constructors
+  SplashPage({ required this.goToPage, required this.duration});
 
   @override
   Widget build(BuildContext context) {
