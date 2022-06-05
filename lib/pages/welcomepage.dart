@@ -1,5 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'package:c300drowningdetection/pages/loginpage.dart';
+import 'package:c300drowningdetection/pages/registrationpage.dart';
 import 'package:flutter/material.dart';
 
 import 'homepage.dart';
@@ -73,7 +75,8 @@ class WelcomePage extends StatelessWidget {
                     icon: const Icon(Icons.login_outlined,
                         size: 32, color: Colors.white),
                     label: buildText('Registration'),
-                    onPressed: () {}),
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage())); 
+                    }),
                 const SizedBox(height: 4),
                 ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
@@ -85,7 +88,7 @@ class WelcomePage extends StatelessWidget {
                     icon: const Icon(Icons.app_registration_outlined,
                         size: 32, color: Colors.white),
                     label: buildText('Login to System'),
-                    onPressed: () {}),
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
               ]),
         )
       ]),

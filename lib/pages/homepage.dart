@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, unnecessary_this
 
-import 'package:c300drowningdetection/helpers/appcolors.dart';
-import 'package:c300drowningdetection/helpers/iconhelper.dart';
 import 'package:c300drowningdetection/helpers/utils.dart';
 import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/selectedcategorypage.dart';
