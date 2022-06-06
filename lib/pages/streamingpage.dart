@@ -71,7 +71,7 @@ class StreamingPageState extends State<StreamingPage> {
               VideoPlayerCustom(),
 
               //Container below would be allocated for video streaming.
-              Container(height: 300,)])))     
+              ])))
             ])));
   }
 }
