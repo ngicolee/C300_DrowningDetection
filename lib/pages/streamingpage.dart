@@ -2,6 +2,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:c300drowningdetection/models/subcategory.dart';
+import 'package:c300drowningdetection/widgets/VideoPlayer.dart';
 import 'package:c300drowningdetection/widgets/categoryicons.dart';
 import 'package:c300drowningdetection/widgets/mainappbar.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,8 @@ class StreamingPageState extends State<StreamingPage> {
               Expanded(child: Container(child: Column(crossAxisAlignment: CrossAxisAlignment.center,
               children: [const Padding( padding: EdgeInsets.only(top: 20, left: 20, right: 20),
               child: Text('Camera Feed would be implemented below')),
+              VideoPlayerCustom(),
+
               //Container below would be allocated for video streaming.
               Container(height: 300,)])))     
             ])));
