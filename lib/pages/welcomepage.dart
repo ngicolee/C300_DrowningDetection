@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/pages/loginpage.dart';
 import 'package:c300drowningdetection/pages/registrationpage.dart';
+import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:flutter/material.dart';
 
 import 'homepage.dart';
@@ -62,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => LiveStreamScreen()));
                       }),
                   const SizedBox(height: 30),
                   ElevatedButton.icon(
