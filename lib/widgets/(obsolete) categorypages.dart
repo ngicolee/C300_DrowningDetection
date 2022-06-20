@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, unnecessary_this
 
 import 'package:c300drowningdetection/models/homecategory.dart';
-import 'package:c300drowningdetection/widgets/categoryicons.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20categoryicons.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPages extends StatelessWidget {

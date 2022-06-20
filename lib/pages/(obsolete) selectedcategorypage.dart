@@ -2,9 +2,9 @@
 
 import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/models/subcategory.dart';
-import 'package:c300drowningdetection/pages/streamingpage.dart';
-import 'package:c300drowningdetection/widgets/categoryicons.dart';
-import 'package:c300drowningdetection/widgets/mainappbar.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20streamingpage.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20categoryicons.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCategoryPage extends StatelessWidget {

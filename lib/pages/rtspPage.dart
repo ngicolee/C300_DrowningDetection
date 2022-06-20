@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
@@ -25,7 +29,33 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          "LiveStream Page",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.MAIN_COLOR,
+        elevation: 0.0,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (ctx) => MainHomePage(),
+                                    ),
+                                  );
+            }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+              icon: Icon(Icons.notifications_none, color: Colors.white),
+              onPressed: () {}),
+        ],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

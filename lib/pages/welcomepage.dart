@@ -1,11 +1,11 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
-import 'package:c300drowningdetection/pages/loginpage.dart';
-import 'package:c300drowningdetection/pages/registrationpage.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20loginpage.dart';
+import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20registrationpage.dart';
+import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:flutter/material.dart';
-
-import 'homepage.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -56,9 +56,9 @@ class WelcomePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 32, vertical: 4),
                           minimumSize: const Size(350, 20)),
-                      icon: const Icon(Icons.home_filled,
+                      icon: const Icon(Icons.video_camera_front,
                           size: 32, color: Colors.white),
-                      label: buildText('Homepage'),
+                      label: buildText('Video Streaming'),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -97,7 +97,24 @@ class WelcomePage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => MainLoginPage()));
+                      }),
+                      const SizedBox(height: 4),
+                  ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(255, 0, 183, 255)
+                              .withOpacity(0.5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 4),
+                          minimumSize: const Size(350, 20)),
+                      icon: const Icon(Icons.home,
+                          size: 32, color: Colors.white),
+                      label: buildText('Temp. HomePage'),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainHomePage()));
                       }),
                 ]),
           ),

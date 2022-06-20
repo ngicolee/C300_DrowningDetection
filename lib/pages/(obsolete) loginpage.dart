@@ -1,10 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:c300drowningdetection/colorpalette.dart';
-import 'package:c300drowningdetection/pages/forgotpwpage.dart';
-import 'package:c300drowningdetection/pages/registrationpage.dart';
-import 'package:c300drowningdetection/widgets/loginandregisterbackground.dart';
-import 'package:c300drowningdetection/widgets/loginwidgets.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20forgotpwpage.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20registrationpage.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginandregisterbackground.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginwidgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       BackgroundImage(
-        image: 'assets/imgs/LoginBackground.jpg',
+        image: 'assets/imgs/Background.jpg',
       ),
       Scaffold(
         backgroundColor: Colors.transparent,

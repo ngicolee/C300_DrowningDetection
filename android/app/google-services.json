@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "609484616252",
+    "firebase_url": "https://c300-drowning-detection-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "c300-drowning-detection-system",
+    "storage_bucket": "c300-drowning-detection-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609484616252:android:6fa1c2b37f31f38c0cc939",
+        "android_client_info": {
+          "package_name": "com.example.c300drowningdetection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609484616252-0ebkcbo3ctvqgervl9ug4965n9us9eoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzzTGLgQH8CHAECOSZU8hB0hOtXYfHde8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609484616252-0ebkcbo3ctvqgervl9ug4965n9us9eoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

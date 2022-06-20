@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, use_key_in_widget_constructors
 
 import 'package:c300drowningdetection/colorpalette.dart';
-import 'package:c300drowningdetection/widgets/forgotusrbtn.dart';
-import 'package:c300drowningdetection/widgets/loginandregisterbackground.dart';
-import 'package:c300drowningdetection/widgets/loginusrinput.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20forgotusrbtn.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginandregisterbackground.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginusrinput.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPwPage extends StatelessWidget {

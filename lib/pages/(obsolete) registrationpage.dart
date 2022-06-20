@@ -3,10 +3,10 @@
 import 'dart:ui';
 
 import 'package:c300drowningdetection/colorpalette.dart';
-import 'package:c300drowningdetection/pages/loginpage.dart';
-import 'package:c300drowningdetection/widgets/loginandregisterbackground.dart';
-import 'package:c300drowningdetection/widgets/loginusrinput.dart';
-import 'package:c300drowningdetection/widgets/registerbtn.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20loginpage.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginandregisterbackground.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20loginusrinput.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20registerbtn.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Stack(children: [
-      BackgroundImage(image: 'assets/imgs/LoginBackground.jpg'),
+      BackgroundImage(image: 'assets/imgs/Background.jpg'),
       Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(

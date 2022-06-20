@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_this, must_be_immutable
 
-import 'package:c300drowningdetection/widgets/iconfont.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20iconfont.dart';
 import 'package:flutter/material.dart';
 
 class CategoryIcon extends StatelessWidget {

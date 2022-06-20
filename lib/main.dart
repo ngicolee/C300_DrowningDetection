@@ -1,8 +1,12 @@
-import 'package:c300drowningdetection/pages/forgotpwpage.dart';
-import 'package:c300drowningdetection/pages/loginpage.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:c300drowningdetection/pages/(obsolete)%20forgotpwpage.dart';
+import 'package:c300drowningdetection/pages/(obsolete)%20loginpage.dart';
+import 'package:c300drowningdetection/pages/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/pages/splashpage.dart';
-import 'package:c300drowningdetection/pages/welcomepage.dart';
+
+import 'pages/mainloginpage.dart';
 
 void main() {
   runApp(
@@ -11,12 +15,8 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: SplashPage(
         duration: 4,
-        goToPage: WelcomePage(),
+        goToPage: MainLoginPage(),
       ),
-      routes: {
-        'Login': (context) => LoginPage(),
-        'ForgotPassword': (context) => ForgotPwPage(),
-      }
     ),
   );
 }
