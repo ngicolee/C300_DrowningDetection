@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -6,19 +9,22 @@ class SplashPage extends StatelessWidget {
   Widget goToPage;
 
   // ignore: use_key_in_widget_constructors
-  SplashPage({ required this.goToPage, required this.duration});
+  SplashPage({required this.goToPage, required this.duration});
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: duration), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => goToPage));
+        context,
+        MaterialPageRoute(builder: (context) => goToPage),
+      );
     });
     return Scaffold(
-        body: Container(
-            color: const Color.fromARGB(255, 0, 183, 255),
-            alignment: Alignment.center,
-            child:
-                const Icon(Icons.pool_sharp, color: Colors.white, size: 200)));
+      body: Container(
+        child: Icon(Icons.pool_sharp, color: Colors.white, size: 200),
+        color: AppColors.MAIN_COLOR,
+        alignment: Alignment.center,
+      ), 
+    );
   }
 }

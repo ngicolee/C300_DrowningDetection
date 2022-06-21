@@ -3,6 +3,7 @@
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20homepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: FutureBuilder(
         future: _initializeFireBase(),
         builder: (context, snapshot) {
@@ -40,14 +42,11 @@ class _MainLoginPageState extends State<MainLoginPage> {
 }
 
 class LoginPage extends StatefulWidget {
-  
   @override
   State<LoginPage> createState() => _LoginPageState();
-  
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   Future<User?> loginCredentials(
       {required String email,
       required String password,
@@ -67,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
- String p =
-    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  String p =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   late RegExp regExp = new RegExp(p);
 
   @override
@@ -86,14 +85,18 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Drowning Detection System",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
+              Center(
+                child: ClipOval(
+                  child: Container(
+                      width: 160,
+                      height: 160,
+                      color: AppColors.MAIN_COLOR,
+                      alignment: Alignment.center,
+                      child: const Icon(Icons.pool_sharp,
+                          color: Colors.white, size: 130)),
                 ),
               ),
+              SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
@@ -107,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 44.0),
+              SizedBox(height: 30.0),
               TextFormField(
                 validator: (value) {
                   if (value == "") {
@@ -129,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                 validator: (value) {
                   if (value == "") {
                     return "Please Fill in Password";
-                  } 
+                  }
                   return "";
                 },
                 controller: _passwordController,
@@ -140,16 +143,26 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 10.0),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot Your Password?",
-                  style: TextStyle(
-                    color: AppColors.MAIN_COLOR,
+              Row(
+                children: [
+                  Text("Don't have an account?"),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => MainRegistrationPage(),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3),
+                      child: Text(
+                        "Register Here!",
+                        style: TextStyle(color: AppColors.MAIN_COLOR),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-              SizedBox(height: 88.0),
+              SizedBox(height: 50.0),
               Container(
                 width: double.infinity,
                 child: RawMaterialButton(
