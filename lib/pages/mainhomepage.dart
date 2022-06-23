@@ -7,7 +7,14 @@ import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:flutter/material.dart';
 
-class MainHomePage extends StatelessWidget {
+class MainHomePage extends StatefulWidget {
+  MainHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MainHomePage> createState() => _MainHomePageState();
+}
+
+class _MainHomePageState extends State<MainHomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   Widget _buildCategoryCards(String image) {
@@ -24,13 +31,216 @@ class MainHomePage extends StatelessWidget {
     );
   }
 
-  MainHomePage({Key? key}) : super(key: key);
+  bool homeColor = true;
+
+  bool mapColor = false;
+
+  bool qrColor = false;
+
+  bool aboutColor = false;
+
+  bool contactUsColor = false;
+
+  Widget _buildDrawer() {
+    return Drawer(
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: Text(
+              "dxterchua (WIP)",
+              style: TextStyle(color: Colors.black),
+            ),
+            currentAccountPicture: CircleAvatar(
+                maxRadius: 40,
+                child: Image.asset("assets/imgs/TestProfilePicture.png")),
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            accountEmail: Text(
+              "dchua647@gmail.com",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          ListTile(
+            selected: homeColor,
+            onTap: () {
+              setState(() {
+                homeColor = true;
+                mapColor = false;
+                qrColor = false;
+                aboutColor = false;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+          ListTile(
+            selected: mapColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = true;
+                qrColor = false;
+                aboutColor = false;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.map_sharp),
+            title: Text("Google Maps"),
+          ),
+          ListTile(
+            selected: qrColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = false;
+                qrColor = true;
+                aboutColor = false;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.qr_code),
+            title: Text("QR Code Scanner"),
+          ),
+          ListTile(
+            selected: aboutColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = false;
+                qrColor = false;
+                aboutColor = true;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.info),
+            title: Text("About"),
+          ),
+          ListTile(
+            selected: contactUsColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = false;
+                qrColor = false;
+                aboutColor = false;
+                contactUsColor = true;
+              });
+            },
+            leading: Icon(Icons.phone),
+            title: Text("Contact Us"),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.exit_to_app),
+            title: Text("Logout"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategories() {
+    return Column(children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Categories",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      Container(
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildCategoryCards("CameraIcon.png"),
+            _buildCategoryCards("MapIcon.png"),
+            _buildCategoryCards("QRIcon.png"),
+            _buildCategoryCards("ProfileIcon.png"),
+          ],
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildFeatured() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              "Featured",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(name: "Featured"),
+                  ),
+                );
+              },
+              child: Text(
+                "View More",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    // Page Route would be changed after completion of 'Detection System' pages
+                    builder: (ctx) => LiveStreamScreen(),
+                  ),
+                );
+              },
+              child: CategorisedPage(
+                  image: "Camera2.png",
+                  name: "Detection System",
+                  subname: "Available Cameras"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    // Page Route would be changed after completion of 'Pool Locations' pages
+                    builder: (ctx) => PoolLocationPage(),
+                  ),
+                );
+              },
+              child: CategorisedPage(
+                  image: "Maps.png",
+                  name: "Pool Locations",
+                  subname: "Available Pools"),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: Drawer(),
+      drawer: _buildDrawer(),
       appBar: AppBar(
         title: Text(
           "Home Page",
@@ -74,101 +284,12 @@ class MainHomePage extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 30,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Categories",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 100,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildCategoryCards("CameraIcon.png"),
-                            _buildCategoryCards("MapIcon.png"),
-                            _buildCategoryCards("QRIcon.png"),
-                            _buildCategoryCards("ProfileIcon.png"),
-                          ],
-                        ),
-                      ),
+                      _buildCategories(),
                       SizedBox(height: 40),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "Featured",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (ctx) =>
-                                          ListItemsPage(name: "Featured"),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  "View More",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Detection System' pages
-                                      builder: (ctx) =>
-                                          LiveStreamScreen(),
-                                    ),
-                                  );
-                                },
-                                child: CategorisedPage(
-                                    image: "Camera2.png",
-                                    name: "Detection System",
-                                    subname: "Available Cameras"),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Pool Locations' pages
-                                      builder: (ctx) =>
-                                          PoolLocationPage(),
-                                    ),
-                                  );
-                                },
-                                child: CategorisedPage(
-                                    image: "Maps.png",
-                                    name: "Pool Locations",
-                                    subname: "Available Pools"),
-                              ),
-                            ],
-                          ),
+                        _buildFeatured(),
                         ],
                       ),
                     ],

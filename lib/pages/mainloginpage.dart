@@ -123,7 +123,9 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(),
                   hintText: "User E-mail Address",
+                  hintStyle: TextStyle(color: Colors.black),
                   prefixIcon: Icon(Icons.mail, color: Colors.black),
                 ),
               ),
@@ -138,7 +140,9 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(),
                   hintText: "User Password",
+                  hintStyle: TextStyle(color: Colors.black),
                   prefixIcon: Icon(Icons.lock, color: Colors.black),
                 ),
               ),
