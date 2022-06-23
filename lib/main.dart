@@ -16,7 +16,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       home: SplashPage(
         duration: 4,
-        goToPage: MainHomePage(),
+        goToPage: MainLoginPage(),
       ),
     ),
   );
