@@ -4,6 +4,7 @@ import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20homepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
+import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     TextEditingController _passwordController = TextEditingController();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Container(
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                   prefixIcon: Icon(Icons.mail, color: Colors.black),
                 ),
               ),
-              SizedBox(height: 26.0),
+              SizedBox(height: 20),
               TextFormField(
                 validator: (value) {
                   if (value == "") {
@@ -147,24 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 10.0),
-              Row(
-                children: [
-                  Text("Don't have an account?"),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => MainRegistrationPage(),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3),
-                      child: Text(
-                        "Register Here!",
-                        style: TextStyle(color: AppColors.MAIN_COLOR),
-                      ),
-                    ),
-                  ),
-                ],
+              AccountState(
+                accPage: "Don't have an account?",
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (ctx) => MainRegistrationPage()));
+                },
+                name: 'Register Here',
               ),
               SizedBox(height: 50.0),
               Container(
