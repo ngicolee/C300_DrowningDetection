@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, body_might_complete_normally_nullable, unused_element, avoid_print, unnecessary_new, sized_box_for_whitespace, use_key_in_widget_constructors
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
-import 'package:c300drowningdetection/pages/(obsolete)%20homepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
