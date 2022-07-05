@@ -3,12 +3,12 @@
 import 'package:c300drowningdetection/widgets/(obsolete)%20iconfont.dart';
 import 'package:flutter/material.dart';
 
-class CategoryIcon extends StatelessWidget {
+class LocationIcons extends StatelessWidget {
   Color color;
   String iconName;
   double size;
 
-  CategoryIcon(
+  LocationIcons(
       {Key? key, required this.color, required this.iconName, this.size = 30})
       : super(key: key);
 

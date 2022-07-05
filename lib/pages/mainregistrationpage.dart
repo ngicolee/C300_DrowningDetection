@@ -35,9 +35,9 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
     final FormState? _form = _registerKey.currentState;
     if (!_form!.validate()) {
       try {
-        UserCredential user = await FirebaseAuth.instance
+        UserCredential result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-        print(user.user!.uid);
+        print(result.user?.uid);
       } on PlatformException catch (e) {
         print(e.message.toString());
         ScaffoldMessenger.of(context).showSnackBar(
@@ -52,175 +52,174 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Form(
-          key: _registerKey,
-          child: Column(
-            children: [
-              SizedBox(height: 50),
-              Center(
-                child: ClipOval(
-                  child: Container(
-                      width: 160,
-                      height: 160,
-                      color: AppColors.MAIN_COLOR,
-                      alignment: Alignment.center,
-                      child: const Icon(Icons.pool_sharp,
-                          color: Colors.white, size: 130)),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _registerKey,
+            child: Column(
+              children: [
+                SizedBox(height: 5),
+                Center(
+                  child: ClipOval(
+                    child: Container(
+                        width: 160,
+                        height: 160,
+                        color: AppColors.MAIN_COLOR,
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.pool_sharp,
+                            color: Colors.white, size: 130)),
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Registration",
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(height: 30),
-                    TextFormField(
-                      // Username Validation
-                      validator: (value) {
-                        if (value!.length < 6) {
-                          return "Please enter a Username with more than 6 characters!";
-                        } else if (value.isEmpty) {
-                          return "Please fill in a Username!";
-                        }
-                        return "";
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person, color: Colors.black),
-                        hintText: "Username",
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      // E-mail Address Validation
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please fill in an E-mail Address!";
-                        } else if (!emailRegExp.hasMatch(value)) {
-                          return "Please enter a valid E-mail Address!";
-                        }
-                        return "";
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          email = value;
-                        });
-                      },
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        prefixIcon:
-                            Icon(Icons.mail_outline_sharp, color: Colors.black),
-                        hintText: "E-mail Address",
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      obscureText: obscureText,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please fill in a Password!";
-                        } else if (value.length < 8) {
-                          return "Please enter a password with 8 characters!";
-                        }
-                        return "";
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          password = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock, color: Colors.black),
-                        hintText: "Password",
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                            FocusScope.of(context).unfocus();
-                          },
-                          child: Icon(
-                            obscureText == true
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: Colors.black,
-                          ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Registration",
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
                         ),
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please fill in a Phone Number";
-                        } else if (value.length > 8 ||
-                            value.length < 8 ||
-                            !phoneRegExp.hasMatch(value)) {
-                          return "Please enter a valid 8 digit (SG) phone number!";
-                        }
-                        return "";
-                      },
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.phone_android_sharp,
-                            color: Colors.black),
-                        hintText: "Phone Number",
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    AccountState(
-                      accPage: "Already have an account?",
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (ctx) => MainLoginPage()));
-                      },
-                      name: 'Login Here!',
-                    ),
-                    SizedBox(height: 50.0),
-                    ButtonsWidget(
-                      btnName: "Register",
-                      onPressed: () {
-                        validation();
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => MainLoginPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(height: 30),
+                      TextFormField(
+                        // Username Validation
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return "Please enter a Username with more than 6 characters!";
+                          } else if (value.isEmpty) {
+                            return "Please fill in a Username!";
+                          }
+                          return "";
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person, color: Colors.black),
+                          hintText: "Username",
+                          hintStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        // E-mail Address Validation
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please fill in an E-mail Address!";
+                          } else if (!emailRegExp.hasMatch(value)) {
+                            return "Please enter a valid E-mail Address!";
+                          }
+                          return "";
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            email = value;
+                          });
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          prefixIcon:
+                              Icon(Icons.mail_outline_sharp, color: Colors.black),
+                          hintText: "E-mail Address",
+                          hintStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        obscureText: obscureText,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please fill in a Password!";
+                          } else if (value.length < 8) {
+                            return "Please enter a password with 8 characters!";
+                          }
+                          return "";
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            password = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock, color: Colors.black),
+                          hintText: "Password",
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                              FocusScope.of(context).unfocus();
+                            },
+                            child: Icon(
+                              obscureText == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black,
+                            ),
+                          ),
+                          hintStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please fill in a Phone Number";
+                          } else if (value.length > 8 ||
+                              value.length < 8 ||
+                              !phoneRegExp.hasMatch(value)) {
+                            return "Please enter a valid 8 digit (SG) phone number!";
+                          }
+                          return "";
+                        },
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.phone_android_sharp,
+                              color: Colors.black),
+                          hintText: "Phone Number",
+                          hintStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      AccountState(
+                        accPage: "Already have an account?",
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (ctx) => MainLoginPage()));
+                        },
+                        name: 'Login Here!',
+                      ),
+                      SizedBox(height: 10),
+                      ButtonsWidget(
+                        btnName: "Register",
+                        onPressed: () {
+                          validation();
+                        },
+                      ),
+                      SizedBox(height: 5),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

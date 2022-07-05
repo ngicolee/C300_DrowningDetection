@@ -15,7 +15,7 @@ class CategorisedPage extends StatelessWidget {
         children: [
           Container(
             height: 350,
-            width: 183.5,
+            width: 176.5,
             child: Column(
               children: <Widget>[
                 Container(

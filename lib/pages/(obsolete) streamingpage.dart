@@ -2,8 +2,8 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:c300drowningdetection/models/subcategory.dart';
-import 'package:c300drowningdetection/widgets/(obsolete)%20categoryicons.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
+import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
 class StreamingPage extends StatefulWidget {
@@ -50,7 +50,7 @@ class StreamingPageState extends State<StreamingPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        CategoryIcon(
+                        LocationIcons(
                             color: widget.subCategory.color,
                             iconName: widget.subCategory.icon,
                             size: 30),

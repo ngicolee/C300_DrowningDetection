@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, unnecessary_this
 
 import 'package:c300drowningdetection/models/homecategory.dart';
-import 'package:c300drowningdetection/widgets/(obsolete)%20categoryicons.dart';
+import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
-class CategoryPages extends StatelessWidget {
+class LocationPages extends StatelessWidget {
   HomeCategory category;
   Function onCardClick;
 
-  CategoryPages({required this.category, required this.onCardClick});
+  LocationPages({required this.category, required this.onCardClick});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class CategoryPages extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(children: [
-                    CategoryIcon(
+                    LocationIcons(
                         color: this.category.color,
                         iconName: this.category.icon),
                     const SizedBox(width: 10),

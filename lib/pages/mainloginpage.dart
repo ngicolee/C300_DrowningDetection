@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, body_might_complete_normally_nullable, unused_element, avoid_print, unnecessary_new, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, body_might_complete_normally_nullable, unused_element, avoid_print, unnecessary_new, sized_box_for_whitespace, use_key_in_widget_constructors
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20homepage.dart';
@@ -79,117 +79,123 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Form(
-        key: _formKey,
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: ClipOval(
-                  child: Container(
-                      width: 160,
-                      height: 160,
-                      color: AppColors.MAIN_COLOR,
-                      alignment: Alignment.center,
-                      child: const Icon(Icons.pool_sharp,
-                          color: Colors.white, size: 130)),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 15),
+                Center(
+                  child: ClipOval(
+                    child: Container(
+                        width: 160,
+                        height: 160,
+                        color: AppColors.MAIN_COLOR,
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.pool_sharp,
+                            color: Colors.white, size: 130)),
+                  ),
                 ),
-              ),
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Center(
-                  child: Text(
-                    "Login Page",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 44.0,
-                      fontWeight: FontWeight.bold,
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      "Login Page",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 44.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 30.0),
-              TextFormField(
-                validator: (value) {
-                  if (value == "") {
-                    return "Please Fill in an E-mail Address";
-                  } else if (!regExp.hasMatch(value!)) {
-                    return "Email is Invalid";
-                  }
-                  return "";
-                },
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "User E-mail Address",
-                  hintStyle: TextStyle(color: Colors.black),
-                  prefixIcon: Icon(Icons.mail, color: Colors.black),
-                ),
-              ),
-              SizedBox(height: 20),
-              TextFormField(
-                validator: (value) {
-                  if (value == "") {
-                    return "Please Fill in Password";
-                  }
-                  return "";
-                },
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "User Password",
-                  hintStyle: TextStyle(color: Colors.black),
-                  prefixIcon: Icon(Icons.lock, color: Colors.black),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              AccountState(
-                accPage: "Don't have an account?",
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (ctx) => MainRegistrationPage()));
-                },
-                name: 'Register Here',
-              ),
-              SizedBox(height: 50.0),
-              Container(
-                width: double.infinity,
-                child: RawMaterialButton(
-                  fillColor: AppColors.MAIN_COLOR,
-                  elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)),
-                  onPressed: () async {
-                    User? user = await loginCredentials(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                        context: context);
-                    print(user);
-                    if (user != null) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => MainHomePage(),
-                        ),
-                      );
+                SizedBox(height: 30.0),
+                TextFormField(
+                  validator: (value) {
+                    if (value == "") {
+                      return "Please Fill in an E-mail Address";
+                    } else if (!regExp.hasMatch(value!)) {
+                      return "Email is Invalid";
                     }
+                    return "";
                   },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "User E-mail Address",
+                    hintStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.mail, color: Colors.black),
+                  ),
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (value) {
+                    if (value == "") {
+                      return "Please Fill in Password";
+                    }
+                    return "";
+                  },
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "User Password",
+                    hintStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(Icons.lock, color: Colors.black),
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                AccountState(
+                  accPage: "Don't have an account?",
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (ctx) => MainRegistrationPage(),
+                      ),
+                    );
+                  },
+                  name: 'Register Here',
+                ),
+                SizedBox(height: 10.0),
+                Container(
+                  width: double.infinity,
+                  child: RawMaterialButton(
+                    fillColor: AppColors.MAIN_COLOR,
+                    elevation: 0.0,
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0)),
+                    onPressed: () async {
+                      User? user = await loginCredentials(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          context: context);
+                      print(user);
+                      if (user != null) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => MainHomePage(),
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

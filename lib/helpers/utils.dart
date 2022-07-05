@@ -12,20 +12,20 @@ class Utils {
     return [
       HomeCategory(
           color: const Color.fromARGB(255, 0, 183, 255),
-          name: "Drowning Detection",
-          imgName: "DetectionImage",
-          icon: IconFontHelper.DETECTION_SYSTEM,
+          name: "North Side",
+          imgName: "ComingSoon",
+          icon: IconFontHelper.MORE_DOTS,
           subCategories: [
             SubCategory(
               color: AppColors.MAIN_COLOR,
-              name: "Camera Feed",
-              imgName: "Camera",
+              name: "",
+              imgName: "Test1",
               icon: IconFontHelper.CAMERA,
               subCategories: []
             ),
             SubCategory(
               color: AppColors.MAIN_COLOR,
-              name: "Others",
+              name: "Test2",
               imgName: "Sample",
               icon: IconFontHelper.MORE_DOTS,
               subCategories: []
@@ -33,43 +33,22 @@ class Utils {
           ]),
       HomeCategory(
           color: const Color.fromARGB(255, 0, 183, 255),
-          name: "Coming Soon...",
+          name: "South Side",
           imgName: "ComingSoon",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: []),
       HomeCategory(
           color: const Color.fromARGB(255, 0, 183, 255),
-          name: "Coming Soon...",
+          name: "East Side",
           imgName: "ComingSoon",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: []),
       HomeCategory(
           color: const Color.fromARGB(255, 0, 183, 255),
-          name: "Coming Soon...",
+          name: "West Side",
           imgName: "ComingSoon",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: []),
-      HomeCategory(
-          color: const Color.fromARGB(255, 0, 183, 255),
-          name: "QR Code",
-          imgName: "QR_Code",
-          icon: IconFontHelper.QR_CODE,
-          subCategories: [
-            SubCategory(
-              color: AppColors.MAIN_COLOR,
-              name: "QR Code Scanner",
-              imgName: "QR_Code3",
-              icon: IconFontHelper.CAMERA,
-              subCategories: []
-            ),
-            SubCategory(
-              color: AppColors.MAIN_COLOR,
-              name: "My QR Code",
-              imgName: "QR_Code2",
-              icon: IconFontHelper.CAMERA,
-              subCategories: []
-            ),
-          ]),
     ];
   }
 }

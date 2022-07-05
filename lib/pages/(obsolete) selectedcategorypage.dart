@@ -3,8 +3,8 @@
 import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/models/subcategory.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20streamingpage.dart';
-import 'package:c300drowningdetection/widgets/(obsolete)%20categoryicons.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
+import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
@@ -20,7 +20,7 @@ class SelectedCategoryPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CategoryIcon(
+              LocationIcons(
                   color: this.selectedCategory.color,
                   iconName: this.selectedCategory.icon),
               const SizedBox(width: 10),

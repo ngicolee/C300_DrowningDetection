@@ -5,6 +5,7 @@ import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20selectedcategorypage.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20categorybtmbar.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20categorypages.dart';
+import 'package:c300drowningdetection/widgets/(obsolete)%20locationpages.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
 import 'package:flutter/material.dart';
 

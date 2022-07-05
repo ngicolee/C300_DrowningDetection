@@ -1,10 +1,16 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/helpers/utils.dart';
+import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/pages/selectedlocationpage.dart';
+import 'package:c300drowningdetection/widgets/locationcards.dart';
+import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
 class PoolLocationPage extends StatelessWidget {
+  List<HomeCategory> poolLocations = Utils.getCategories();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +42,33 @@ class PoolLocationPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Pool Location Page",
-              style: TextStyle(color: Colors.black, fontSize: 28.0),
+            Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: Text(
+                'Select your location preference:',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: poolLocations.length,
+                itemBuilder: (BuildContext ctx, int index) {
+                  return LocationCards(
+                    locations: poolLocations[index],
+                    onCardClick: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SelectedLocationPage(),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),
