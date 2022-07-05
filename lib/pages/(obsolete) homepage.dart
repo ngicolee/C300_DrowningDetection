@@ -4,7 +4,6 @@ import 'package:c300drowningdetection/helpers/utils.dart';
 import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20selectedcategorypage.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20categorybtmbar.dart';
-import 'package:c300drowningdetection/widgets/(obsolete)%20categorypages.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20locationpages.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,7 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 70),
                     itemCount: categories.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return CategoryPages(
+                      return LocationPages(
                           category: categories[index],
                           onCardClick: () {
                             Navigator.push(

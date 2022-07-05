@@ -2,7 +2,6 @@
 
 // import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
-import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
