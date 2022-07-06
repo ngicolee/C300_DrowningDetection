@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_this, must_be_immutable, import_of_legacy_library_into_null_safe, prefer_const_literals_to_create_immutables
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_this, must_be_immutable, import_of_legacy_library_into_null_safe, prefer_const_literals_to_create_immutables, file_names
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:c300drowningdetection/models/subcategory.dart';

@@ -22,7 +22,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
     return firebaseApp;
   }
 
-  @override
+  @override                                                                                                                             
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 15),
+                SizedBox(height: 30),
                 Center(
                   child: ClipOval(
                     child: Container(

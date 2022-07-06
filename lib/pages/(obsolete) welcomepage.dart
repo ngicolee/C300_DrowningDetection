@@ -1,10 +1,8 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names
 
-import 'package:c300drowningdetection/pages/(obsolete)%20loginpage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20registrationpage.dart';
-import 'package:c300drowningdetection/pages/(obsolete)%20mainloginpage3.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:flutter/material.dart';
 

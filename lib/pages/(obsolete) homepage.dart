@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, unnecessary_this
+// ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, unnecessary_this, file_names
 
 import 'package:c300drowningdetection/helpers/utils.dart';
 import 'package:c300drowningdetection/models/homecategory.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, use_key_in_widget_constructors, file_names
 
 import 'package:c300drowningdetection/colorpalette.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20forgotusrbtn.dart';

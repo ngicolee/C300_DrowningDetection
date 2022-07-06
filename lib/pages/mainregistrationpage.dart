@@ -2,7 +2,6 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
-import 'package:c300drowningdetection/pages/(obsolete)%20mainloginpage3.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';

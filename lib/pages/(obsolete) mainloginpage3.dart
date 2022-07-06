@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, avoid_print, file_names
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
@@ -7,7 +7,6 @@ import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MainLoginPage3 extends StatefulWidget {
   const MainLoginPage3({Key? key}) : super(key: key);

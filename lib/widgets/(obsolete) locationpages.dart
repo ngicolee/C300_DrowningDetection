@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, unnecessary_this
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, unnecessary_this, file_names
 
 import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_new, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_new, must_be_immutable, file_names
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/iconhelper.dart';
