@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, unnecessary_this, file_names
 
-import 'package:c300drowningdetection/models/homecategory.dart';
+import 'package:c300drowningdetection/models/mainlocation.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
 class LocationPages extends StatelessWidget {
-  HomeCategory category;
+  MainLocation category;
   Function onCardClick;
 
   LocationPages({required this.category, required this.onCardClick});

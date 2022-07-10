@@ -1,15 +1,14 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, must_be_immutable, unnecessary_this
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/utils.dart';
-import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/selectedlocationpage.dart';
 import 'package:c300drowningdetection/widgets/locationcards.dart';
 import 'package:flutter/material.dart';
 
 class PoolLocationPage extends StatelessWidget {
-  List<HomeCategory> poolLocations = Utils.getCategories();
+  List poolLocations = Utils.getLocations();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +50,7 @@ class PoolLocationPage extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
             ),
+            
             Expanded(
               child: ListView.builder(
                 itemCount: poolLocations.length,
@@ -61,7 +61,9 @@ class PoolLocationPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectedLocationPage(),
+                          builder: (context) => SelectedLocationPage(
+                            selectedLocation: this.poolLocations[index],
+                          ),
                         ),
                       );
                     },

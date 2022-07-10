@@ -1,19 +1,21 @@
 // ignore_for_file: missing_required_param
 
 import 'dart:ui';
-import 'homecategory.dart';
+import 'package:c300drowningdetection/models/mainlocation.dart';
 
-class SubCategory extends HomeCategory {
-  SubCategory(
+import 'mainlocation.dart';
+
+class SubLocation extends MainLocation {
+  SubLocation(
       {required String name,
       required String icon,
       required Color color,
       required String imgName,
-      required List<SubCategory> subCategories})
+      required List<MainLocation> subLocation})
       : super(
             name: name,
             icon: icon,
             color: color,
             imgName: imgName,
-            subCategories: subCategories);
+            subCategories: subLocation);
 }

@@ -12,7 +12,7 @@ void main() async {
     MaterialApp(
       theme: ThemeData(fontFamily: 'Raleway'),
       debugShowCheckedModeBanner: false,
-      home: MainWelcomePage(),
+      home: MainWelcomePage(),//SelectedLocationPage(),
     ),
   );
 }

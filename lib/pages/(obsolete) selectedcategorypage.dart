@@ -1,14 +1,14 @@
 // ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, must_be_immutable, unnecessary_this, file_names
 
-import 'package:c300drowningdetection/models/homecategory.dart';
-import 'package:c300drowningdetection/models/subcategory.dart';
+import 'package:c300drowningdetection/models/mainlocation.dart';
+import 'package:c300drowningdetection/models/sublocation.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20streamingpage.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20mainappbar.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
-  HomeCategory selectedCategory;
+  MainLocation selectedCategory;
   SelectedCategoryPage({required this.selectedCategory});
 
   @override
@@ -44,7 +44,7 @@ class SelectedCategoryPage extends StatelessWidget {
                                       subCategory: this
                                               .selectedCategory
                                               .subCategories[index]
-                                          as SubCategory)));
+                                          as SubLocation)));
                         },
                         child: Container(
                             child: Column(children: [

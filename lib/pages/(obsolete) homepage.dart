@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors, unnecessary_this, file_names
 
 import 'package:c300drowningdetection/helpers/utils.dart';
-import 'package:c300drowningdetection/models/homecategory.dart';
 import 'package:c300drowningdetection/pages/(obsolete)%20selectedcategorypage.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20categorybtmbar.dart';
 import 'package:c300drowningdetection/widgets/(obsolete)%20locationpages.dart';
@@ -10,7 +9,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  List<HomeCategory> categories = Utils.getCategories();
+  List categories = Utils.getLocations();
 
   @override
   Widget build(BuildContext context) {

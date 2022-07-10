@@ -2,7 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/iconhelper.dart';
-import 'package:c300drowningdetection/widgets/(obsolete)%20iconfont.dart';
+import 'package:c300drowningdetection/widgets/iconfont.dart';
 import 'package:flutter/material.dart';
 
 class MainAppBar extends StatefulWidget implements PreferredSizeWidget {

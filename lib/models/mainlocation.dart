@@ -1,13 +1,13 @@
 import 'dart:ui';
 
-class HomeCategory {
+class MainLocation {
   String name;
   String icon;
   Color color;
   String imgName;
-  List<HomeCategory> subCategories;
+  List<MainLocation> subCategories;
 
-  HomeCategory(
+  MainLocation(
       {required this.name,
       required this.icon,
       required this.color,
