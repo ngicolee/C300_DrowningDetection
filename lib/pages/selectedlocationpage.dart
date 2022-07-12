@@ -70,7 +70,7 @@ class SelectedLocationPage extends StatelessWidget {
                   (index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PoolLocationDetails(subLocation: this.selectedLocation.subCategories[index] as SubLocation)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PoolLocationDetails(selectedLocation: this.selectedLocation.subCategories[index] as SubLocation)));
                       },
                       child: Container(
                         child: Column(
