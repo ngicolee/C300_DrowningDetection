@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_unnecessary_containers, must_be_immutable, unnecessary_this
 
-import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/mainlocation.dart';
 import 'package:c300drowningdetection/models/sublocation.dart';
 import 'package:c300drowningdetection/pages/poollocationdetails.dart';
