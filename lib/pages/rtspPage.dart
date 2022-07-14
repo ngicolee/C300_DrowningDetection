@@ -14,12 +14,12 @@ class LiveStreamScreen extends StatefulWidget {
 
 class _LiveStreamScreenState extends State<LiveStreamScreen> {
 
-  bool _isPlaying = true;
+  //bool _isPlaying = true;
 
   final VlcPlayerController _videoPlayerController = VlcPlayerController.network(
-    'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4',
     hwAcc: HwAcc.full,
-    autoPlay: false,
+    autoPlay: true,
     options: VlcPlayerOptions(),
   );
 
@@ -67,7 +67,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           //Comment out the whole thing under ROW when using RTSP
-          Row(
+          /*Row(
             children: [
               TextButton(
                 onPressed: () {},
@@ -110,7 +110,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
               ),
 
             ],
-          )
+          )*/
         ],
       ),
     );
