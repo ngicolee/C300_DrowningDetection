@@ -1,11 +1,15 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
+import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:c300drowningdetection/models/pages.dart';
 
 class MainHomePage extends StatefulWidget {
   MainHomePage({Key? key}) : super(key: key);
@@ -13,6 +17,11 @@ class MainHomePage extends StatefulWidget {
   @override
   State<MainHomePage> createState() => _MainHomePageState();
 }
+
+Pages? cameradata;
+Pages? mapdata;
+Pages? qrdata;
+Pages? profiledata;
 
 class _MainHomePageState extends State<MainHomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -132,7 +141,14 @@ class _MainHomePageState extends State<MainHomePage> {
             title: Text("Contact Us"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => MainWelcomePage(),
+                  ),
+                );
+            },
             leading: Icon(Icons.exit_to_app),
             title: Text("Logout"),
           ),
@@ -213,8 +229,8 @@ class _MainHomePageState extends State<MainHomePage> {
               },
               child: CategorisedPage(
                   image: "Camera2.png",
-                  name: "Detection System",
-                  subname: "Available Cameras"),
+                  name: cameradata!.mainName,
+                  subname: cameradata!.subName),
             ),
             GestureDetector(
               onTap: () {
@@ -267,38 +283,56 @@ class _MainHomePageState extends State<MainHomePage> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 5),
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: 10,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+        child: FutureBuilder(
+            future: FirebaseFirestore.instance
+                .collection("pages")
+                .doc("dM44qotLzmLFaDeE9B3d")
+                .collection("featuredpages")
+                .get(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              cameradata = Pages(
+                  image: snapshot.data.docs[0]["image"],
+                  mainName: snapshot.data.docs[0]["mainname"],
+                  subName: snapshot.data.docs[0]["subname"]);
+              print(cameradata?.mainName);
+              return Container(
+                height: double.infinity,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: ListView(
+                  children: [
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          height: 10,
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            _buildCategories(),
+                            SizedBox(height: 40),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                _buildFeatured(),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  Column(
-                    children: [
-                      _buildCategories(),
-                      SizedBox(height: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                        _buildFeatured(),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }

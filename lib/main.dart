@@ -2,7 +2,10 @@
 
 // import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 //import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
+import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -14,7 +17,16 @@ void main() async {
     MaterialApp(
       theme: ThemeData(fontFamily: 'Raleway'),
       debugShowCheckedModeBanner: false,
-      home: MainWelcomePage(),//SelectedLocationPage(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (ctx, snapShot) {
+          if (snapShot.hasData) {
+            return MainHomePage();
+          } else {
+            return MainLoginPage();
+          }
+        },
+      ), //SelectedLocationPage(),
     ),
   );
 }

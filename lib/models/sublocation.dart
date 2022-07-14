@@ -2,7 +2,6 @@
 
 import 'dart:ui';
 import 'package:c300drowningdetection/models/mainlocation.dart';
-import 'package:c300drowningdetection/models/pooldescription.dart';
 
 import 'mainlocation.dart';
 
