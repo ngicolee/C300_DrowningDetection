@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:c300drowningdetection/models/sublocation.dart';
+import 'package:c300drowningdetection/pages/mappage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +167,7 @@ class PoolLocationDetailsState extends State<PoolLocationDetails> {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => PoolLocationPage(),
+                                builder: (ctx) => MapPage(),
                               ),
                             );
                           },
