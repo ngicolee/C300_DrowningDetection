@@ -1,4 +1,4 @@
-  // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
@@ -22,6 +22,13 @@ Pages? cameradata;
 Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
+
+var featuredSnapshot;
+
+var camera;
+var maps;
+var qrcode;
+var profile;
 
 class _MainHomePageState extends State<MainHomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -144,10 +151,10 @@ class _MainHomePageState extends State<MainHomePage> {
             onTap: () {
               FirebaseAuth.instance.signOut();
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => MainWelcomePage(),
-                  ),
-                );
+                MaterialPageRoute(
+                  builder: (ctx) => MainWelcomePage(),
+                ),
+              );
             },
             leading: Icon(Icons.exit_to_app),
             title: Text("Logout"),
@@ -181,10 +188,62 @@ class _MainHomePageState extends State<MainHomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildCategoryCards("CameraIcon.png"),
-            _buildCategoryCards("MapIcon.png"),
-            _buildCategoryCards("QRIcon.png"),
-            _buildCategoryCards("ProfileIcon.png"),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      name: "Detection System",
+                      snapShot: camera,
+                      appbarName: 'Detection System Pages',
+                    ),
+                  ),
+                );
+              },
+              child: _buildCategoryCards("CameraIcon.png"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      name: "Map Pages",
+                      snapShot: maps,
+                      appbarName: 'Map Pages',
+                    ),
+                  ),
+                );
+              },
+              child: _buildCategoryCards("MapIcon.png"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      name: "QR Pages",
+                      snapShot: qrcode,
+                      appbarName: 'QR Pages',
+                    ),
+                  ),
+                );
+              },
+              child: _buildCategoryCards("QRIcon.png"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      name: "Profile Pages",
+                      snapShot: profile,
+                      appbarName: 'Profile Pages',
+                    ),
+                  ),
+                );
+              },
+              child: _buildCategoryCards("ProfileIcon.png"),
+            ),
           ],
         ),
       ),
@@ -205,7 +264,11 @@ class _MainHomePageState extends State<MainHomePage> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (ctx) => ListItemsPage(name: "Featured"),
+                    builder: (ctx) => ListItemsPage(
+                      name: "Featured Page",
+                      snapShot: featuredSnapshot,
+                      appbarName: "Featured Page",
+                    ),
                   ),
                 );
               },
@@ -228,9 +291,10 @@ class _MainHomePageState extends State<MainHomePage> {
                 );
               },
               child: CategorisedPage(
-                  image: "Camera2.png",
-                  name: cameradata!.mainName,
-                  subname: cameradata!.subName),
+                image: cameradata!.image,
+                name: cameradata!.mainName,
+                subname: cameradata!.subName,
+              ),
             ),
             GestureDetector(
               onTap: () {
@@ -242,9 +306,10 @@ class _MainHomePageState extends State<MainHomePage> {
                 );
               },
               child: CategorisedPage(
-                  image: "Maps.png",
-                  name: "Pool Locations",
-                  subname: "Available Pools"),
+                image: mapdata!.image,
+                name: mapdata!.mainName,
+                subname: mapdata!.subName,
+              ),
             ),
           ],
         ),
@@ -285,53 +350,120 @@ class _MainHomePageState extends State<MainHomePage> {
         padding: EdgeInsets.symmetric(vertical: 5),
         child: FutureBuilder(
             future: FirebaseFirestore.instance
-                .collection("pages")
-                .doc("dM44qotLzmLFaDeE9B3d")
-                .collection("featuredpages")
+                .collection("categories")
+                .doc("9s7SeemNZoGJKe0aZtBu")
+                .collection("cameracat")
                 .get(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+            builder: (context, cameraSnapshot) {
+              if (cameraSnapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               }
-              cameradata = Pages(
-                  image: snapshot.data.docs[0]["image"],
-                  mainName: snapshot.data.docs[0]["mainname"],
-                  subName: snapshot.data.docs[0]["subname"]);
-              print(cameradata?.mainName);
-              return Container(
-                height: double.infinity,
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: ListView(
-                  children: [
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          height: 10,
-                          width: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            _buildCategories(),
-                            SizedBox(height: 40),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                _buildFeatured(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
+              camera = cameraSnapshot;
+              return FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection("categories")
+                      .doc("9s7SeemNZoGJKe0aZtBu")
+                      .collection("mapcat")
+                      .get(),
+                  builder: (context, mapSnapshot) {
+                    if (mapSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    maps = mapSnapshot;
+                    return FutureBuilder(
+                        future: FirebaseFirestore.instance
+                            .collection("categories")
+                            .doc("9s7SeemNZoGJKe0aZtBu")
+                            .collection("qrcodecat")
+                            .get(),
+                        builder: (context, qrSnapshot) {
+                          if (qrSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          qrcode = qrSnapshot;
+                          return FutureBuilder(
+                            future: FirebaseFirestore.instance
+                            .collection("categories")
+                            .doc("9s7SeemNZoGJKe0aZtBu")
+                            .collection("profilecat")
+                            .get(),
+                        builder: (context, profileSnapshot) {
+                          if (profileSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          profile = profileSnapshot;
+                              return FutureBuilder(
+                                  future: FirebaseFirestore.instance
+                                      .collection("pages")
+                                      .doc("dM44qotLzmLFaDeE9B3d")
+                                      .collection("featuredpages")
+                                      .get(),
+                                  builder: (context, AsyncSnapshot snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    featuredSnapshot = snapshot;
+                                    cameradata = Pages(
+                                        image: snapshot.data.docs[0]["image"],
+                                        mainName: snapshot.data.docs[0]["mainname"],
+                                        subName: snapshot.data.docs[0]["subname"]);
+                                    mapdata = Pages(
+                                        image: snapshot.data.docs[1]["image"],
+                                        mainName: snapshot.data.docs[1]["mainname"],
+                                        subName: snapshot.data.docs[1]["subname"]);
+                                    return Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      margin: EdgeInsets.symmetric(horizontal: 20),
+                                      child: ListView(
+                                        children: [
+                                          Column(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 10,
+                                                width: double.infinity,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  _buildCategories(),
+                                                  SizedBox(height: 40),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: <Widget>[
+                                                      _buildFeatured(),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            }
+                          );
+                        });
+                  });
             }),
       ),
     );

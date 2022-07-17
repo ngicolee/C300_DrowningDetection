@@ -14,12 +14,12 @@ class CategorisedPage extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 350,
+            height: 250,
             width: 176.5,
             child: Column(
               children: <Widget>[
                 Container(
-                  height: 300,
+                  height: 200,
                   width: 140,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -38,7 +38,7 @@ class CategorisedPage extends StatelessWidget {
                 Text(
                   name,
                   style: TextStyle(fontSize: 16),
-                )
+                ),
               ],
             ),
           ),

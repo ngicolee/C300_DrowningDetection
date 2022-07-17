@@ -11,14 +11,16 @@ import 'package:flutter/material.dart';
 
 class ListItemsPage extends StatelessWidget {
   final String name;
-  ListItemsPage({required this.name});
+  final String appbarName;
+  final snapShot;
+  ListItemsPage({required this.name, required this.snapShot, required this.appbarName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Featured Page",
+          appbarName,
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -28,10 +30,10 @@ class ListItemsPage extends StatelessWidget {
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (ctx) => MainHomePage(),
-                                    ),
-                                  );
+                MaterialPageRoute(
+                  builder: (ctx) => MainHomePage(),
+                ),
+              );
             }),
         actions: <Widget>[
           IconButton(
@@ -54,7 +56,6 @@ class ListItemsPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -71,78 +72,21 @@ class ListItemsPage extends StatelessWidget {
                 SizedBox(height: 10),
                 Container(
                   height: 725,
-                  child: GridView.count(
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.5,
-                      crossAxisCount: 2,
-                      scrollDirection: Axis.vertical,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Pool Locations' pages
-                                      builder: (ctx) =>
-                                          LiveStreamScreen(),
-                                    ),
-                                  );
-                                },
-                          child: CategorisedPage(
-                            image: "Camera2.png",
-                            name: "Detection System",
-                            subname: "Available Cameras",
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Pool Locations' pages
-                                      builder: (ctx) =>
-                                          PoolLocationPage(),
-                                    ),
-                                  );
-                                },
-                          child: CategorisedPage(
-                            image: "Maps.png",
-                            name: "Pool Locations",
-                            subname: "Available Pools",
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Pool Locations' pages
-                                      builder: (ctx) =>
-                                          QRPage(),
-                                    ),
-                                  );
-                                },
-                          child: CategorisedPage(
-                            image: "QR_Code4.png",
-                            name: "QR Codes",
-                            subname: "My QR Code",
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      // Page Route would be changed after completion of 'Pool Locations' pages
-                                      builder: (ctx) =>
-                                          ProfilePage(),
-                                    ),
-                                  );
-                                },
-                          child: CategorisedPage(
-                            image: "Profile.png",
-                            name: "Profile Page",
-                            subname: "My Profile Page",
-                          ),
-                        ),
-                      ]),
-                ),           
+                  child: GridView.builder(
+                    itemCount: snapShot.data.docs.length,
+                    itemBuilder: (ctx, index) => CategorisedPage(
+                        image: snapShot.data.docs[index]["image"],
+                        name: snapShot.data.docs[index]["mainname"],
+                        subname: snapShot.data.docs[index]["subname"]),
+                    scrollDirection: Axis.vertical,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.7,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                  ),
+                )
+                
               ],
             ),
           ],
