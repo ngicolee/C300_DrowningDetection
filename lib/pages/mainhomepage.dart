@@ -4,8 +4,11 @@ import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
+import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
+import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,8 @@ Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
 
+late CategoryProvider provider;
+
 var featuredSnapshot;
 
 var camera;
@@ -32,6 +37,12 @@ var profile;
 
 class _MainHomePageState extends State<MainHomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  final images = [
+    'https://i0.wp.com/www.theaqualife.ca/wp-content/uploads/2020/05/Water-safety-post.png?resize=480%2C402&ssl=1',
+    'https://www.enjoy-swimming.com/wp-content/uploads/swimming-pool-rules-2.jpg.webp',
+    'https://i0.wp.com/www.theaqualife.ca/wp-content/uploads/2020/05/Water-safety-post.png?resize=480%2C402&ssl=1'
+  ];
 
   Widget _buildCategoryCards(String image) {
     return CircleAvatar(
@@ -86,6 +97,11 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = false;
                 contactUsColor = false;
+                Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => MainHomePage(),
+                ),
+              );
               });
             },
             leading: Icon(Icons.home),
@@ -100,6 +116,11 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = false;
                 contactUsColor = false;
+                Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => PoolLocationPage(),
+                ),
+              );
               });
             },
             leading: Icon(Icons.map_sharp),
@@ -114,6 +135,11 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = true;
                 aboutColor = false;
                 contactUsColor = false;
+                Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => QRPage(),
+                ),
+              );
               });
             },
             leading: Icon(Icons.qr_code),
@@ -128,6 +154,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = true;
                 contactUsColor = false;
+                
               });
             },
             leading: Icon(Icons.info),
@@ -164,91 +191,116 @@ class _MainHomePageState extends State<MainHomePage> {
     );
   }
 
-  Widget _buildCategories() {
-    return Column(children: [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 30,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Categories",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ],
+  Widget buildImage(String image, int index) => Container(
+        margin: EdgeInsets.symmetric(horizontal: 12),
+        color: Colors.grey,
+        child: Image.network(image, fit: BoxFit.cover),
+      );
+
+  Widget _buildCarouselSlider() {
+    return Center(
+        child: CarouselSlider.builder(
+      options: CarouselOptions(
+        
+        height: 250,
+        autoPlay: true,
+        enableInfiniteScroll: false,
+        enlargeCenterPage: true,
+        enlargeStrategy: CenterPageEnlargeStrategy.height
       ),
-      Container(
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => ListItemsPage(
-                      name: "Detection System",
-                      snapShot: camera,
-                      appbarName: 'Detection System Pages',
-                    ),
-                  ),
-                );
-              },
-              child: _buildCategoryCards("CameraIcon.png"),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => ListItemsPage(
-                      name: "Map Pages",
-                      snapShot: maps,
-                      appbarName: 'Map Pages',
-                    ),
-                  ),
-                );
-              },
-              child: _buildCategoryCards("MapIcon.png"),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => ListItemsPage(
-                      name: "QR Pages",
-                      snapShot: qrcode,
-                      appbarName: 'QR Pages',
-                    ),
-                  ),
-                );
-              },
-              child: _buildCategoryCards("QRIcon.png"),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => ListItemsPage(
-                      name: "Profile Pages",
-                      snapShot: profile,
-                      appbarName: 'Profile Pages',
-                    ),
-                  ),
-                );
-              },
-              child: _buildCategoryCards("ProfileIcon.png"),
-            ),
-          ],
-        ),
-      ),
-    ]);
+      itemCount: images.length,
+      itemBuilder: (BuildContext context, int index, int realIndex) {
+        final image = images[index];
+        return buildImage(image, index);
+      },
+    ));
   }
+
+  // Widget _buildCategories() {
+  //   return Column(children: [
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         Container(
+  //           height: 30,
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Text(
+  //                 "Categories",
+  //                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //     Container(
+  //       height: 100,
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //         children: [
+  //           GestureDetector(
+  //             onTap: () {
+  //               Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(
+  //                   builder: (ctx) => ListItemsPage(
+  //                     name: "Detection System",
+  //                     snapShot: camera,
+  //                     appbarName: 'Detection System Pages',
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             child: _buildCategoryCards("CameraIcon.png"),
+  //           ),
+  //           GestureDetector(
+  //             onTap: () {
+  //               Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(
+  //                   builder: (ctx) => ListItemsPage(
+  //                     name: "Map Pages",
+  //                     snapShot: maps,
+  //                     appbarName: 'Map Pages',
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             child: _buildCategoryCards("MapIcon.png"),
+  //           ),
+  //           GestureDetector(
+  //             onTap: () {
+  //               Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(
+  //                   builder: (ctx) => ListItemsPage(
+  //                     name: "QR Pages",
+  //                     snapShot: qrcode,
+  //                     appbarName: 'QR Pages',
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             child: _buildCategoryCards("QRIcon.png"),
+  //           ),
+  //           GestureDetector(
+  //             onTap: () {
+  //               Navigator.of(context).pushReplacement(
+  //                 MaterialPageRoute(
+  //                   builder: (ctx) => ListItemsPage(
+  //                     name: "Profile Pages",
+  //                     snapShot: profile,
+  //                     appbarName: 'Profile Pages',
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             child: _buildCategoryCards("ProfileIcon.png"),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   ]);
+  // }
 
   Widget _buildFeatured() {
     return Column(
@@ -319,6 +371,9 @@ class _MainHomePageState extends State<MainHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // provider = Provider.of<CategoryProvider>(context);
+    // provider.getCameraData();
+
     return Scaffold(
       key: _key,
       drawer: _buildDrawer(),
@@ -390,78 +445,98 @@ class _MainHomePageState extends State<MainHomePage> {
                           }
                           qrcode = qrSnapshot;
                           return FutureBuilder(
-                            future: FirebaseFirestore.instance
-                            .collection("categories")
-                            .doc("9s7SeemNZoGJKe0aZtBu")
-                            .collection("profilecat")
-                            .get(),
-                        builder: (context, profileSnapshot) {
-                          if (profileSnapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          profile = profileSnapshot;
-                              return FutureBuilder(
-                                  future: FirebaseFirestore.instance
-                                      .collection("pages")
-                                      .doc("dM44qotLzmLFaDeE9B3d")
-                                      .collection("featuredpages")
-                                      .get(),
-                                  builder: (context, AsyncSnapshot snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    }
-                                    featuredSnapshot = snapshot;
-                                    cameradata = Pages(
-                                        image: snapshot.data.docs[0]["image"],
-                                        mainName: snapshot.data.docs[0]["mainname"],
-                                        subName: snapshot.data.docs[0]["subname"]);
-                                    mapdata = Pages(
-                                        image: snapshot.data.docs[1]["image"],
-                                        mainName: snapshot.data.docs[1]["mainname"],
-                                        subName: snapshot.data.docs[1]["subname"]);
-                                    return Container(
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      margin: EdgeInsets.symmetric(horizontal: 20),
-                                      child: ListView(
-                                        children: [
-                                          Column(
-                                            children: <Widget>[
-                                              Container(
-                                                height: 10,
-                                                width: double.infinity,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                ),
-                                              ),
-                                              Column(
-                                                children: [
-                                                  _buildCategories(),
-                                                  SizedBox(height: 40),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: <Widget>[
-                                                      _buildFeatured(),
-                                                    ],
+                              future: FirebaseFirestore.instance
+                                  .collection("categories")
+                                  .doc("9s7SeemNZoGJKe0aZtBu")
+                                  .collection("profilecat")
+                                  .get(),
+                              builder: (context, profileSnapshot) {
+                                if (profileSnapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                profile = profileSnapshot;
+                                return FutureBuilder(
+                                    future: FirebaseFirestore.instance
+                                        .collection("pages")
+                                        .doc("dM44qotLzmLFaDeE9B3d")
+                                        .collection("featuredpages")
+                                        .get(),
+                                    builder: (context, AsyncSnapshot snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      featuredSnapshot = snapshot;
+                                      cameradata = Pages(
+                                          image: snapshot.data.docs[0]["image"],
+                                          mainName: snapshot.data.docs[0]
+                                              ["mainname"],
+                                          subName: snapshot.data.docs[0]
+                                              ["subname"]);
+                                      mapdata = Pages(
+                                          image: snapshot.data.docs[1]["image"],
+                                          mainName: snapshot.data.docs[1]
+                                              ["mainname"],
+                                          subName: snapshot.data.docs[1]
+                                              ["subname"]);
+                                      qrdata = Pages(
+                                          image: snapshot.data.docs[2]["image"],
+                                          mainName: snapshot.data.docs[2]
+                                              ["mainname"],
+                                          subName: snapshot.data.docs[2]
+                                              ["subname"]);
+                                      profiledata = Pages(
+                                          image: snapshot.data.docs[3]["image"],
+                                          mainName: snapshot.data.docs[3]
+                                              ["mainname"],
+                                          subName: snapshot.data.docs[3]
+                                              ["subname"]);
+                                      return Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: ListView(
+                                          children: [
+                                            Column(
+                                              children: <Widget>[
+                                                Container(
+                                                  height: 10,
+                                                  width: double.infinity,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                   ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  });
-                            }
-                          );
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    _buildCarouselSlider(),
+                                                    SizedBox(height: 40),
+                                                    // _buildCategories(),
+                                                    // SizedBox(height: 40),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        _buildFeatured(),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              });
                         });
                   });
             }),

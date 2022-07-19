@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/utils.dart';
+import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/selectedlocationpage.dart';
 import 'package:c300drowningdetection/widgets/locationcards.dart';
@@ -25,7 +26,11 @@ class PoolLocationPage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => MainHomePage(),
+                  builder: (ctx) => ListItemsPage(
+                    snapShot: featuredSnapshot,
+                    appbarName: 'Featured Page',
+                    name: 'Featured Page',
+                  ),
                 ),
               );
             }),

@@ -4,6 +4,7 @@ import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,9 +26,13 @@ RegExp emailRegExp = RegExp(emailRE);
 RegExp phoneRegExp = RegExp(phoneRE);
 
 bool obscureText = true;
+bool isMale = true;
+bool isAdmin = true;
 
+String? userName;
 late String email;
 late String password;
+String? phoneNumber;
 
 class _MainRegistrationPageState extends State<MainRegistrationPage> {
   void validation() async {
@@ -36,7 +41,19 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
       try {
         UserCredential result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-        print(result.user?.uid);
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(result.user?.uid)
+            .set(
+          {
+            "userName": userName,
+            "userId": result.user?.uid,
+            "userEmail": email,
+            "gender": isMale == true ? "Male" : "Female",
+            "phoneNumber": phoneNumber,
+            "admin": isAdmin == true ? "Admin" : "Guest"
+          },
+        );
       } on PlatformException catch (e) {
         print(e.message.toString());
         ScaffoldMessenger.of(context).showSnackBar(
@@ -98,6 +115,11 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                     children: [
                       SizedBox(height: 30),
                       TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            userName = value;
+                          });
+                        },
                         // Username Validation
                         validator: (value) {
                           if (value!.length < 6) {
@@ -132,8 +154,8 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                         },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.mail_outline_sharp, color: Colors.black),
+                          prefixIcon: Icon(Icons.mail_outline_sharp,
+                              color: Colors.black),
                           hintText: "E-mail Address",
                           hintStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(),
@@ -177,7 +199,41 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                         ),
                       ),
                       SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isMale = !isMale;
+                          });
+                        },
+                        child: Container(
+                          height: 60,
+                          padding: EdgeInsets.only(left: 10),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: Center(
+                            child: Row(
+                              children: [
+                                Text(
+                                  isMale == true ? "Male" : "Female",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
                       TextFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            phoneNumber = value;
+                          });
+                        },
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please fill in a Phone Number";
@@ -201,8 +257,9 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                       AccountState(
                         accPage: "Already have an account?",
                         onTap: () {
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (ctx) => MainLoginPage()));
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (ctx) => MainLoginPage()));
                         },
                         name: 'Login Here!',
                       ),
@@ -211,9 +268,10 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                         btnName: "Register",
                         onPressed: () {
                           validation();
+                          isAdmin = false;
                         },
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

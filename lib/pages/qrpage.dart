@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,11 @@ class QRPage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => MainHomePage(),
+                  builder: (ctx) => ListItemsPage(
+                    snapShot: featuredSnapshot,
+                    appbarName: 'Featured Page',
+                    name: 'Featured Page',
+                  ),
                 ),
               );
             }),

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
@@ -13,18 +14,15 @@ class LiveStreamScreen extends StatefulWidget {
 }
 
 class _LiveStreamScreenState extends State<LiveStreamScreen> {
-
   //bool _isPlaying = true;
 
-  final VlcPlayerController _videoPlayerController = VlcPlayerController.network(
+  final VlcPlayerController _videoPlayerController =
+      VlcPlayerController.network(
     'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4',
     hwAcc: HwAcc.full,
     autoPlay: true,
     options: VlcPlayerOptions(),
   );
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +39,14 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (ctx) => MainHomePage(),
-                                    ),
-                                  );
+                MaterialPageRoute(
+                  builder: (ctx) => ListItemsPage(
+                    snapShot: featuredSnapshot,
+                    appbarName: 'Featured Page',
+                    name: 'Featured Page',
+                  ),
+                ),
+              );
             }),
         actions: <Widget>[
           IconButton(
