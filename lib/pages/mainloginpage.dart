@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                           email: _emailController.text,
                           password: _passwordController.text,
                           context: context);
-                      print(user);
+                      user = FirebaseAuth.instance.currentUser;
                       if (user != null) {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(

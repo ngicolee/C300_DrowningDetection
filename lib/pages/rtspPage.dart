@@ -18,7 +18,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
 
   final VlcPlayerController _videoPlayerController =
       VlcPlayerController.network(
-    'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4',
+    'rtsp://10.13.12.65:5540/ch0',
     hwAcc: HwAcc.full,
     autoPlay: true,
     options: VlcPlayerOptions(),

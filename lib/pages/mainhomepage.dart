@@ -7,12 +7,17 @@ import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
+import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:provider/provider.dart';
+
+import '../models/usermodel.dart';
 
 class MainHomePage extends StatefulWidget {
   MainHomePage({Key? key}) : super(key: key);
@@ -26,7 +31,10 @@ Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
 
-late CategoryProvider provider;
+UserModel? userModel;
+
+CategoryProvider? categoryprovider;
+PageProvider? pageProvider;
 
 var featuredSnapshot;
 
@@ -74,7 +82,7 @@ class _MainHomePageState extends State<MainHomePage> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              "dxterchua (WIP)",
+              pageProvider?.getUserModel?.userName ?? "",
               style: TextStyle(color: Colors.black),
             ),
             currentAccountPicture: CircleAvatar(
@@ -84,7 +92,7 @@ class _MainHomePageState extends State<MainHomePage> {
               color: Colors.white,
             ),
             accountEmail: Text(
-              "dchua647@gmail.com",
+              pageProvider?.getUserModel?.userEmail ?? "",
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -98,10 +106,10 @@ class _MainHomePageState extends State<MainHomePage> {
                 aboutColor = false;
                 contactUsColor = false;
                 Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => MainHomePage(),
-                ),
-              );
+                  MaterialPageRoute(
+                    builder: (ctx) => MainHomePage(),
+                  ),
+                );
               });
             },
             leading: Icon(Icons.home),
@@ -117,10 +125,10 @@ class _MainHomePageState extends State<MainHomePage> {
                 aboutColor = false;
                 contactUsColor = false;
                 Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => PoolLocationPage(),
-                ),
-              );
+                  MaterialPageRoute(
+                    builder: (ctx) => PoolLocationPage(),
+                  ),
+                );
               });
             },
             leading: Icon(Icons.map_sharp),
@@ -136,10 +144,10 @@ class _MainHomePageState extends State<MainHomePage> {
                 aboutColor = false;
                 contactUsColor = false;
                 Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => QRPage(),
-                ),
-              );
+                  MaterialPageRoute(
+                    builder: (ctx) => QRPage(),
+                  ),
+                );
               });
             },
             leading: Icon(Icons.qr_code),
@@ -154,7 +162,6 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = true;
                 contactUsColor = false;
-                
               });
             },
             leading: Icon(Icons.info),
@@ -201,13 +208,11 @@ class _MainHomePageState extends State<MainHomePage> {
     return Center(
         child: CarouselSlider.builder(
       options: CarouselOptions(
-        
-        height: 250,
-        autoPlay: true,
-        enableInfiniteScroll: false,
-        enlargeCenterPage: true,
-        enlargeStrategy: CenterPageEnlargeStrategy.height
-      ),
+          height: 250,
+          autoPlay: true,
+          enableInfiniteScroll: false,
+          enlargeCenterPage: true,
+          enlargeStrategy: CenterPageEnlargeStrategy.height),
       itemCount: images.length,
       itemBuilder: (BuildContext context, int index, int realIndex) {
         final image = images[index];
@@ -371,8 +376,10 @@ class _MainHomePageState extends State<MainHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // provider = Provider.of<CategoryProvider>(context);
-    // provider.getCameraData();
+    pageProvider = Provider.of<PageProvider>(context);
+    pageProvider?.getUserData();
+    print(pageProvider?.getUserModel?.userEmail);
+    print(pageProvider?.getUserModel?.userName);
 
     return Scaffold(
       key: _key,

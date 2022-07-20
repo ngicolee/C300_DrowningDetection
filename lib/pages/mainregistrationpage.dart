@@ -42,16 +42,16 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
         UserCredential result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         FirebaseFirestore.instance
-            .collection("users")
+            .collection("User")
             .doc(result.user?.uid)
             .set(
           {
             "userName": userName,
             "userId": result.user?.uid,
             "userEmail": email,
-            "gender": isMale == true ? "Male" : "Female",
-            "phoneNumber": phoneNumber,
-            "admin": isAdmin == true ? "Admin" : "Guest"
+            "userGender": isMale == true ? "Male" : "Female",
+            "userPhoneNumber": phoneNumber,
+            "userRights": isAdmin == true ? "Admin" : "Guest"
           },
         );
       } on PlatformException catch (e) {
