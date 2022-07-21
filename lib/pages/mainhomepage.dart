@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
+import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
@@ -76,26 +77,36 @@ class _MainHomePageState extends State<MainHomePage> {
 
   bool contactUsColor = false;
 
+  bool profileColor = false;
+
+  Widget _buildUserAccountDrawerHeader() {
+    List<UserModel> userModel = pageProvider!.userList;
+    return Column(
+        children: userModel.map((e) {
+      return UserAccountsDrawerHeader(
+        accountName: Text(
+          e.userName,
+          style: TextStyle(color: Colors.black),
+        ),
+        currentAccountPicture: CircleAvatar(
+            maxRadius: 40,
+            child: Image.asset("assets/imgs/TestProfilePicture.png")),
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        accountEmail: Text(
+          e.userEmail,
+          style: TextStyle(color: Colors.black),
+        ),
+      );
+    }).toList());
+  }
+
   Widget _buildDrawer() {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text(
-              pageProvider?.getUserModel?.userName ?? "",
-              style: TextStyle(color: Colors.black),
-            ),
-            currentAccountPicture: CircleAvatar(
-                maxRadius: 40,
-                child: Image.asset("assets/imgs/TestProfilePicture.png")),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            accountEmail: Text(
-              pageProvider?.getUserModel?.userEmail ?? "",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
+          _buildUserAccountDrawerHeader(),
           ListTile(
             selected: homeColor,
             onTap: () {
@@ -105,6 +116,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = false;
                 contactUsColor = false;
+                profileColor = false;
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (ctx) => MainHomePage(),
@@ -124,6 +136,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = false;
                 contactUsColor = false;
+                profileColor = false;
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (ctx) => PoolLocationPage(),
@@ -143,6 +156,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = true;
                 aboutColor = false;
                 contactUsColor = false;
+                profileColor = false;
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (ctx) => QRPage(),
@@ -162,6 +176,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = true;
                 contactUsColor = false;
+                profileColor = false;
               });
             },
             leading: Icon(Icons.info),
@@ -176,10 +191,31 @@ class _MainHomePageState extends State<MainHomePage> {
                 qrColor = false;
                 aboutColor = false;
                 contactUsColor = true;
+                profileColor = false;
               });
             },
             leading: Icon(Icons.phone),
             title: Text("Contact Us"),
+          ),
+          ListTile(
+            selected: profileColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = false;
+                qrColor = false;
+                aboutColor = false;
+                contactUsColor = false;
+                profileColor = true;
+              });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => ProfilePage(),
+                ),
+              );
+            },
+            leading: Icon(Icons.person),
+            title: Text("Profile"),
           ),
           ListTile(
             onTap: () {
@@ -376,10 +412,8 @@ class _MainHomePageState extends State<MainHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    pageProvider = Provider.of<PageProvider>(context);
     pageProvider?.getUserData();
-    print(pageProvider?.getUserModel?.userEmail);
-    print(pageProvider?.getUserModel?.userName);
+    pageProvider = Provider.of<PageProvider>(context);
 
     return Scaffold(
       key: _key,

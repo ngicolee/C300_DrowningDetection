@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  PageProvider? pageProvider;
+
   Widget _buildSingleCont({required String label, required String dataText}) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -61,8 +66,53 @@ class _ProfilePageState extends State<ProfilePage> {
 
   bool edit = false;
 
+  Widget _buildContainer() {
+    List<UserModel> userModel = pageProvider!.userList;
+    return Column(
+      children: userModel.map((e) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildSingleCont(label: "Username:", dataText: e.userName),
+            _buildSingleCont(label: "Email:", dataText: e.userEmail),
+            _buildSingleCont(label: "Gender:", dataText: e.userGender),
+            _buildSingleCont(
+                label: "Phone Number:", dataText: e.userPhoneNumber),
+          ],
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildTextFormField() {
+    List<UserModel> userModel = pageProvider!.userList;
+    return Column(
+      children: userModel.map((e) {
+        return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _buildSingleTextField(
+                                name: e.userName,
+                              ),
+                              _buildSingleTextField(
+                                name: e.userEmail,
+                              ),
+                              _buildSingleTextField(
+                                name: e.userGender,
+                              ),
+                              _buildSingleTextField(
+                                name:
+                                    e.userPhoneNumber,
+                              ),
+                            ],
+                          );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    pageProvider = Provider.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -73,8 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
         backgroundColor: AppColors.MAIN_COLOR,
         elevation: 0.0,
-        leading: 
-        edit == true
+        leading: edit == true
             ? IconButton(
                 icon: Icon(Icons.close, color: Colors.white, size: 30),
                 onPressed: () {
@@ -83,8 +132,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   });
                 },
               )
-            : Container(),
-            
+            : IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (ctx) => MainHomePage(),
+                      ),
+                    );
+                  });
+                },
+              ),
         actions: [
           edit == false
               ? Container()
@@ -156,37 +215,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 300,
                     child: edit == true
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              _buildSingleTextField(
-                                name: "Dexter Chua",
-                              ),
-                              _buildSingleTextField(
-                                name: "dchua647@gmail.com",
-                              ),
-                              _buildSingleTextField(
-                                name: "Male",
-                              ),
-                              _buildSingleTextField(
-                                name: "81621630",
-                              ),
-                            ],
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              _buildSingleCont(
-                                  label: "Name:", dataText: "Dexter Chua"),
-                              _buildSingleCont(
-                                  label: "Email:",
-                                  dataText: "dchua647@gmail.com"),
-                              _buildSingleCont(
-                                  label: "Gender:", dataText: "Male"),
-                              _buildSingleCont(
-                                  label: "Phone Number:", dataText: "81621630"),
-                            ],
-                          ),
+                        ? _buildTextFormField()
+                        : _buildContainer(),
                   ),
                 ],
               ),

@@ -2,6 +2,7 @@
 
 // import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 //import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
+import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
@@ -17,33 +18,69 @@ void main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-    MaterialApp(
-      theme: ThemeData(fontFamily: 'Raleway'),
-      debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          Provider<PageProvider>(
-            create: (ctx) => PageProvider(),
-          ),
-          Provider<CategoryProvider>(
-            create: (ctx) => CategoryProvider(),
-          ),
-        ],
-        child: StreamBuilder(
+  runApp(MyApp());
+}
+
+  class MyApp extends StatelessWidget {
+     @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        // ChangeNotifierProvider<CategoryProvider>(
+        //   create: (context) => CategoryProvider(),
+        // ),
+        ChangeNotifierProvider<PageProvider>(
+          create: (context) => PageProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: AppColors.MAIN_COLOR,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, snapShot) {
-            if (snapShot.hasData) {
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
               return MainHomePage();
             } else {
               return MainLoginPage();
             }
           },
         ),
-      ), //SelectedLocationPage(),
-    ),
-  );
-}
+      ),
+    );
+  }
+  }
+  // runApp(
+  //   MaterialApp(
+  //     theme: ThemeData(fontFamily: 'Raleway'),
+  //     debugShowCheckedModeBanner: false,
+  //     home: MultiProvider(
+  //       providers: [
+  //         ChangeNotifierProvider<PageProvider>(
+  //           create: (context) => PageProvider(),
+            
+  //         ),
+  //         // ChangeNotifierProvider<CategoryProvider>(
+  //         //   create: (context) => CategoryProvider(),
+  //         // ),
+  //       ],
+  //       child: StreamBuilder(
+  //         stream: FirebaseAuth.instance.authStateChanges(),
+  //         builder: (ctx, snapShot) {
+  //           if (snapShot.hasData) {
+  //             return MainHomePage();
+  //           } else {
+  //             return MainLoginPage();
+  //           }
+  //         },
+  //       ),
+  //     ), //SelectedLocationPage(),
+  //   ),
+  // );
+
 
 
 // ignore: must_be_immutable

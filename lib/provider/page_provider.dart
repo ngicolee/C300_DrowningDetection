@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 
 class PageProvider with ChangeNotifier {
   UserModel? userModel;
+  List<UserModel> userList = [];
 
   Future<void> getUserData() async {
+    List<UserModel> newUserList = [];
     User? currentUser = FirebaseAuth.instance.currentUser;
     QuerySnapshot<Map<String, dynamic>> userSnapshot =
         await FirebaseFirestore.instance.collection("User").get();
@@ -19,12 +21,15 @@ class PageProvider with ChangeNotifier {
           userGender: element.data()["userGender"],
           userPhoneNumber: element.data()["userPhoneNumber"],
           userName: element.data()["userName"],
+          userRights: element.data()["userRights"],
         );
+        newUserList.add(userModel!);
       }
+      userList = newUserList;
     }
   }
 
-  UserModel? get getUserModel {
-    return userModel;
+  List<UserModel> get getUserModelList {
+    return userList;
   }
 }
