@@ -1,11 +1,39 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/guesthomepage.dart';
+import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class QRPage extends StatelessWidget {
+class QRPage extends StatefulWidget {
+  @override
+  State<QRPage> createState() => _QRPageState();
+}
+
+class _QRPageState extends State<QRPage> {
+  String userRights = "Guest";
+
+  @override
+  void initState() {
+    super.initState();
+    _checkRole();
+  }
+
+  void _checkRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("User")
+        .doc(user?.uid)
+        .get();
+
+    setState(() {
+      userRights = snap["userRights"];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +49,27 @@ class QRPage extends StatelessWidget {
         leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => ListItemsPage(
-                    snapShot: featuredSnapshot,
-                    appbarName: 'Featured Page',
-                    name: 'Featured Page',
+              if (userRights == "Admin") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      snapShot: featuredSnapshot,
+                      appbarName: 'Featured Page',
+                      name: 'Featured Page',
+                    ),
                   ),
-                ),
-              );
+                );
+              } else if (userRights == "Guest") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => GuestListItemsPage(
+                      snapShot: guestfeaturedSnapshot,
+                      appbarName: 'Featured Page',
+                      name: 'Featured Page',
+                    ),
+                  ),
+                );
+              }
             }),
         actions: <Widget>[
           IconButton(

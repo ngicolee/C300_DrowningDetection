@@ -3,6 +3,7 @@
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
+import 'package:c300drowningdetection/pages/testsplashscreen.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -179,7 +180,8 @@ class _LoginPageState extends State<LoginPage> {
                       if (user != null) {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => MainHomePage(),
+                            builder: (context) => //MainHomePage(),
+                            TestSplashScreen(),
                           ),
                         );
                       }

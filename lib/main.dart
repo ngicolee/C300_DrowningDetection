@@ -1,11 +1,15 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, must_be_immutable
 
 // import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 //import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
+import 'dart:math';
+
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
+import 'package:c300drowningdetection/pages/testsplashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +25,8 @@ void main() async {
   runApp(MyApp());
 }
 
-  class MyApp extends StatelessWidget {
-     @override
+class MyApp extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -43,7 +47,7 @@ void main() async {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return MainHomePage();
+              return TestSplashScreen();
             } else {
               return MainLoginPage();
             }
@@ -52,7 +56,7 @@ void main() async {
       ),
     );
   }
-  }
+}
   // runApp(
   //   MaterialApp(
   //     theme: ThemeData(fontFamily: 'Raleway'),

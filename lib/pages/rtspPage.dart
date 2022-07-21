@@ -40,11 +40,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => ListItemsPage(
-                    snapShot: featuredSnapshot,
-                    appbarName: 'Featured Page',
-                    name: 'Featured Page',
-                  ),
+                  builder: (ctx) => MainHomePage(),
                 ),
               );
             }),

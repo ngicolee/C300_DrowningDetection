@@ -2,10 +2,14 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/usermodel.dart';
+import 'package:c300drowningdetection/pages/guesthomepage.dart';
+import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +22,26 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   PageProvider? pageProvider;
+
+  String userRights = "Guest";
+
+  @override
+  void initState() {
+    super.initState();
+    _checkRole();
+  }
+
+  void _checkRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("User")
+        .doc(user?.uid)
+        .get();
+
+    setState(() {
+      userRights = snap["userRights"];
+    });
+  }
 
   Widget _buildSingleCont({required String label, required String dataText}) {
     return Card(
@@ -89,23 +113,22 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       children: userModel.map((e) {
         return Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              _buildSingleTextField(
-                                name: e.userName,
-                              ),
-                              _buildSingleTextField(
-                                name: e.userEmail,
-                              ),
-                              _buildSingleTextField(
-                                name: e.userGender,
-                              ),
-                              _buildSingleTextField(
-                                name:
-                                    e.userPhoneNumber,
-                              ),
-                            ],
-                          );
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildSingleTextField(
+              name: e.userName,
+            ),
+            _buildSingleTextField(
+              name: e.userEmail,
+            ),
+            _buildSingleTextField(
+              name: e.userGender,
+            ),
+            _buildSingleTextField(
+              name: e.userPhoneNumber,
+            ),
+          ],
+        );
       }).toList(),
     );
   }
@@ -135,13 +158,23 @@ class _ProfilePageState extends State<ProfilePage> {
             : IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
                 onPressed: () {
-                  setState(() {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (ctx) => MainHomePage(),
-                      ),
-                    );
-                  });
+                  if (userRights == "Admin") {
+                    setState(() {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => MainHomePage(),
+                        ),
+                      );
+                    });
+                  } else if (userRights == "Guest") {
+                    setState(() {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => GuestHomePage(),
+                        ),
+                      );
+                    });
+                  }
                 },
               ),
         actions: [
@@ -153,15 +186,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     size: 30,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (ctx) => ListItemsPage(
-                          appbarName: 'Featured Page',
-                          snapShot: featuredSnapshot,
-                          name: 'Featured',
+                    if (userRights == "Admin") {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => ListItemsPage(
+                            appbarName: 'Featured Page',
+                            snapShot: featuredSnapshot,
+                            name: 'Featured',
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else if (userRights == "Guest") {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => GuestListItemsPage(
+                            appbarName: 'Featured Page',
+                            snapShot: guestfeaturedSnapshot,
+                            name: 'Featured',
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
         ],

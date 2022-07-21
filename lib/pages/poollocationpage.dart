@@ -2,14 +2,44 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/helpers/utils.dart';
+import 'package:c300drowningdetection/pages/guesthomepage.dart';
+import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/selectedlocationpage.dart';
 import 'package:c300drowningdetection/widgets/locationcards.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class PoolLocationPage extends StatelessWidget {
+class PoolLocationPage extends StatefulWidget {
+  @override
+  State<PoolLocationPage> createState() => _PoolLocationPageState();
+}
+
+class _PoolLocationPageState extends State<PoolLocationPage> {
   List poolLocations = Utils.getLocations();
+
+  String userRights = "Guest";
+
+  @override
+  void initState() {
+    super.initState();
+    _checkRole();
+  }
+
+  void _checkRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("User")
+        .doc(user?.uid)
+        .get();
+
+    setState(() {
+      userRights = snap["userRights"];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +54,8 @@ class PoolLocationPage extends StatelessWidget {
         leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
+              if (userRights == "Admin") {
+                Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (ctx) => ListItemsPage(
                     snapShot: featuredSnapshot,
@@ -33,6 +64,18 @@ class PoolLocationPage extends StatelessWidget {
                   ),
                 ),
               );
+              } else if (userRights == "Guest") {
+                 Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => GuestListItemsPage(
+                    snapShot: guestfeaturedSnapshot,
+                    appbarName: 'Featured Page',
+                    name: 'Featured Page',
+                  ),
+                ),
+              );
+              }
+              
             }),
         actions: <Widget>[
           IconButton(
