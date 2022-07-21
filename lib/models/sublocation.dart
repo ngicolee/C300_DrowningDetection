@@ -7,6 +7,8 @@ import 'mainlocation.dart';
 
 class SubLocation extends MainLocation {
   String description;
+  double? long;
+  double? lat;
 
   SubLocation(
       {required this.description,
@@ -15,6 +17,8 @@ class SubLocation extends MainLocation {
       required Color color,
       required String imgName,
       required String direction,
+        required  this.long,
+        required  this.lat,
       required List<MainLocation> subLocation})
       : super(
             name: name,

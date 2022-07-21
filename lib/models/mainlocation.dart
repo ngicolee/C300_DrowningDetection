@@ -14,5 +14,8 @@ class MainLocation {
       required this.color,
       required this.imgName,
       required this.subCategories,
-      required this.direction});
+      required this.direction,
+
+
+      });
 }
