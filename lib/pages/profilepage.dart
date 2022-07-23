@@ -11,7 +11,9 @@ import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -22,6 +24,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   PageProvider? pageProvider;
+  File? _pickedImage;
+  PickedFile? _image;
+  Future<void> getImage() async {
+    _image = (await ImagePicker().pickImage(source: ImageSource.camera))! as PickedFile;
+    _pickedImage = File(_image!.path);
+  }
 
   String userRights = "Guest";
 
@@ -241,10 +249,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            child:
-                                Icon(Icons.edit, color: AppColors.MAIN_COLOR),
+                          child: GestureDetector(
+                            onTap: () {
+                              getImage();
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              child:
+                                  Icon(Icons.camera_alt, color: AppColors.MAIN_COLOR),
+                            ),
                           ),
                         ),
                       )

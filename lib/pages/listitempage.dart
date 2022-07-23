@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
@@ -75,32 +76,32 @@ class ListItemsPage extends StatelessWidget {
                 SizedBox(height: 10),
                 Container(
                   height: 525,
-                  child: 
-                  // GridView.count(
-                  //   crossAxisCount: 2,
-                  //   scrollDirection: Axis.vertical,
-                  //   children: snapShot
-                  //       .map(
-                  //         (e) => CategorisedPage(
-                  //             image: e.image,
-                  //             name: e.mainName,
-                  //             subname: e.subName),
-                  //       )
-                  //       .toList(),
-                  // ),
-                  GridView.count(
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.7,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      scrollDirection: Axis.vertical,
-                      children: <Widget>[
+                  child:
+                      // GridView.count(
+                      //   crossAxisCount: 2,
+                      //   scrollDirection: Axis.vertical,
+                      //   children: snapShot
+                      //       .map(
+                      //         (e) => CategorisedPage(
+                      //             image: e.image,
+                      //             name: e.mainName,
+                      //             subname: e.subName),
+                      //       )
+                      //       .toList(),
+                      // ),
+                      GridView.count(
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.7,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          scrollDirection: Axis.vertical,
+                          children: <Widget>[
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => LiveStreamScreen(),
+                                builder: (ctx) => DetectionSystemsPage(),
                               ),
                             );
                           },
@@ -155,7 +156,6 @@ class ListItemsPage extends StatelessWidget {
                             subname: snapShot.data.docs[3]["subname"],
                           ),
                         ),
-
                       ]),
                 ),
               ],

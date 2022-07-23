@@ -56,26 +56,25 @@ class _PoolLocationPageState extends State<PoolLocationPage> {
             onPressed: () {
               if (userRights == "Admin") {
                 Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => ListItemsPage(
-                    snapShot: featuredSnapshot,
-                    appbarName: 'Featured Page',
-                    name: 'Featured Page',
+                  MaterialPageRoute(
+                    builder: (ctx) => ListItemsPage(
+                      snapShot: featuredSnapshot,
+                      appbarName: 'Featured Page',
+                      name: 'Featured Page',
+                    ),
                   ),
-                ),
-              );
+                );
               } else if (userRights == "Guest") {
-                 Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => GuestListItemsPage(
-                    snapShot: guestfeaturedSnapshot,
-                    appbarName: 'Featured Page',
-                    name: 'Featured Page',
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => GuestListItemsPage(
+                      snapShot: guestfeaturedSnapshot,
+                      appbarName: 'Featured Page',
+                      name: 'Featured Page',
+                    ),
                   ),
-                ),
-              );
+                );
               }
-              
             }),
         actions: <Widget>[
           IconButton(
@@ -98,7 +97,6 @@ class _PoolLocationPageState extends State<PoolLocationPage> {
                 style: TextStyle(color: Colors.black),
               ),
             ),
-            
             Expanded(
               child: ListView.builder(
                 itemCount: poolLocations.length,
