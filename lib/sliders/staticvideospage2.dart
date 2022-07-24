@@ -1,20 +1,21 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
-import 'package:c300drowningdetection/sliders/SampleVideo1.dart';
-import 'package:c300drowningdetection/sliders/SampleVideo2.dart';
+import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoDemo extends StatefulWidget {
-  VideoDemo() : super();
+class VideoDemo2 extends StatefulWidget {
+  VideoDemo2() : super();
 
   final String title = "Video Demo";
   @override
-  _VideoDemoState createState() => _VideoDemoState();
+  _VideoDemo2State createState() => _VideoDemo2State();
 }
 
-class _VideoDemoState extends State<VideoDemo> {
+class _VideoDemo2State extends State<VideoDemo2> {
 
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
@@ -38,7 +39,24 @@ class _VideoDemoState extends State<VideoDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Video Demo"),
+        title: Text(
+          "Video Demo 2",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.MAIN_COLOR,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                // Page Route would be changed after completion of 'Detection System' pages
+                builder: (ctx) => DetectionSystemsPage(),
+              ),
+            );
+          },
+        ),
       ),
       body: FutureBuilder(
         future: _initializeVideoPlayerFuture,

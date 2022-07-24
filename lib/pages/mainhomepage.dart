@@ -32,6 +32,7 @@ Pages? cameradata;
 Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
+Pages? admindata;
 
 UserModel? userModel;
 
@@ -537,6 +538,12 @@ class _MainHomePageState extends State<MainHomePage> {
                                           mainName: snapshot.data.docs[3]
                                               ["mainname"],
                                           subName: snapshot.data.docs[3]
+                                              ["subname"]);
+                                      admindata = Pages(
+                                          image: snapshot.data.docs[4]["image"],
+                                          mainName: snapshot.data.docs[4]
+                                              ["mainname"],
+                                          subName: snapshot.data.docs[4]
                                               ["subname"]);
                                       return Container(
                                         height: double.infinity,

@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:c300drowningdetection/pages/adminpanelpage.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
@@ -146,7 +147,7 @@ class ListItemsPage extends StatelessWidget {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => ProfilePage(),
+                                builder: (ctx) => AdminPanelPage(),
                               ),
                             );
                           },
@@ -154,6 +155,21 @@ class ListItemsPage extends StatelessWidget {
                             image: snapShot.data.docs[3]["image"],
                             name: snapShot.data.docs[3]["mainname"],
                             subname: snapShot.data.docs[3]["subname"],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                // Page Route would be changed after completion of 'Pool Locations' pages
+                                builder: (ctx) => ProfilePage(),
+                              ),
+                            );
+                          },
+                          child: CategorisedPage(
+                            image: snapShot.data.docs[4]["image"],
+                            name: snapShot.data.docs[4]["mainname"],
+                            subname: snapShot.data.docs[4]["subname"],
                           ),
                         ),
                       ]),
