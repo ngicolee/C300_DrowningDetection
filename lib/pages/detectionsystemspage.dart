@@ -8,6 +8,7 @@ import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/pages/samplevideospage.dart';
+import 'package:c300drowningdetection/pages/staticvideospage.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -82,7 +83,7 @@ class _DetectionSystemsPageState extends State<DetectionSystemsPage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => SampleVideosPage(),
+                    builder: (ctx) => VideoDemo(),
                   ),
                 );
               },
