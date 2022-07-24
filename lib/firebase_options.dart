@@ -47,33 +47,33 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBi2Rn2gVP78GL6SpCMYuSsmLNamHh9wKE',
-    appId: '1:609484616252:web:08efa9d1e050dc9b0cc939',
-    messagingSenderId: '609484616252',
-    projectId: 'c300-drowning-detection-system',
-    authDomain: 'c300-drowning-detection-system.firebaseapp.com',
-    databaseURL: 'https://c300-drowning-detection-system-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'c300-drowning-detection-system.appspot.com',
-    measurementId: 'G-P1853BVYB0',
+    apiKey: 'AIzaSyBIUBlhEcHHGOR07NP3OAXdaCZOj1KwSAg',
+    appId: '1:576402726315:web:42a25e12db3797d57f86ee',
+    messagingSenderId: '576402726315',
+    projectId: 'c300-project-e38e7',
+    authDomain: 'c300-project-e38e7.firebaseapp.com',
+    databaseURL: 'https://c300-project-e38e7-default-rtdb.firebaseio.com',
+    storageBucket: 'c300-project-e38e7.appspot.com',
+    measurementId: 'G-17DYNWVYGT',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDzzTGLgQH8CHAECOSZU8hB0hOtXYfHde8',
-    appId: '1:609484616252:android:6fa1c2b37f31f38c0cc939',
-    messagingSenderId: '609484616252',
-    projectId: 'c300-drowning-detection-system',
-    databaseURL: 'https://c300-drowning-detection-system-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'c300-drowning-detection-system.appspot.com',
+    apiKey: 'AIzaSyDWgoiIxEo_hc2A5h-g1W9eYy9HEe_-Fus',
+    appId: '1:576402726315:android:663658c0a23cd0447f86ee',
+    messagingSenderId: '576402726315',
+    projectId: 'c300-project-e38e7',
+    databaseURL: 'https://c300-project-e38e7-default-rtdb.firebaseio.com',
+    storageBucket: 'c300-project-e38e7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDohMk8dvd8zgoqwmr4X5c-SGBy8eGuL7c',
-    appId: '1:609484616252:ios:cf021480290a9caf0cc939',
-    messagingSenderId: '609484616252',
-    projectId: 'c300-drowning-detection-system',
-    databaseURL: 'https://c300-drowning-detection-system-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'c300-drowning-detection-system.appspot.com',
-    iosClientId: '609484616252-cfqdbnnjoe5pm4hassvvhku4bc28fesp.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAo8G2WHnokkfLAsO-Lm8IeyOVj54g6Pk0',
+    appId: '1:576402726315:ios:184710febe9ce8eb7f86ee',
+    messagingSenderId: '576402726315',
+    projectId: 'c300-project-e38e7',
+    databaseURL: 'https://c300-project-e38e7-default-rtdb.firebaseio.com',
+    storageBucket: 'c300-project-e38e7.appspot.com',
+    iosClientId: '576402726315-4kdp0rv81pk1q4mbmgj915q6rpefvava.apps.googleusercontent.com',
     iosBundleId: 'com.example.c300drowningdetection',
   );
 }

@@ -15,9 +15,9 @@ import 'package:flutter/material.dart';
 class ListItemsPage extends StatelessWidget {
   final String name;
   final String appbarName;
-  final snapShot;
+  final snapshot;
   ListItemsPage(
-      {required this.name, required this.snapShot, required this.appbarName});
+      {required this.name, required this.snapshot, required this.appbarName});
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +77,7 @@ class ListItemsPage extends StatelessWidget {
                 SizedBox(height: 10),
                 Container(
                   height: 525,
-                  child:
-                      // GridView.count(
-                      //   crossAxisCount: 2,
-                      //   scrollDirection: Axis.vertical,
-                      //   children: snapShot
-                      //       .map(
-                      //         (e) => CategorisedPage(
-                      //             image: e.image,
-                      //             name: e.mainName,
-                      //             subname: e.subName),
-                      //       )
-                      //       .toList(),
-                      // ),
+                  child:                  
                       GridView.count(
                           mainAxisSpacing: 10,
                           childAspectRatio: 0.7,
@@ -107,9 +95,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[0]["image"],
-                            name: snapShot.data.docs[0]["mainname"],
-                            subname: snapShot.data.docs[0]["subname"],
+                            image: snapshot.data.docs[0]["image"],
+                            name: snapshot.data.docs[0]["mainname"],
+                            subname: snapshot.data.docs[0]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -122,9 +110,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[1]["image"],
-                            name: snapShot.data.docs[1]["mainname"],
-                            subname: snapShot.data.docs[1]["subname"],
+                          image: snapshot.data.docs[1]["image"],
+                            name: snapshot.data.docs[1]["mainname"],
+                            subname: snapshot.data.docs[1]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -137,24 +125,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[2]["image"],
-                            name: snapShot.data.docs[2]["mainname"],
-                            subname: snapShot.data.docs[2]["subname"],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => AdminPanelPage(),
-                              ),
-                            );
-                          },
-                          child: CategorisedPage(
-                            image: snapShot.data.docs[3]["image"],
-                            name: snapShot.data.docs[3]["mainname"],
-                            subname: snapShot.data.docs[3]["subname"],
+                           image: snapshot.data.docs[2]["image"],
+                            name: snapshot.data.docs[2]["mainname"],
+                            subname: snapshot.data.docs[2]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -167,9 +140,24 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[4]["image"],
-                            name: snapShot.data.docs[4]["mainname"],
-                            subname: snapShot.data.docs[4]["subname"],
+                            image: snapshot.data.docs[3]["image"],
+                            name: snapshot.data.docs[3]["mainname"],
+                            subname: snapshot.data.docs[3]["subname"],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                // Page Route would be changed after completion of 'Pool Locations' pages
+                                builder: (ctx) => AdminPanelPage(),
+                              ),
+                            );
+                          },
+                          child: CategorisedPage(
+                          image: snapshot.data.docs[4]["image"],
+                            name: snapshot.data.docs[4]["mainname"],
+                            subname: snapshot.data.docs[4]["subname"],
                           ),
                         ),
                       ]),

@@ -21,7 +21,8 @@ import 'provider/page_provider.dart';
 void main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
@@ -57,33 +58,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-  // runApp(
-  //   MaterialApp(
-  //     theme: ThemeData(fontFamily: 'Raleway'),
-  //     debugShowCheckedModeBanner: false,
-  //     home: MultiProvider(
-  //       providers: [
-  //         ChangeNotifierProvider<PageProvider>(
-  //           create: (context) => PageProvider(),
-            
-  //         ),
-  //         // ChangeNotifierProvider<CategoryProvider>(
-  //         //   create: (context) => CategoryProvider(),
-  //         // ),
-  //       ],
-  //       child: StreamBuilder(
-  //         stream: FirebaseAuth.instance.authStateChanges(),
-  //         builder: (ctx, snapShot) {
-  //           if (snapShot.hasData) {
-  //             return MainHomePage();
-  //           } else {
-  //             return MainLoginPage();
-  //           }
-  //         },
-  //       ),
-  //     ), //SelectedLocationPage(),
-  //   ),
-  // );
 
 
 

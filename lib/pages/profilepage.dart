@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void _checkRole() async {
     User? user = FirebaseAuth.instance.currentUser;
     final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("User")
+        .collection("users")
         .doc(user?.uid)
         .get();
 
@@ -199,7 +199,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         MaterialPageRoute(
                           builder: (ctx) => ListItemsPage(
                             appbarName: 'Featured Page',
-                            snapShot: featuredSnapshot,
+                            snapshot: featuredSnapshot,
                             name: 'Featured',
                           ),
                         ),

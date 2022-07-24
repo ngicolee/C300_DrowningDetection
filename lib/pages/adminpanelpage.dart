@@ -43,7 +43,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                 MaterialPageRoute(
                   builder: (ctx) => ListItemsPage(
                     appbarName: 'Featured Page',
-                    snapShot: featuredSnapshot,
+                    snapshot: featuredSnapshot,
                     name: 'Featured',
                   ),
                 ),
@@ -74,7 +74,7 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
               onTap: () async {
                 String userEmail = emailController.text.trim();
                 final QuerySnapshot snap = await FirebaseFirestore.instance
-                    .collection('User')
+                    .collection('users')
                     .where('userEmail', isEqualTo: userEmail)
                     .get();
                 setState(() {

@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:609484616252:ios:cf021480290a9caf0cc939",
-  "FIREBASE_PROJECT_ID": "c300-drowning-detection-system",
-  "GCM_SENDER_ID": "609484616252"
+  "GOOGLE_APP_ID": "1:576402726315:ios:184710febe9ce8eb7f86ee",
+  "FIREBASE_PROJECT_ID": "c300-project-e38e7",
+  "GCM_SENDER_ID": "576402726315"
 }

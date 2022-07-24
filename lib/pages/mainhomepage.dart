@@ -7,14 +7,12 @@ import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
-import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
 import 'package:provider/provider.dart';
@@ -361,7 +359,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   MaterialPageRoute(
                     builder: (ctx) => ListItemsPage(
                       name: "Featured Page",
-                      snapShot: featuredSnapshot,
+                      snapshot: featuredSnapshot,
                       appbarName: "Featured Page",
                     ),
                   ),
@@ -504,7 +502,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                 return FutureBuilder(
                                     future: FirebaseFirestore.instance
                                         .collection("pages")
-                                        .doc("dM44qotLzmLFaDeE9B3d")
+                                        .doc("r3YfjXRPA2bt2uAP8241")
                                         .collection("featuredpages")
                                         .get(),
                                     builder: (context, AsyncSnapshot snapshot) {

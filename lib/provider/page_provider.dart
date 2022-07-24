@@ -13,7 +13,7 @@ class PageProvider with ChangeNotifier {
     List<UserModel> newUserList = [];
     User? currentUser = FirebaseAuth.instance.currentUser;
     QuerySnapshot<Map<String, dynamic>> userSnapshot =
-        await FirebaseFirestore.instance.collection("User").get();
+        await FirebaseFirestore.instance.collection("users").get();
     for (var element in userSnapshot.docs) {
       if (currentUser?.uid == element.data()["userId"]) {
         userModel = UserModel(

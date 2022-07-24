@@ -39,7 +39,7 @@ class _DetectionSystemsPageState extends State<DetectionSystemsPage> {
   void _checkRole() async {
     User? user = FirebaseAuth.instance.currentUser;
     final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("User")
+        .collection("users")
         .doc(user?.uid)
         .get();
 
@@ -133,7 +133,7 @@ class _DetectionSystemsPageState extends State<DetectionSystemsPage> {
         child: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection("pages")
-              .doc("dM44qotLzmLFaDeE9B3d")
+              .doc("r3YfjXRPA2bt2uAP8241")
               .collection("detectionpages")
               .get(),
           builder: (context, AsyncSnapshot snapshot) {

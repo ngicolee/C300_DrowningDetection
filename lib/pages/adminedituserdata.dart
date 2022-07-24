@@ -40,7 +40,7 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
                 MaterialPageRoute(
                   builder: (ctx) => ListItemsPage(
                     appbarName: 'Featured Page',
-                    snapShot: featuredSnapshot,
+                    snapshot: featuredSnapshot,
                     name: 'Featured',
                   ),
                 ),
@@ -63,7 +63,7 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
               String newRole = userRightsController.text.trim();
 
               FirebaseFirestore.instance
-                  .collection('User')
+                  .collection('users')
                   .doc(widget.uid)
                   .update(
                 {'userRights': newRole},

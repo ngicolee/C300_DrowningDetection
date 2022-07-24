@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +27,7 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
   void _checkRole() async {
     User? user = FirebaseAuth.instance.currentUser;
     final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("User")
+        .collection("users")
         .doc(user?.uid)
         .get();
 
@@ -38,6 +39,8 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
       navigateNext(GuestHomePage());
     } else if (userRights == "Admin") {
       navigateNext(MainHomePage());
+    } else {
+      navigateNext(MainLoginPage());
     }
   }
 

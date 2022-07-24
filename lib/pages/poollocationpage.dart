@@ -31,7 +31,7 @@ class _PoolLocationPageState extends State<PoolLocationPage> {
   void _checkRole() async {
     User? user = FirebaseAuth.instance.currentUser;
     final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("User")
+        .collection("users")
         .doc(user?.uid)
         .get();
 
@@ -58,7 +58,7 @@ class _PoolLocationPageState extends State<PoolLocationPage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (ctx) => ListItemsPage(
-                      snapShot: featuredSnapshot,
+                      snapshot: featuredSnapshot,
                       appbarName: 'Featured Page',
                       name: 'Featured Page',
                     ),
