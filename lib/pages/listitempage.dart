@@ -76,7 +76,7 @@ class ListItemsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 525,
+                  height: 725,
                   child:                  
                       GridView.count(
                           mainAxisSpacing: 10,

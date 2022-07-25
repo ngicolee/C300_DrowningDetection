@@ -1,15 +1,14 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, unused_field, prefer_const_constructors_in_immutables, unnecessary_null_comparison
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
-import 'package:c300drowningdetection/pages/guestlistitempage.dart';
-import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -24,11 +23,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   PageProvider? pageProvider;
-  File? _pickedImage;
-  PickedFile? _image;
-  Future<void> getImage() async {
-    _image = (await ImagePicker().pickImage(source: ImageSource.camera))! as PickedFile;
-    _pickedImage = File(_image!.path);
+  File ?_pickedImage;
+  XFile? _image;
+  Future<void> getImage({required ImageSource source}) async {
+    _image = (await ImagePicker().pickImage(source: source))!;
+    if (_image != null) {
+      _pickedImage = File(_image!.path);
+    }
+  }
+
+  String? imageUrl;
+  void _imageUpload({required File image}) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref = storage.ref().child("UserImage/${user?.uid}");
+    UploadTask uploadTask = ref.putFile(image);
+    uploadTask.then((res) {
+      res.ref.getDownloadURL();
+    });
   }
 
   String userRights = "Guest";
@@ -102,40 +114,78 @@ class _ProfilePageState extends State<ProfilePage> {
     List<UserModel> userModel = pageProvider!.userList;
     return Column(
       children: userModel.map((e) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildSingleCont(label: "Username:", dataText: e.userName),
-            _buildSingleCont(label: "Email:", dataText: e.userEmail),
-            _buildSingleCont(label: "Gender:", dataText: e.userGender),
-            _buildSingleCont(
-                label: "Phone Number:", dataText: e.userPhoneNumber),
-          ],
+        return Container(
+          height: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSingleCont(label: "Username:", dataText: e.userName),
+              _buildSingleCont(label: "Email:", dataText: e.userEmail),
+              _buildSingleCont(label: "Gender:", dataText: e.userGender),
+              _buildSingleCont(
+                  label: "Phone Number:", dataText: e.userPhoneNumber),
+            ],
+          ),
         );
       }).toList(),
     );
+  }
+
+  Future<void> alertDialog() {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.camera_alt),
+                    title: Text("Take Photo"),
+                    onTap: () {
+                      getImage(source: ImageSource.camera);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.photo_library),
+                    title: Text("Obtain Image from Gallery"),
+                    onTap: () {
+                      getImage(source: ImageSource.gallery);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   Widget _buildTextFormField() {
     List<UserModel> userModel = pageProvider!.userList;
     return Column(
       children: userModel.map((e) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildSingleTextField(
-              name: e.userName,
-            ),
-            _buildSingleTextField(
-              name: e.userEmail,
-            ),
-            _buildSingleTextField(
-              name: e.userGender,
-            ),
-            _buildSingleTextField(
-              name: e.userPhoneNumber,
-            ),
-          ],
+        return Container(
+          height: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSingleTextField(
+                name: e.userName,
+              ),
+              _buildSingleTextField(
+                name: e.userEmail,
+              ),
+              _buildSingleTextField(
+                name: e.userGender,
+              ),
+              _buildSingleTextField(
+                name: e.userPhoneNumber,
+              ),
+            ],
+          ),
         );
       }).toList(),
     );
@@ -194,27 +244,31 @@ class _ProfilePageState extends State<ProfilePage> {
                     size: 30,
                   ),
                   onPressed: () {
-                    if (userRights == "Admin") {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (ctx) => ListItemsPage(
-                            appbarName: 'Featured Page',
-                            snapshot: featuredSnapshot,
-                            name: 'Featured',
-                          ),
-                        ),
-                      );
-                    } else if (userRights == "Guest") {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (ctx) => GuestListItemsPage(
-                            appbarName: 'Featured Page',
-                            snapShot: guestfeaturedSnapshot,
-                            name: 'Featured',
-                          ),
-                        ),
-                      );
-                    }
+                    _imageUpload(image: _pickedImage!);
+                    setState(() {
+                      edit = false;
+                    });
+                    // if (userRights == "Admin") {
+                    //   Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(
+                    //       builder: (ctx) => ListItemsPage(
+                    //         appbarName: 'Featured Page',
+                    //         snapshot: featuredSnapshot,
+                    //         name: 'Featured',
+                    //       ),
+                    //     ),
+                    //   );
+                    // } else if (userRights == "Guest") {
+                    //   Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(
+                    //       builder: (ctx) => GuestListItemsPage(
+                    //         appbarName: 'Featured Page',
+                    //         snapShot: guestfeaturedSnapshot,
+                    //         name: 'Featured',
+                    //       ),
+                    //     ),
+                    //   );
+                    // }
                   },
                 ),
         ],
@@ -236,8 +290,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       CircleAvatar(
                         maxRadius: 65,
-                        backgroundImage:
-                            AssetImage("assets/imgs/TestProfilePicture.png"),
+                        backgroundImage: _pickedImage == null
+                            ? AssetImage("assets/imgs/TestProfilePicture.png")
+                            : FileImage(_pickedImage!) as ImageProvider,
                       ),
                     ],
                   ),
@@ -251,12 +306,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: GestureDetector(
                             onTap: () {
-                              getImage();
+                              alertDialog();
                             },
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
-                              child:
-                                  Icon(Icons.camera_alt, color: AppColors.MAIN_COLOR),
+                              child: Icon(Icons.camera_alt,
+                                  color: AppColors.MAIN_COLOR),
                             ),
                           ),
                         ),

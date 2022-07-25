@@ -55,7 +55,7 @@ class _DetectionSystemsPageState extends State<DetectionSystemsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              "Featured",
+              "Camera & Sample Videos",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],

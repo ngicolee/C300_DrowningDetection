@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, unused_element
 
+import 'dart:io';
+
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
@@ -15,6 +17,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../models/usermodel.dart';
@@ -53,6 +56,15 @@ class _MainHomePageState extends State<MainHomePage> {
     'https://i0.wp.com/www.theaqualife.ca/wp-content/uploads/2020/05/Water-safety-post.png?resize=480%2C402&ssl=1'
   ];
 
+  File ?_pickedImage;
+  XFile? _image;
+  Future<void> getImage({required ImageSource source}) async {
+    _image = (await ImagePicker().pickImage(source: source))!;
+    if (_image != null) {
+      _pickedImage = File(_image!.path);
+    }
+  }
+
   Widget _buildCategoryCards(String image) {
     return CircleAvatar(
       maxRadius: 38,
@@ -89,8 +101,14 @@ class _MainHomePageState extends State<MainHomePage> {
           style: TextStyle(color: Colors.black),
         ),
         currentAccountPicture: CircleAvatar(
-            maxRadius: 40,
-            child: Image.asset("assets/imgs/TestProfilePicture.png")),
+          maxRadius: 40,
+          child: CircleAvatar(
+                        maxRadius: 65,
+                        backgroundImage: _pickedImage == null
+                            ? AssetImage("assets/imgs/TestProfilePicture.png")
+                            : FileImage(_pickedImage!) as ImageProvider,
+                      ),
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
         ),

@@ -5,17 +5,13 @@
 import 'dart:math';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
-import 'package:c300drowningdetection/models/usermodel.dart';
-import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
-import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/testsplashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'provider/category_provider.dart';
 import 'provider/page_provider.dart';
 
 void main() async {
@@ -31,9 +27,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider<CategoryProvider>(
-        //   create: (context) => CategoryProvider(),
-        // ),
         ChangeNotifierProvider<PageProvider>(
           create: (context) => PageProvider(),
         ),
@@ -48,7 +41,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return TestSplashScreen();
+              return MainLoginPage();
             } else {
               return MainLoginPage();
             }
@@ -58,10 +51,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-// ignore: must_be_immutable
 
 
 
