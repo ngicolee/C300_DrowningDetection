@@ -9,6 +9,7 @@ import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
+import 'package:c300drowningdetection/pages/smspage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:flutter/material.dart';
 
@@ -150,7 +151,7 @@ class ListItemsPage extends StatelessWidget {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => AdminPanelPage(),
+                                builder: (ctx) => SMSPage(),
                               ),
                             );
                           },
