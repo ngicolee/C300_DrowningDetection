@@ -24,7 +24,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
     return firebaseApp;
   }
 
-  @override                                                                                                                             
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -60,9 +60,56 @@ class _LoginPageState extends State<LoginPage> {
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {
-        print("No User found for that email");
+      if (e.code == 'invalid-email') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Email Address is Invalid."),
+          ),
+        );
+      } else if (e.code == 'user-disabled') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Email Address has been disabled."),
+          ),
+        );
+      } else if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                Text("There is no user corresponding to the email address."),
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                "Password is Incorrect, Please enter the correct password."),
+          ),
+        );
+      } else if (e.code == 'unknown') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Please Enter an Email Address and Password."),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.message!),
+          ),
+        );
       }
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text(e.message.toString()),
+      //     ),
+      //   );
+      // } catch (e) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text("Unknown Error, Please Try Again Later!"),
+      //     ),
+      //   );
     }
     return user;
   }
@@ -89,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: 150),
                 Center(
                   child: ClipOval(
                     child: Container(
@@ -118,9 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 30.0),
                 TextFormField(
                   validator: (value) {
-                    if (value == "") {
+                    if (value!.isEmpty) {
                       return "Please Fill in an E-mail Address";
-                    } else if (!regExp.hasMatch(value!)) {
+                    } else if (!regExp.hasMatch(value)) {
                       return "Email is Invalid";
                     }
                     return "";
@@ -129,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: "User E-mail Address",
+                    hintText: "E-mail Address",
                     hintStyle: TextStyle(color: Colors.black),
                     prefixIcon: Icon(Icons.mail, color: Colors.black),
                   ),
@@ -182,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => //MainHomePage(),
-                            TestSplashScreen(),
+                                TestSplashScreen(),
                           ),
                         );
                       }

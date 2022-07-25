@@ -28,11 +28,24 @@ RegExp phoneRegExp = RegExp(phoneRE);
 bool obscureText = true;
 bool isMale = true;
 bool isAdmin = true;
+bool errorRegister = false;
 
 String? userName;
-late String email;
-late String password;
+String email = "";
+String password = "";
 String? phoneNumber;
+
+var emailController = TextEditingController();
+var userNameController = TextEditingController();
+var passwordController = TextEditingController();
+var phoneNumberController = TextEditingController();
+
+void clearText() {
+  userNameController.clear();
+  emailController.clear();
+  passwordController.clear();
+  phoneNumberController.clear();
+}
 
 class _MainRegistrationPageState extends State<MainRegistrationPage> {
   void validation() async {
@@ -54,28 +67,28 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
             "userRights": isAdmin == true ? "Admin" : "Guest"
           },
         );
-      } on PlatformException catch (e) {
-        print(e.message.toString());
+        errorRegister = false;
+      } on PlatformException catch (e) {       
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(e.message.toString()),
           ),
         );
       }
-    } else {}
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
             key: _registerKey,
             child: Column(
               children: [
-                SizedBox(height: 5),
+                SizedBox(height: 50),
                 Center(
                   child: ClipOval(
                     child: Container(
@@ -115,6 +128,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                     children: [
                       SizedBox(height: 30),
                       TextFormField(
+                        controller: userNameController,
                         onChanged: (value) {
                           setState(() {
                             userName = value;
@@ -138,6 +152,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
+                        controller: emailController,
                         // E-mail Address Validation
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -163,6 +178,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
+                        controller: passwordController,
                         obscureText: obscureText,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -229,6 +245,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
+                        controller: phoneNumberController,
                         onChanged: (value) {
                           setState(() {
                             phoneNumber = value;
@@ -267,6 +284,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                       ButtonsWidget(
                         btnName: "Register",
                         onPressed: () {
+                          clearText();
                           validation();
                           isAdmin = false;
                         },
