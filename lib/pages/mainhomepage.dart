@@ -9,6 +9,7 @@ import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
+import 'package:c300drowningdetection/pages/searchingfunction.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
@@ -17,6 +18,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -56,13 +58,20 @@ class _MainHomePageState extends State<MainHomePage> {
     'https://i0.wp.com/www.theaqualife.ca/wp-content/uploads/2020/05/Water-safety-post.png?resize=480%2C402&ssl=1'
   ];
 
-  File ?_pickedImage;
+  File? _pickedImage;
   XFile? _image;
   Future<void> getImage({required ImageSource source}) async {
     _image = (await ImagePicker().pickImage(source: source))!;
     if (_image != null) {
       _pickedImage = File(_image!.path);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp]);
   }
 
   Widget _buildCategoryCards(String image) {
@@ -103,11 +112,11 @@ class _MainHomePageState extends State<MainHomePage> {
         currentAccountPicture: CircleAvatar(
           maxRadius: 40,
           child: CircleAvatar(
-                        maxRadius: 65,
-                        backgroundImage: _pickedImage == null
-                            ? AssetImage("assets/imgs/TestProfilePicture.png")
-                            : FileImage(_pickedImage!) as ImageProvider,
-                      ),
+            maxRadius: 65,
+            backgroundImage: _pickedImage == null
+                ? AssetImage("assets/imgs/TestProfilePicture.png")
+                : FileImage(_pickedImage!) as ImageProvider,
+          ),
         ),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -452,7 +461,9 @@ class _MainHomePageState extends State<MainHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(context: context, delegate: SearchingFunction());
+            },
           ),
           IconButton(
             icon: Icon(Icons.notifications_none, color: Colors.white),

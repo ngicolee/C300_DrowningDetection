@@ -161,6 +161,21 @@ class ListItemsPage extends StatelessWidget {
                             subname: snapshot.data.docs[4]["subname"],
                           ),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                // Page Route would be changed after completion of 'Pool Locations' pages
+                                builder: (ctx) => AdminPanelPage(),
+                              ),
+                            );
+                          },
+                          child: CategorisedPage(
+                          image: snapshot.data.docs[5]["image"],
+                            name: snapshot.data.docs[5]["mainname"],
+                            subname: snapshot.data.docs[5]["subname"],
+                          ),
+                        ),
                       ]),
                 ),
               ],

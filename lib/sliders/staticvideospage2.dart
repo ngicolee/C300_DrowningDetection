@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'dart:ffi';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDemo2 extends StatefulWidget {
@@ -16,17 +17,20 @@ class VideoDemo2 extends StatefulWidget {
 }
 
 class _VideoDemo2State extends State<VideoDemo2> {
-
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
     _controller = VideoPlayerController.asset("assets/videos/video5.mp4");
-    _initializeVideoPlayerFuture = _controller.initialize().then((value) => _controller.play());
+    _initializeVideoPlayerFuture =
+        _controller.initialize().then((value) => _controller.play());
     _controller.setLooping(true);
     _controller.setVolume(1.0);
+    _controller.play();
     super.initState();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
 
   @override
@@ -58,35 +62,35 @@ class _VideoDemo2State extends State<VideoDemo2> {
           },
         ),
       ),
-      body: FutureBuilder(
-        future: _initializeVideoPlayerFuture,
-        builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.done){
-            return AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
-            );
-          }
-          else {
-            return
-                Center(
-                  child: CircularProgressIndicator(),
-                );
-          }
-        },
+      body: Center(
+        child: FutureBuilder(
+          future: _initializeVideoPlayerFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           setState(() {
-            if(_controller.value.isPlaying) {
+            if (_controller.value.isPlaying) {
               _controller.pause();
-            }
-            else{
+            } else {
               _controller.play();
             }
           });
         },
-        child: Icon(_controller.value.isPlaying ? Icons.pause: Icons.play_arrow),
+        child:
+            Icon(_controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
       ),
     );
   }

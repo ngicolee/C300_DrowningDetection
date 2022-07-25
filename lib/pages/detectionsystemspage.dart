@@ -13,6 +13,7 @@ import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DetectionSystemsPage extends StatefulWidget {
   const DetectionSystemsPage({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class _DetectionSystemsPageState extends State<DetectionSystemsPage> {
   void initState() {
     super.initState();
     _checkRole();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   void _checkRole() async {
