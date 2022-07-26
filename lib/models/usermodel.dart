@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
 import 'package:flutter/material.dart';
 
 class UserModel {
@@ -12,3 +13,6 @@ class UserModel {
       required this.userRights});
 }
 
+String? get getUserName {
+  return userName;
+}

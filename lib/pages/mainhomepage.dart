@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/attendancepage.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
@@ -36,6 +37,7 @@ Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
 Pages? admindata;
+Pages? attendancedata;
 
 UserModel? userModel;
 
@@ -420,14 +422,14 @@ class _MainHomePageState extends State<MainHomePage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => PoolLocationPage(),
+                    builder: (ctx) => AttendancePage(),
                   ),
                 );
               },
               child: CategorisedPage(
-                image: mapdata!.image,
-                name: mapdata!.mainName,
-                subname: mapdata!.subName,
+                image: attendancedata!.image,
+                name: attendancedata!.mainName,
+                subname: attendancedata!.subName,
               ),
             ),
           ],
@@ -541,29 +543,11 @@ class _MainHomePageState extends State<MainHomePage> {
                                               ["mainname"],
                                           subName: snapshot.data.docs[0]
                                               ["subname"]);
-                                      mapdata = Pages(
-                                          image: snapshot.data.docs[1]["image"],
-                                          mainName: snapshot.data.docs[1]
+                                      attendancedata = Pages(
+                                          image: snapshot.data.docs[6]["image"],
+                                          mainName: snapshot.data.docs[6]
                                               ["mainname"],
-                                          subName: snapshot.data.docs[1]
-                                              ["subname"]);
-                                      qrdata = Pages(
-                                          image: snapshot.data.docs[2]["image"],
-                                          mainName: snapshot.data.docs[2]
-                                              ["mainname"],
-                                          subName: snapshot.data.docs[2]
-                                              ["subname"]);
-                                      profiledata = Pages(
-                                          image: snapshot.data.docs[3]["image"],
-                                          mainName: snapshot.data.docs[3]
-                                              ["mainname"],
-                                          subName: snapshot.data.docs[3]
-                                              ["subname"]);
-                                      admindata = Pages(
-                                          image: snapshot.data.docs[4]["image"],
-                                          mainName: snapshot.data.docs[4]
-                                              ["mainname"],
-                                          subName: snapshot.data.docs[4]
+                                          subName: snapshot.data.docs[6]
                                               ["subname"]);
                                       return Container(
                                         height: double.infinity,
