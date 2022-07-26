@@ -248,27 +248,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     setState(() {
                       edit = false;
                     });
-                    // if (userRights == "Admin") {
-                    //   Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(
-                    //       builder: (ctx) => ListItemsPage(
-                    //         appbarName: 'Featured Page',
-                    //         snapshot: featuredSnapshot,
-                    //         name: 'Featured',
-                    //       ),
-                    //     ),
-                    //   );
-                    // } else if (userRights == "Guest") {
-                    //   Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(
-                    //       builder: (ctx) => GuestListItemsPage(
-                    //         appbarName: 'Featured Page',
-                    //         snapShot: guestfeaturedSnapshot,
-                    //         name: 'Featured',
-                    //       ),
-                    //     ),
-                    //   );
-                    // }
                   },
                 ),
         ],
@@ -291,7 +270,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       CircleAvatar(
                         maxRadius: 65,
                         backgroundImage: _pickedImage == null
-                            ? AssetImage("assets/imgs/TestProfilePicture.png")
+                            ? AssetImage("assets/imgs/ProfilePicture.jpg")
                             : FileImage(_pickedImage!) as ImageProvider,
                       ),
                     ],
@@ -328,7 +307,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 300,
                     child: edit == true
-                        ? _buildTextFormField()
+                        ? _buildContainer()
                         : _buildContainer(),
                   ),
                 ],
@@ -345,7 +324,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: edit == false
                     ? ButtonsWidget(
-                        btnName: "Edit Profile",
+                        btnName: "Upload Profile Picture",
                         onPressed: () {
                           setState(() {
                             edit = true;

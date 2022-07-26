@@ -114,7 +114,7 @@ class _MainHomePageState extends State<MainHomePage> {
           child: CircleAvatar(
             maxRadius: 65,
             backgroundImage: _pickedImage == null
-                ? AssetImage("assets/imgs/TestProfilePicture.png")
+                ? AssetImage("assets/imgs/ProfilePicture.jpg")
                 : FileImage(_pickedImage!) as ImageProvider,
           ),
         ),
