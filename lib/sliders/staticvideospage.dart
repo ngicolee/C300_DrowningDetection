@@ -71,7 +71,8 @@ class _VideoDemoState extends State<VideoDemo> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
+                // aspectRatio: _controller.value.aspectRatio,
+                aspectRatio: 26 / 10,
                 child: VideoPlayer(_controller),
               );
             } else {

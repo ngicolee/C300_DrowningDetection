@@ -70,8 +70,7 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   Widget _buildCategoryCards(String image) {
@@ -459,12 +458,6 @@ class _MainHomePageState extends State<MainHomePage> {
               _key.currentState?.openDrawer();
             }),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              showSearch(context: context, delegate: SearchingFunction());
-            },
-          ),
           IconButton(
             icon: Icon(Icons.notifications_none, color: Colors.white),
             onPressed: () {},

@@ -43,10 +43,6 @@ class ListItemsPage extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
               icon: Icon(Icons.notifications_none, color: Colors.white),
               onPressed: () {}),
         ],
@@ -78,14 +74,13 @@ class ListItemsPage extends StatelessWidget {
                 SizedBox(height: 10),
                 Container(
                   height: 725,
-                  child:                  
-                      GridView.count(
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 0.7,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          scrollDirection: Axis.vertical,
-                          children: <Widget>[
+                  child: GridView.count(
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.7,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushReplacement(
@@ -111,7 +106,7 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                          image: snapshot.data.docs[1]["image"],
+                            image: snapshot.data.docs[1]["image"],
                             name: snapshot.data.docs[1]["mainname"],
                             subname: snapshot.data.docs[1]["subname"],
                           ),
@@ -126,7 +121,7 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                           image: snapshot.data.docs[2]["image"],
+                            image: snapshot.data.docs[2]["image"],
                             name: snapshot.data.docs[2]["mainname"],
                             subname: snapshot.data.docs[2]["subname"],
                           ),
@@ -156,7 +151,7 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                          image: snapshot.data.docs[4]["image"],
+                            image: snapshot.data.docs[4]["image"],
                             name: snapshot.data.docs[4]["mainname"],
                             subname: snapshot.data.docs[4]["subname"],
                           ),
@@ -171,7 +166,7 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                          image: snapshot.data.docs[5]["image"],
+                            image: snapshot.data.docs[5]["image"],
                             name: snapshot.data.docs[5]["mainname"],
                             subname: snapshot.data.docs[5]["subname"],
                           ),
