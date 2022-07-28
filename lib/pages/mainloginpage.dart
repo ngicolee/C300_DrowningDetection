@@ -3,7 +3,7 @@
 import 'package:c300drowningdetection/firebase_options.dart';
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
-import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
+
 import 'package:c300drowningdetection/pages/testsplashscreen.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -199,17 +199,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 10.0),
-                AccountState(
-                  accPage: "Don't have an account?",
-                  onTap: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (ctx) => MainRegistrationPage(),
-                      ),
-                    );
-                  },
-                  name: 'Register Here',
-                ),
+                // AccountState(
+                //   accPage: "Don't have an account?",
+                //   onTap: () {
+                //     Navigator.of(context).pushReplacement(
+                //       MaterialPageRoute(
+                //         builder: (ctx) => MainRegistrationPage(),
+                //       ),
+                //     );
+                //   },
+                //   name: 'Register Here',
+                // ),
                 SizedBox(height: 10.0),
                 Container(
                   width: double.infinity,

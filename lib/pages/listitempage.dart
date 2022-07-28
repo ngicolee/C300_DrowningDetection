@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:c300drowningdetection/pages/adminpage.dart';
 import 'package:c300drowningdetection/pages/adminpanelpage.dart';
 import 'package:c300drowningdetection/pages/attendancepage.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
@@ -97,21 +98,21 @@ class ListItemsPage extends StatelessWidget {
                             subname: snapshot.data.docs[0]["subname"],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => AttendancePage(),
-                              ),
-                            );
-                          },
-                          child: CategorisedPage(
-                            image: snapshot.data.docs[6]["image"],
-                            name: snapshot.data.docs[6]["mainname"],
-                            subname: snapshot.data.docs[6]["subname"],
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.of(context).pushReplacement(
+                        //       MaterialPageRoute(
+                        //         // Page Route would be changed after completion of 'Pool Locations' pages
+                        //         builder: (ctx) => AttendancePage(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: CategorisedPage(
+                        //     image: snapshot.data.docs[6]["image"],
+                        //     name: snapshot.data.docs[6]["mainname"],
+                        //     subname: snapshot.data.docs[6]["subname"],
+                        //   ),
+                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushReplacement(
@@ -142,27 +143,27 @@ class ListItemsPage extends StatelessWidget {
                             subname: snapshot.data.docs[3]["subname"],
                           ),
                         ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.of(context).pushReplacement(
+                        //       MaterialPageRoute(
+                        //         // Page Route would be changed after completion of 'Pool Locations' pages
+                        //         builder: (ctx) => SMSPage(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: CategorisedPage(
+                        //     image: snapshot.data.docs[4]["image"],
+                        //     name: snapshot.data.docs[4]["mainname"],
+                        //     subname: snapshot.data.docs[4]["subname"],
+                        //   ),
+                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => SMSPage(),
-                              ),
-                            );
-                          },
-                          child: CategorisedPage(
-                            image: snapshot.data.docs[4]["image"],
-                            name: snapshot.data.docs[4]["mainname"],
-                            subname: snapshot.data.docs[4]["subname"],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => AdminPanelPage(),
+                                builder: (ctx) => AdminPage(),
                               ),
                             );
                           },

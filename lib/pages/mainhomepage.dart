@@ -544,10 +544,10 @@ class _MainHomePageState extends State<MainHomePage> {
                                           subName: snapshot.data.docs[0]
                                               ["subname"]);
                                       attendancedata = Pages(
-                                          image: snapshot.data.docs[6]["image"],
-                                          mainName: snapshot.data.docs[6]
+                                          image: snapshot.data.docs[5]["image"],
+                                          mainName: snapshot.data.docs[5]
                                               ["mainname"],
-                                          subName: snapshot.data.docs[6]
+                                          subName: snapshot.data.docs[5]
                                               ["subname"]);
                                       return Container(
                                         height: double.infinity,

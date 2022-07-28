@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, avoid_print, no_leading_underscores_for_local_identifiers, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/adminpage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
@@ -28,12 +29,12 @@ RegExp phoneRegExp = RegExp(phoneRE);
 bool obscureText = true;
 bool isMale = true;
 bool isAdmin = true;
-bool errorRegister = false;
+bool errorRegister = true;
 
-String? userName;
+String userName = "";
 String email = "";
 String password = "";
-String? phoneNumber;
+String phoneNumber = "";
 
 var emailController = TextEditingController();
 var userNameController = TextEditingController();
@@ -47,13 +48,36 @@ void clearText() {
   phoneNumberController.clear();
 }
 
+Future<bool> validateRegistration() async {
+  UserCredential result = await FirebaseAuth.instance
+      .createUserWithEmailAndPassword(email: email, password: password);
+  if (result.user!.uid.isNotEmpty) {
+    errorRegister = false;
+  } else {
+    errorRegister = true;
+  }
+  return errorRegister;
+}
+
 class _MainRegistrationPageState extends State<MainRegistrationPage> {
+  Future<bool> validateRegistration() async {
+    UserCredential result = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    if (result.user!.uid.isNotEmpty) {
+      errorRegister = false;
+    } else {
+      errorRegister = true;
+    }
+    return errorRegister;
+  }
+
   void validation() async {
     final FormState? _form = _registerKey.currentState;
     if (!_form!.validate()) {
       try {
         UserCredential result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+
         FirebaseFirestore.instance
             .collection("users")
             .doc(result.user?.uid)
@@ -67,14 +91,47 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
             "userRights": isAdmin == true ? "Admin" : "Guest"
           },
         );
-        errorRegister = false;
-      } on PlatformException catch (e) {       
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.message.toString()),
-          ),
-        );
-      }
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-email') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Email Address is Invalid."),
+            ),
+          );
+        } else if (e.code == 'user-disabled') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Email Address has been disabled."),
+            ),
+          );
+        } else if (e.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  Text("There is no user corresponding to the email address."),
+            ),
+          );
+        } else if (e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                  "Password is Incorrect, Please enter the correct password."),
+            ),
+          );
+        } else if (e.code == 'unknown') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Please fill in the blanks appropriately!"),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.message!),
+            ),
+          );
+        }
+      } 
     }
   }
 
@@ -82,13 +139,32 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(
+          "Create User Page",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.MAIN_COLOR,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.login, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (ctx) => MainLoginPage(),
+              ),
+            );
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
             key: _registerKey,
             child: Column(
               children: [
-                SizedBox(height: 50),
+                SizedBox(height: 10),
                 Center(
                   child: ClipOval(
                     child: Container(
@@ -108,7 +184,7 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        "Registration",
+                        "Create User",
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -271,22 +347,23 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      AccountState(
-                        accPage: "Already have an account?",
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (ctx) => MainLoginPage()));
-                        },
-                        name: 'Login Here!',
-                      ),
+                      // AccountState(
+                      //   accPage: "Already have an account?",
+                      //   onTap: () {
+                      //     Navigator.of(context).pushReplacement(
+                      //         MaterialPageRoute(
+                      //             builder: (ctx) => MainLoginPage()));
+                      //   },
+                      //   name: 'Login Here!',
+                      // ),
                       SizedBox(height: 10),
                       ButtonsWidget(
-                        btnName: "Register",
+                        btnName: "Create User",
                         onPressed: () {
-                          clearText();
                           validation();
-                          isAdmin = false;
+                          clearText();           
+                          isAdmin = false;              
+                          
                         },
                       ),
                       SizedBox(height: 20),

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_element, prefer_interpolation_to_compose_strings, avoid_print, avoid_unnecessary_containers, unused_label
 
+import 'dart:async';
+
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
@@ -275,7 +277,10 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                           ),
                           key: slideKey,
                           onSubmit: () async {
-                            slideKey.currentState!.reset();
+                            Timer(Duration(seconds: 1), () {
+                              slideKey.currentState!.reset();
+                            });
+
                             QuerySnapshot<Map<String, dynamic>> snap =
                                 await FirebaseFirestore.instance
                                     .collection("users")

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, avoid_unnecessary_containers, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_typing_uninitialized_variables
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/attendancepage.dart';
+import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
@@ -72,33 +74,20 @@ class GuestListItemsPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 525,
-                  child:
-                      // GridView.count(
-                      //   crossAxisCount: 2,
-                      //   scrollDirection: Axis.vertical,
-                      //   children: snapShot
-                      //       .map(
-                      //         (e) => CategorisedPage(
-                      //             image: e.image,
-                      //             name: e.mainName,
-                      //             subname: e.subName),
-                      //       )
-                      //       .toList(),
-                      // ),
-                      GridView.count(
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 0.7,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          scrollDirection: Axis.vertical,
-                          children: <Widget>[
+                  height: 725,
+                  child: GridView.count(
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.7,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => PoolLocationPage(),
+                                builder: (ctx) => DetectionSystemsPage(),
                               ),
                             );
                           },
@@ -113,7 +102,22 @@ class GuestListItemsPage extends StatelessWidget {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 // Page Route would be changed after completion of 'Pool Locations' pages
-                                builder: (ctx) => QRPage(),
+                                builder: (ctx) => AttendancePage(),
+                              ),
+                            );
+                          },
+                          child: CategorisedPage(
+                            image: snapShot.data.docs[6]["image"],
+                            name: snapShot.data.docs[6]["mainname"],
+                            subname: snapShot.data.docs[6]["subname"],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                // Page Route would be changed after completion of 'Pool Locations' pages
+                                builder: (ctx) => PoolLocationPage(),
                               ),
                             );
                           },
@@ -133,11 +137,41 @@ class GuestListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[2]["image"],
-                            name: snapShot.data.docs[2]["mainname"],
-                            subname: snapShot.data.docs[2]["subname"],
+                            image: snapShot.data.docs[3]["image"],
+                            name: snapShot.data.docs[3]["mainname"],
+                            subname: snapShot.data.docs[3]["subname"],
                           ),
                         ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.of(context).pushReplacement(
+                        //       MaterialPageRoute(
+                        //         // Page Route would be changed after completion of 'Pool Locations' pages
+                        //         builder: (ctx) => SMSPage(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: CategorisedPage(
+                        //     image: snapShot.data.docs[4]["image"],
+                        //     name: snapShot.data.docs[4]["mainname"],
+                        //     subname: snapShot.data.docs[4]["subname"],
+                        //   ),
+                        // ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.of(context).pushReplacement(
+                        //       MaterialPageRoute(
+                        //         // Page Route would be changed after completion of 'Pool Locations' pages
+                        //         builder: (ctx) => AdminPage(),
+                        //       ),
+                        //     );
+                        //   },
+                        //   child: CategorisedPage(
+                        //     image: snapShot.data.docs[5]["image"],
+                        //     name: snapShot.data.docs[5]["mainname"],
+                        //     subname: snapShot.data.docs[5]["subname"],
+                        //   ),
+                        // ),
                       ]),
                 ),
               ],

@@ -28,9 +28,11 @@ class GuestHomePage extends StatefulWidget {
   State<GuestHomePage> createState() => _GuestHomePageState();
 }
 
-Pages? mapdata;
+
 Pages? qrdata;
-Pages? profiledata;
+
+Pages? cameradata;
+Pages? admindata;
 
 UserModel? userModel;
 
@@ -384,9 +386,9 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 );
               },
               child: CategorisedPage(
-                image: profiledata!.image,
-                name: profiledata!.mainName,
-                subname: profiledata!.subName,
+                image: cameradata!.image,
+                name: cameradata!.mainName,
+                subname: cameradata!.subName,
               ),
             ),
             GestureDetector(
@@ -399,9 +401,9 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 );
               },
               child: CategorisedPage(
-                image: mapdata!.image,
-                name: mapdata!.mainName,
-                subname: mapdata!.subName,
+                image: admindata!.image,
+                name: admindata!.mainName,
+                subname: admindata!.subName,
               ),
             ),
           ],
@@ -503,7 +505,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                                     future: FirebaseFirestore.instance
                                         .collection("pages")
                                         .doc("r3YfjXRPA2bt2uAP8241")
-                                        .collection("guestfeaturedpages")
+                                        .collection("featuredpages")
                                         .get(),
                                     builder: (context, AsyncSnapshot snapshot) {
                                       if (snapshot.connectionState ==
@@ -513,23 +515,17 @@ class _GuestHomePageState extends State<GuestHomePage> {
                                         );
                                       }
                                       guestfeaturedSnapshot = snapshot;                                   
-                                      mapdata = Pages(
+                                      cameradata = Pages(
                                           image: snapshot.data.docs[0]["image"],
                                           mainName: snapshot.data.docs[0]
                                               ["mainname"],
                                           subName: snapshot.data.docs[0]
                                               ["subname"]);
-                                      qrdata = Pages(
-                                          image: snapshot.data.docs[1]["image"],
-                                          mainName: snapshot.data.docs[1]
+                                      admindata = Pages(
+                                          image: snapshot.data.docs[6]["image"],
+                                          mainName: snapshot.data.docs[6]
                                               ["mainname"],
-                                          subName: snapshot.data.docs[1]
-                                              ["subname"]);
-                                      profiledata = Pages(
-                                          image: snapshot.data.docs[2]["image"],
-                                          mainName: snapshot.data.docs[2]
-                                              ["mainname"],
-                                          subName: snapshot.data.docs[2]
+                                          subName: snapshot.data.docs[6]
                                               ["subname"]);
                                               
                                       return Container(

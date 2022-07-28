@@ -62,12 +62,12 @@ class MainWelcomePage extends StatelessWidget {
                     Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => MainRegistrationPage(),
+                    builder: (ctx) => MainLoginPage(),
                   ),
                 );
                   },
                   child: Text(
-                    "Register Here",
+                    "Login Here",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
@@ -76,26 +76,26 @@ class MainWelcomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 5),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Already have an Account? "),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          // Page Route would be changed after completion of 'Pool Locations' pages
-                          builder: (ctx) => MainLoginPage(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Login Here!",
-                      style: TextStyle(color: AppColors.MAIN_COLOR),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Text("Already have an Account? "),
+              //     GestureDetector(
+              //       onTap: () {
+              //         Navigator.of(context).pushReplacement(
+              //           MaterialPageRoute(
+              //             // Page Route would be changed after completion of 'Pool Locations' pages
+              //             builder: (ctx) => MainLoginPage(),
+              //           ),
+              //         );
+              //       },
+              //       child: Text(
+              //         "Login Here!",
+              //         style: TextStyle(color: AppColors.MAIN_COLOR),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

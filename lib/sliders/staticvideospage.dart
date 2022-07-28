@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
-import 'dart:ffi';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
@@ -25,7 +24,7 @@ class _VideoDemoState extends State<VideoDemo> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.asset("assets/videos/video6.mp4");
+    _controller = VideoPlayerController.asset("assets/videos/video4.mp4");
     _initializeVideoPlayerFuture =
         _controller.initialize().then((value) => _controller.play());
     _controller.setLooping(true);

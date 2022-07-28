@@ -4,6 +4,7 @@ import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class LiveStreamScreen extends StatefulWidget {
@@ -11,6 +12,11 @@ class LiveStreamScreen extends StatefulWidget {
 
   @override
   State<LiveStreamScreen> createState() => _LiveStreamScreenState();
+}
+
+void deviceOrientation() {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 }
 
 class _LiveStreamScreenState extends State<LiveStreamScreen> {
@@ -26,7 +32,9 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
 
   @override
   Widget build(BuildContext context) {
+    deviceOrientation();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           "LiveStream Page",
@@ -46,10 +54,6 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             }),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
               icon: Icon(Icons.notifications_none, color: Colors.white),
               onPressed: () {}),
         ],
@@ -59,7 +63,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
         children: [
           VlcPlayer(
             controller: _videoPlayerController,
-            aspectRatio: 16 / 9,
+            aspectRatio: 26 / 9,
             placeholder: const Center(
               child: CircularProgressIndicator(),
             ),
