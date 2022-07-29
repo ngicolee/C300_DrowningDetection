@@ -3,6 +3,8 @@
 import 'dart:async';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/guesthomepage.dart';
+import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -74,7 +76,7 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
 
       DocumentSnapshot docSnap = await FirebaseFirestore.instance
           .collection("users")
-          .doc(snap.docs[0].id)
+          .doc(userId)
           .collection("record")
           .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
           .get();
@@ -110,14 +112,14 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (ctx) => ListItemsPage(
-                  appbarName: 'Featured Page',
-                  snapshot: featuredSnapshot,
-                  name: 'Featured',
-                ),
-              ),
-            );
+                  MaterialPageRoute(
+                    builder: (ctx) => GuestListItemsPage(
+                      snapShot: guestfeaturedSnapshot,
+                      appbarName: 'Featured Page',
+                      name: 'Featured Page',
+                    ),
+                  ),
+                );
           },
         ),
       ),
@@ -277,10 +279,6 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                           ),
                           key: slideKey,
                           onSubmit: () async {
-                            Timer(Duration(seconds: 1), () {
-                              slideKey.currentState!.reset();
-                            });
-
                             QuerySnapshot<Map<String, dynamic>> snap =
                                 await FirebaseFirestore.instance
                                     .collection("users")
@@ -317,9 +315,12 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                                       .format(DateTime.now()))
                                   .update(
                                 {
+                                  
                                   'checkIn': checkIn,
+                                  'date': Timestamp.now(),
                                   'checkOut':
                                       DateFormat('hh:mm').format(DateTime.now())
+                                      
                                 },
                               );
                             } catch (e) {
@@ -335,12 +336,18 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                                       .format(DateTime.now()))
                                   .set(
                                 {
+                                  
                                   'checkIn': DateFormat('hh:mm').format(
                                     DateTime.now(),
                                   ),
+                                  'date': Timestamp.now(),
+                                  'checkOut': "--/--"
+                                  
                                 },
                               );
                             }
+
+                            slideKey.currentState?.reset();
                           },
                         );
                       },
@@ -349,7 +356,7 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                 : Container(
                     margin: EdgeInsets.only(top: 32),
                     child: Text(
-                      "You have completed today's day.",
+                      "You have completed today's attendance!",
                       style: TextStyle(
                           color: Colors.black, fontSize: screenWidth / 20),
                     ),

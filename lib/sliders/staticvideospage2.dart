@@ -21,7 +21,7 @@ class _VideoDemo2State extends State<VideoDemo2> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.asset("assets/videos/video5.mp4");
+    _controller = VideoPlayerController.asset("assets/videos/video7.mp4");
     _initializeVideoPlayerFuture =
         _controller.initialize().then((value) => _controller.play());
     _controller.setLooping(true);

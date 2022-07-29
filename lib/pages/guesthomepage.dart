@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/attendancepage.dart';
 import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
@@ -396,7 +397,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => PoolLocationPage(),
+                    builder: (ctx) => AttendancePage(),
                   ),
                 );
               },

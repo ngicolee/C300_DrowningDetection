@@ -62,6 +62,15 @@ dependencies:
   slide_to_act: ^2.0.1
   intl: ^0.17.0
 
+  # Notifications Testing
+  flutter_local_notifications: ^9.7.0
+
+  # MQTT
+  mqtt_client: ^9.7.0
+
+  # Month Year Picker
+  month_year_picker: ^0.2.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

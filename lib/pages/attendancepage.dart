@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unnecessary_new
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/calendarpage.dart';
@@ -6,6 +6,8 @@ import 'package:c300drowningdetection/pages/currentdatepage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -24,11 +26,37 @@ class _AttendancePageState extends State<AttendancePage> {
 
   int selectedIcon = 0;
 
+  String email = " ";
+  String userName = " ";
+  String userRights = " ";
+  String userId = " ";
+  String userPhoneNumber = " ";
+
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
   List<IconData> navigateIcons = [
-    Icons.calendar_month,
     Icons.check,
+    Icons.calendar_month,
     Icons.person,
   ];
+
+  Future<String> getUserId() async {
+    QuerySnapshot<Map<String, dynamic>> snap =
+        await FirebaseFirestore.instance.collection("users").get();
+    for (var element in snap.docs) {
+      if (currentUser?.uid == element.data()["userId"]) {
+        userId = element.data()["userId"];
+      }
+    }
+
+    return userId;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserId();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +64,13 @@ class _AttendancePageState extends State<AttendancePage> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      
       body: IndexedStack(
         index: selectedIcon,
         children: [
-          CalendarPage(),
-          CurrentDatePage(),
-          ProfilePage(),
+          new CurrentDatePage(),
+          new CalendarPage(),
+          new ProfilePage(),
         ],
       ),
       bottomNavigationBar: Container(

@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, unused_element
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace, prefer_const_constructors_in_immutables, avoid_print, prefer_typing_uninitialized_variables, unused_element, unnecessary_new
 
 import 'dart:io';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/adminpage.dart';
 import 'package:c300drowningdetection/pages/attendancepage.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
@@ -37,7 +38,6 @@ Pages? mapdata;
 Pages? qrdata;
 Pages? profiledata;
 Pages? admindata;
-Pages? attendancedata;
 
 UserModel? userModel;
 
@@ -128,6 +128,12 @@ class _MainHomePageState extends State<MainHomePage> {
         ),
       );
     }).toList());
+  }
+
+  refresh() {
+    setState(() {
+      new MainHomePage();
+    });
   }
 
   Widget _buildDrawer() {
@@ -422,14 +428,14 @@ class _MainHomePageState extends State<MainHomePage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => AttendancePage(),
+                    builder: (ctx) => AdminPage(),
                   ),
                 );
               },
               child: CategorisedPage(
-                image: attendancedata!.image,
-                name: attendancedata!.mainName,
-                subname: attendancedata!.subName,
+                image: admindata!.image,
+                name: admindata!.mainName,
+                subname: admindata!.subName,
               ),
             ),
           ],
@@ -442,6 +448,7 @@ class _MainHomePageState extends State<MainHomePage> {
   Widget build(BuildContext context) {
     pageProvider?.getUserData();
     pageProvider = Provider.of<PageProvider>(context);
+    refresh();
 
     return Scaffold(
       key: _key,
@@ -543,7 +550,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                               ["mainname"],
                                           subName: snapshot.data.docs[0]
                                               ["subname"]);
-                                      attendancedata = Pages(
+                                      admindata = Pages(
                                           image: snapshot.data.docs[5]["image"],
                                           mainName: snapshot.data.docs[5]
                                               ["mainname"],

@@ -1,4 +1,4 @@
-// ignore_for_file: annotate_overrides, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: annotate_overrides, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, use_build_context_synchronously
 
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
@@ -36,11 +36,23 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
     });
 
     if (userRights == "Guest") {
-      navigateNext(GuestHomePage());
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (ctx) => new GuestHomePage(),
+        ),
+      );
     } else if (userRights == "Admin") {
-      navigateNext(MainHomePage());
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (ctx) => new MainHomePage(),
+        ),
+      );
     } else {
-      navigateNext(MainLoginPage());
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (ctx) => new MainLoginPage(),
+        ),
+      );
     }
   }
 

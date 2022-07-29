@@ -109,9 +109,6 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
             CircleAvatar(
                 maxRadius: 65,
                 backgroundImage: AssetImage("assets/imgs/ProfilePicture.jpg")),
-            SizedBox(
-              height: 50,
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child:
