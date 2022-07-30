@@ -28,15 +28,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _service = MQTTService(
-      // Host IP Address (?)
-      host: 'broker.mqttdashboard.com',
-      port: 8000,
-      topic: 'sensor/home',
-      model: MQTTModel(),
-    );
-    _service.initializeMQTTClient;
-    _service.connectMQTT;
+    // final _service = MQTTService(
+    //   // Host IP Address (?)
+    //   host: 'test.mosquitto.org',
+    //   port: 1883,
+    //   topic: 'MQTT_Drowning',
+    //   model: MQTTModel(),
+    // );
+    // _service.initializeMQTTClient;
+    // _service.connectMQTT;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PageProvider>(

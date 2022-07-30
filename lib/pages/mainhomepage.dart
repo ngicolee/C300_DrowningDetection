@@ -75,6 +75,21 @@ class _MainHomePageState extends State<MainHomePage> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
+  void alert() {
+    AlertDialog(
+      title: Text("Verify Email!"),
+      content: Text(
+          "You will be able to use the feature of Drowning Detection System.\nHowever, please do verify your email before continuing!"),
+    );
+  }
+
+  void verifyEmail() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (!(user!.emailVerified)) {
+      alert();
+    }
+  }
+
   Widget _buildCategoryCards(String image) {
     return CircleAvatar(
       maxRadius: 38,
@@ -448,6 +463,7 @@ class _MainHomePageState extends State<MainHomePage> {
   Widget build(BuildContext context) {
     pageProvider?.getUserData();
     pageProvider = Provider.of<PageProvider>(context);
+    verifyEmail();
     refresh();
 
     return Scaffold(

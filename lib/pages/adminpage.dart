@@ -59,7 +59,7 @@ class _AdminPageState extends State<AdminPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              "Camera & Sample Videos",
+              "Manage Users",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],
