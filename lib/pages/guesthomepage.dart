@@ -189,6 +189,11 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 attendanceColor = true;
                 profileColor = false;
               });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => AttendancePage(),
+                ),
+              );
             },
             leading: Icon(Icons.book),
             title: Text("Attendance"),

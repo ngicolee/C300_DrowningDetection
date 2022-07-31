@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:c300drowningdetection/pages/admindeleteuserpage.dart';
 import 'package:c300drowningdetection/pages/adminpanelpage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
@@ -26,6 +27,7 @@ class _AdminPageState extends State<AdminPage> {
   var adminSnapshot;
   var createUser;
   var manageUser;
+  var deleteUser;
 
   String userRights = "Guest";
 
@@ -61,39 +63,61 @@ class _AdminPageState extends State<AdminPage> {
             ),
           ],
         ),
-        Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    // Page Route would be changed after completion of 'Detection System' pages
-                    builder: (ctx) => MainRegistrationPage(),
+        Container(
+          height: 725,
+          child: GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 10,
+              scrollDirection: Axis.vertical,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        // Page Route would be changed after completion of 'Detection System' pages
+                        builder: (ctx) => MainRegistrationPage(),
+                      ),
+                    );
+                  },
+                  child: CategorisedPage(
+                    image: manageUser!.image,
+                    name: manageUser!.mainName,
+                    subname: manageUser!.subName,
                   ),
-                );
-              },
-              child: CategorisedPage(
-                image: manageUser!.image,
-                name: manageUser!.mainName,
-                subname: manageUser!.subName,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    // Page Route would be changed after completion of 'Pool Locations' pages
-                    builder: (ctx) => AdminPanelPage(),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        // Page Route would be changed after completion of 'Pool Locations' pages
+                        builder: (ctx) => AdminPanelPage(),
+                      ),
+                    );
+                  },
+                  child: CategorisedPage(
+                    image: createUser!.image,
+                    name: createUser!.mainName,
+                    subname: createUser!.subName,
                   ),
-                );
-              },
-              child: CategorisedPage(
-                image: createUser!.image,
-                name: createUser!.mainName,
-                subname: createUser!.subName,
-              ),
-            ),
-          ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        // Page Route would be changed after completion of 'Pool Locations' pages
+                        builder: (ctx) => AdminDeleteUserPage(),
+                      ),
+                    );
+                  },
+                  child: CategorisedPage(
+                    image: deleteUser!.image,
+                    name: deleteUser!.mainName,
+                    subname: deleteUser!.subName,
+                  ),
+                ),
+              ]),
         ),
       ],
     );
@@ -145,6 +169,10 @@ class _AdminPageState extends State<AdminPage> {
                 image: snapshot.data.docs[1]["image"],
                 mainName: snapshot.data.docs[1]["mainname"],
                 subName: snapshot.data.docs[1]["subname"]);
+            deleteUser = Pages(
+                image: snapshot.data.docs[2]["image"],
+                mainName: snapshot.data.docs[2]["mainname"],
+                subName: snapshot.data.docs[2]["subname"]);
             return Container(
               height: double.infinity,
               width: double.infinity,

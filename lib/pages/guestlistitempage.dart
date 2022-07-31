@@ -9,8 +9,9 @@ import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class GuestListItemsPage extends StatelessWidget {
+class GuestListItemsPage extends StatefulWidget {
   final String name;
   final String appbarName;
   final snapShot;
@@ -18,12 +19,24 @@ class GuestListItemsPage extends StatelessWidget {
       {required this.name, required this.snapShot, required this.appbarName});
 
   @override
+  State<GuestListItemsPage> createState() => _GuestListItemsPageState();
+}
+
+class _GuestListItemsPageState extends State<GuestListItemsPage> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DrownCheck().drownCheck;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    DrownCheck().drownCheck();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          appbarName,
+          widget.appbarName,
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -64,7 +77,7 @@ class GuestListItemsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            name,
+                            widget.name,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -93,9 +106,9 @@ class GuestListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[0]["image"],
-                            name: snapShot.data.docs[0]["mainname"],
-                            subname: snapShot.data.docs[0]["subname"],
+                            image: widget.snapShot.data.docs[0]["image"],
+                            name: widget.snapShot.data.docs[0]["mainname"],
+                            subname: widget.snapShot.data.docs[0]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -108,9 +121,9 @@ class GuestListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[6]["image"],
-                            name: snapShot.data.docs[6]["mainname"],
-                            subname: snapShot.data.docs[6]["subname"],
+                            image: widget.snapShot.data.docs[6]["image"],
+                            name: widget.snapShot.data.docs[6]["mainname"],
+                            subname: widget.snapShot.data.docs[6]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -123,9 +136,9 @@ class GuestListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[1]["image"],
-                            name: snapShot.data.docs[1]["mainname"],
-                            subname: snapShot.data.docs[1]["subname"],
+                            image: widget.snapShot.data.docs[1]["image"],
+                            name: widget.snapShot.data.docs[1]["mainname"],
+                            subname: widget.snapShot.data.docs[1]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -138,9 +151,9 @@ class GuestListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapShot.data.docs[3]["image"],
-                            name: snapShot.data.docs[3]["mainname"],
-                            subname: snapShot.data.docs[3]["subname"],
+                            image: widget.snapShot.data.docs[3]["image"],
+                            name: widget.snapShot.data.docs[3]["mainname"],
+                            subname: widget.snapShot.data.docs[3]["subname"],
                           ),
                         ),
                         // GestureDetector(

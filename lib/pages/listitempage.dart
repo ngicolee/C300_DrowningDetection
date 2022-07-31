@@ -8,10 +8,11 @@ import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../widgets/drowncheck.dart';
 
-class ListItemsPage extends StatelessWidget {
+class ListItemsPage extends StatefulWidget {
   final String name;
   final String appbarName;
   final snapshot;
@@ -19,12 +20,24 @@ class ListItemsPage extends StatelessWidget {
       {required this.name, required this.snapshot, required this.appbarName});
 
   @override
+  State<ListItemsPage> createState() => _ListItemsPageState();
+}
+
+class _ListItemsPageState extends State<ListItemsPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DrownCheck().drownCheck;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    DrownCheck().drownCheck();
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          appbarName,
+          widget.appbarName,
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -61,7 +74,7 @@ class ListItemsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            name,
+                            widget.name,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -90,9 +103,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapshot.data.docs[0]["image"],
-                            name: snapshot.data.docs[0]["mainname"],
-                            subname: snapshot.data.docs[0]["subname"],
+                            image: widget.snapshot.data.docs[0]["image"],
+                            name: widget.snapshot.data.docs[0]["mainname"],
+                            subname: widget.snapshot.data.docs[0]["subname"],
                           ),
                         ),
                         // GestureDetector(
@@ -120,9 +133,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapshot.data.docs[1]["image"],
-                            name: snapshot.data.docs[1]["mainname"],
-                            subname: snapshot.data.docs[1]["subname"],
+                            image: widget.snapshot.data.docs[1]["image"],
+                            name: widget.snapshot.data.docs[1]["mainname"],
+                            subname: widget.snapshot.data.docs[1]["subname"],
                           ),
                         ),
                         GestureDetector(
@@ -135,9 +148,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapshot.data.docs[3]["image"],
-                            name: snapshot.data.docs[3]["mainname"],
-                            subname: snapshot.data.docs[3]["subname"],
+                            image: widget.snapshot.data.docs[3]["image"],
+                            name: widget.snapshot.data.docs[3]["mainname"],
+                            subname: widget.snapshot.data.docs[3]["subname"],
                           ),
                         ),
                         // GestureDetector(
@@ -165,9 +178,9 @@ class ListItemsPage extends StatelessWidget {
                             );
                           },
                           child: CategorisedPage(
-                            image: snapshot.data.docs[5]["image"],
-                            name: snapshot.data.docs[5]["mainname"],
-                            subname: snapshot.data.docs[5]["subname"],
+                            image: widget.snapshot.data.docs[5]["image"],
+                            name: widget.snapshot.data.docs[5]["mainname"],
+                            subname: widget.snapshot.data.docs[5]["subname"],
                           ),
                         ),
                       ]),

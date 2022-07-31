@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/adminpage.dart';
+import 'package:c300drowningdetection/pages/attendancepage.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
@@ -228,8 +229,13 @@ class _MainHomePageState extends State<MainHomePage> {
                 attendanceColor = true;
                 profileColor = false;
               });
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (ctx) => AttendancePage(),
+                ),
+              );
             },
-            leading: Icon(Icons.phone),
+            leading: Icon(Icons.book),
             title: Text("Attendance"),
           ),
           ListTile(
