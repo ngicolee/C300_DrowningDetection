@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 class UserModel {
   String userName, userEmail, userGender, userPhoneNumber, userRights;
+  static double lat = 0;
+  static double long = 0;
   UserModel(
       {required this.userEmail,
       required this.userGender,

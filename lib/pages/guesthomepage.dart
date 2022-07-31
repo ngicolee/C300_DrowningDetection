@@ -100,7 +100,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
         ),
         currentAccountPicture: CircleAvatar(
             maxRadius: 40,
-            child: Image.asset("assets/imgs/TestProfilePicture.png")),
+            child: Image.asset("assets/imgs/ProfilePicture.jpg")),
         decoration: BoxDecoration(
           color: Colors.white,
         ),

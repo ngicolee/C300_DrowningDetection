@@ -12,7 +12,7 @@ class Utils {
       MainLocation(
           color: Colors.red,
           name: "North",
-          imgName: "ComingSoon",
+          imgName: "WhiteBackground",
           direction: "North",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: [

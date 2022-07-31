@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unnecessary_new
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unnecessary_new, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/calendarpage.dart';
 import 'package:c300drowningdetection/pages/currentdatepage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
+import 'package:c300drowningdetection/services/locationservices.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,6 +39,19 @@ class _AttendancePageState extends State<AttendancePage> {
     Icons.person,
   ];
 
+  void _startLocationServices() async {
+    LocationServices().initialize();
+
+    LocationServices().getLongitude().then((value) {
+      setState(() {
+        UserModel.long = value!;
+      });
+      LocationServices().getLatitude().then((value) {
+        UserModel.lat = value!;
+      });
+    });
+  }
+
   Future<String> getUserId() async {
     QuerySnapshot<Map<String, dynamic>> snap =
         await FirebaseFirestore.instance.collection("users").get();
@@ -54,6 +69,7 @@ class _AttendancePageState extends State<AttendancePage> {
     super.initState();
     getUserId();
     DrownCheck().drownCheck;
+    _startLocationServices();
   }
 
   @override

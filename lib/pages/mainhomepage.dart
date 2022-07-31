@@ -8,6 +8,7 @@ import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
+import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
@@ -244,7 +245,7 @@ class _MainHomePageState extends State<MainHomePage> {
               });
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => DetectionSystemsPage(),
+                  builder: (ctx) => ProfilePage(),
                 ),
               );
             },

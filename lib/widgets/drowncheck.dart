@@ -21,8 +21,8 @@ class DrownCheck extends StatelessWidget {
         body: jsonEncode(
           <String, dynamic>{
             'notification': <String, dynamic>{
-              'body': 'Drowning Detected!',
-              'title': 'ALERT!'
+              'body': "There is someone drowning. Please act accordingly!",
+              'title': 'ALERT: Drowning Detected'
             },
             'priority': 'high',
             'data': <String, dynamic>{
@@ -43,18 +43,12 @@ class DrownCheck extends StatelessWidget {
     String drown = "0_All_Clear";
     bool drowning = false;
 
-    // DocumentSnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
-    //     .instance
-    //     .collection("drowning")
-    //     .doc("SfrIbW6CA8t4ymLTpmQ3")
-    //     .get();
-    // drown = snap['drown'];
     DatabaseReference ref = FirebaseDatabase.instance.ref("DetectedDrowning");
     Stream<DatabaseEvent> stream = ref.onValue;
 
     stream.listen((DatabaseEvent event) {
       drown = '${event.snapshot.value}';
-      print('Event Type: ${event.snapshot.value}');
+      // print('Event Type: ${event.snapshot.value}'); for debug purposes
 
       if (drown == "1_Drowning_Detected") {
         drowning = true;
