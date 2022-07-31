@@ -3,8 +3,6 @@
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/pages.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
-import 'package:c300drowningdetection/pages/guestlistitempage.dart';
-import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/pages/samplevideospage.dart';

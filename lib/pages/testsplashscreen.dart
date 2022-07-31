@@ -1,7 +1,6 @@
 // ignore_for_file: annotate_overrides, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, use_build_context_synchronously, avoid_print, unnecessary_brace_in_string_interps, unused_field, unrelated_type_equality_checks, unused_element, unnecessary_string_interpolations
 
-import 'dart:async';
-import 'dart:convert';
+
 
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
@@ -13,7 +12,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:http/http.dart' as http;
 // import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 
 class TestSplashScreen extends StatefulWidget {

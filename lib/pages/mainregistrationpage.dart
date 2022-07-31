@@ -1,14 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, avoid_print, no_leading_underscores_for_local_identifiers, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
-import 'package:c300drowningdetection/pages/adminpage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
-import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../widgets/drowncheck.dart';
 

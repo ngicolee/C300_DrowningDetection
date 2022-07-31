@@ -3,16 +3,12 @@
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/calendarpage.dart';
 import 'package:c300drowningdetection/pages/currentdatepage.dart';
-import 'package:c300drowningdetection/pages/listitempage.dart';
-import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class AttendancePage extends StatefulWidget {
   const AttendancePage({Key? key}) : super(key: key);

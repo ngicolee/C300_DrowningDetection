@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_constructors, file_names, unused_element
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
-import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,6 +30,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
     super.initState();
     // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     DrownCheck().drownCheck();
+    _checkRole();
   }
   //bool _isPlaying = true;
 

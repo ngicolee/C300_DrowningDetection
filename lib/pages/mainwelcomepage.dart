@@ -2,7 +2,6 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
-import 'package:c300drowningdetection/pages/mainregistrationpage.dart';
 import 'package:flutter/material.dart';
 
 class MainWelcomePage extends StatelessWidget {

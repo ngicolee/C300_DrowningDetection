@@ -2,11 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_database/firebase_database.dart';
 
@@ -14,7 +10,6 @@ class DrownCheck extends StatelessWidget {
   const DrownCheck({Key? key}) : super(key: key);
 
   void sendPushMessage() async {
-    FirebaseMessaging.instance.subscribeToTopic("Drowning");
     try {
       await http.post(
         Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -60,7 +55,7 @@ class DrownCheck extends StatelessWidget {
     stream.listen((DatabaseEvent event) {
       drown = '${event.snapshot.value}';
       print('Event Type: ${event.snapshot.value}');
-     
+
       if (drown == "1") {
         drowning = true;
         sendPushMessage();

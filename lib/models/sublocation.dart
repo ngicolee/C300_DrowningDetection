@@ -3,8 +3,6 @@
 import 'dart:ui';
 import 'package:c300drowningdetection/models/mainlocation.dart';
 
-import 'mainlocation.dart';
-
 class SubLocation extends MainLocation {
   String description;
   double? long;

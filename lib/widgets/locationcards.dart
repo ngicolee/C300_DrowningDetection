@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_this, prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: unnecessary_this, prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, prefer_interpolation_to_compose_strings
 
 import 'package:c300drowningdetection/models/mainlocation.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';

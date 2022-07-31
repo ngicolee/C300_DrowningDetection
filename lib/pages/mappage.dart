@@ -1,11 +1,7 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, unnecessary_this
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, unnecessary_this, constant_identifier_names, library_private_types_in_public_api, use_key_in_widget_constructors
 
 import 'dart:async';
-import 'dart:math';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:c300drowningdetection/helpers/utils.dart';
-import 'package:c300drowningdetection/models/sublocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../widgets/drowncheck.dart';

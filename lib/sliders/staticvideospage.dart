@@ -2,9 +2,8 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
-import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
-import 'package:flutter/cupertino.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

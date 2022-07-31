@@ -6,7 +6,6 @@ import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
-import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:flutter/material.dart';

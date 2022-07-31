@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, body_might_complete_normally_nullable, unused_element, avoid_print, unnecessary_new, sized_box_for_whitespace, use_key_in_widget_constructors, use_build_context_synchronously, no_leading_underscores_for_local_identifiers
 
-import 'package:c300drowningdetection/firebase_options.dart';
 import 'package:c300drowningdetection/helpers/appcolors.dart';
-import 'package:c300drowningdetection/pages/mainhomepage.dart';
 
 import 'package:c300drowningdetection/pages/testsplashscreen.dart';
-import 'package:c300drowningdetection/widgets/accountstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

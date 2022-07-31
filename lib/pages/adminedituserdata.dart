@@ -1,16 +1,12 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_new, sized_box_for_whitespace
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/adminpanelpage.dart';
-import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
-import 'package:c300drowningdetection/widgets/buttonswidget.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter/material.dart';
 
 class AdminEditUserData extends StatefulWidget {
