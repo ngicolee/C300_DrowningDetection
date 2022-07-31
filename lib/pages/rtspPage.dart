@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, file_names
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
+import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
@@ -20,6 +24,14 @@ void deviceOrientation() {
 }
 
 class _LiveStreamScreenState extends State<LiveStreamScreen> {
+  String userRights = "Guest";
+
+  @override
+  void initState() {
+    super.initState();
+    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DrownCheck().drownCheck();
+  }
   //bool _isPlaying = true;
 
   final VlcPlayerController _videoPlayerController =
@@ -29,6 +41,17 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
     autoPlay: true,
     options: VlcPlayerOptions(),
   );
+  void _checkRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user?.uid)
+        .get();
+
+    setState(() {
+      userRights = snap["userRights"];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +69,19 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
         leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => MainHomePage(),
-                ),
-              );
+              if (userRights == "Admin") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => MainHomePage(),
+                  ),
+                );
+              } else if (userRights == "Guest") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => GuestHomePage(),
+                  ),
+                );
+              }
             }),
         actions: <Widget>[
           IconButton(

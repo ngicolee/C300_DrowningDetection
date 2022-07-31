@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
-
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -33,6 +33,7 @@ class _VideoDemoState extends State<VideoDemo> {
     super.initState();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    DrownCheck().drownCheck;
   }
 
   @override
@@ -93,7 +94,7 @@ class _VideoDemoState extends State<VideoDemo> {
           });
         },
         child:
-            Icon(_controller.value.isPlaying ? Icons.pause: Icons.play_arrow),
+            Icon(_controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
       ),
     );
   }

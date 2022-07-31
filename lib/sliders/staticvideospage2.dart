@@ -3,6 +3,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
@@ -30,6 +31,7 @@ class _VideoDemo2State extends State<VideoDemo2> {
     super.initState();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+        DrownCheck().drownCheck;
   }
 
   @override

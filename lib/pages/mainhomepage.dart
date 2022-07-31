@@ -15,9 +15,11 @@ import 'package:c300drowningdetection/pages/searchingfunction.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
 import 'package:flutter/services.dart';
@@ -73,21 +75,8 @@ class _MainHomePageState extends State<MainHomePage> {
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  }
-
-  void alert() {
-    AlertDialog(
-      title: Text("Verify Email!"),
-      content: Text(
-          "You will be able to use the feature of Drowning Detection System.\nHowever, please do verify your email before continuing!"),
-    );
-  }
-
-  void verifyEmail() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (!(user!.emailVerified)) {
-      alert();
-    }
+    DrownCheck().drownCheck();
+    
   }
 
   Widget _buildCategoryCards(String image) {
@@ -259,7 +248,7 @@ class _MainHomePageState extends State<MainHomePage> {
               });
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => ProfilePage(),
+                  builder: (ctx) => DetectionSystemsPage(),
                 ),
               );
             },
@@ -463,7 +452,6 @@ class _MainHomePageState extends State<MainHomePage> {
   Widget build(BuildContext context) {
     pageProvider?.getUserData();
     pageProvider = Provider.of<PageProvider>(context);
-    verifyEmail();
     refresh();
 
     return Scaffold(

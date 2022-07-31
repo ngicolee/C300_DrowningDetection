@@ -3,6 +3,7 @@
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/guestlistitempage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class _CalendarPageState extends State<CalendarPage> {
   void initState() {
     super.initState();
     getUserId();
+    DrownCheck().drownCheck;
   }
 
   @override
@@ -91,10 +93,11 @@ class _CalendarPageState extends State<CalendarPage> {
               child: Text(
                 "Attendance History",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: screenWidth / 18,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,),
+                  color: Colors.black,
+                  fontSize: screenWidth / 18,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
             Stack(
@@ -143,7 +146,6 @@ class _CalendarPageState extends State<CalendarPage> {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: screenWidth / 18,
-                          
                           fontWeight: FontWeight.bold),
                     ),
                   ),

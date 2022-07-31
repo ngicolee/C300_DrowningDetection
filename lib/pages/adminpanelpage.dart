@@ -5,6 +5,7 @@ import 'package:c300drowningdetection/pages/adminedituserdata.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,13 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
   String userPhoneNumber = " ";
 
   bool editable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // _checkRole();
+    DrownCheck().drownCheck();
+  }
 
   Widget _buildSingleCont({required String label, required String dataText}) {
     return Card(

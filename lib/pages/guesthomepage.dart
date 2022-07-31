@@ -2,6 +2,7 @@
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/pages/attendancepage.dart';
+import 'package:c300drowningdetection/pages/detectionsystemspage.dart';
 import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
@@ -12,12 +13,14 @@ import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/provider/category_provider.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../models/usermodel.dart';
@@ -28,7 +31,6 @@ class GuestHomePage extends StatefulWidget {
   @override
   State<GuestHomePage> createState() => _GuestHomePageState();
 }
-
 
 Pages? qrdata;
 
@@ -55,6 +57,14 @@ class _GuestHomePageState extends State<GuestHomePage> {
     'https://www.enjoy-swimming.com/wp-content/uploads/swimming-pool-rules-2.jpg.webp',
     'https://i0.wp.com/www.theaqualife.ca/wp-content/uploads/2020/05/Water-safety-post.png?resize=480%2C402&ssl=1'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // _checkRole();
+    DrownCheck().drownCheck();
+  }
 
   Widget _buildCategoryCards(String image) {
     return CircleAvatar(
@@ -382,7 +392,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     // Page Route would be changed after completion of 'Detection System' pages
-                    builder: (ctx) => ProfilePage(),
+                    builder: (ctx) => DetectionSystemsPage(),
                   ),
                 );
               },
@@ -515,7 +525,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                                           child: CircularProgressIndicator(),
                                         );
                                       }
-                                      guestfeaturedSnapshot = snapshot;                                   
+                                      guestfeaturedSnapshot = snapshot;
                                       cameradata = Pages(
                                           image: snapshot.data.docs[0]["image"],
                                           mainName: snapshot.data.docs[0]
@@ -528,7 +538,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                                               ["mainname"],
                                           subName: snapshot.data.docs[6]
                                               ["subname"]);
-                                              
+
                                       return Container(
                                         height: double.infinity,
                                         width: double.infinity,

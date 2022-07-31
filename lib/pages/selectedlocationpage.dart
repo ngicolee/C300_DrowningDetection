@@ -4,6 +4,7 @@ import 'package:c300drowningdetection/models/mainlocation.dart';
 import 'package:c300drowningdetection/models/sublocation.dart';
 import 'package:c300drowningdetection/pages/poollocationdetails.dart';
 import 'package:c300drowningdetection/pages/poollocationpage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:c300drowningdetection/widgets/locationicons.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class SelectedLocationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DrownCheck().drownCheck;
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -6,6 +6,7 @@ import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -48,7 +49,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    _checkRole();
+    // _checkRole();
+    DrownCheck().drownCheck();
   }
 
   void _checkRole() async {

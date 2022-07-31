@@ -5,6 +5,7 @@ import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/guestlistitempage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _QRPageState extends State<QRPage> {
   void initState() {
     super.initState();
     _checkRole();
+    DrownCheck().drownCheck;
   }
 
   void _checkRole() async {

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_const_literals_to_create_immutables, unnecessary_this
+
 import 'dart:async';
 import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,59 +8,49 @@ import 'package:c300drowningdetection/helpers/utils.dart';
 import 'package:c300drowningdetection/models/sublocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../widgets/drowncheck.dart';
+
 const LatLng SOURCE_LOCATION = LatLng(1.4345187789881595, 103.77953147513655);
 const LatLng DEST_LOCATION = LatLng(42.743902, -71.170009);
 const double CAMERA_ZOOM = 16;
 const double CAMERA_TILT = 60;
 const double CAMERA_BEARING = 30;
 
-
-
 class MapPage extends StatefulWidget {
   //MapPage({Key? key}) : super(key: key);
-
 
   @override
   _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-
   final Completer<GoogleMapController> _controller = Completer();
-  late BitmapDescriptor  sourceIcon;
+  late BitmapDescriptor sourceIcon;
   late BitmapDescriptor destinationIcon;
 
   late LatLng currentLocation;
   late LatLng destinationLocation;
 
-
-
-
   List<Marker> markerss = [];
-
 
   @override
   void initState() {
     intilize();
     super.initState();
-
+    const DrownCheck().drownCheck;
 
     // Setting initial Location
   }
 
   intilize() {
-
-
     Marker Marker1 = Marker(
       markerId: MarkerId('Woodlands'),
-      position: LatLng(1.434430293831611,103.77953147513655),
+      position: LatLng(1.434430293831611, 103.77953147513655),
       infoWindow: InfoWindow(title: 'Woodlands Swimming Complex'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueRed,
+        BitmapDescriptor.hueRed,
       ),
     );
-
-
 
     Marker Marker2 = Marker(
       markerId: MarkerId('Yi Shun'),
@@ -117,7 +109,8 @@ class _MapPageState extends State<MapPage> {
     Marker Marker8 = Marker(
       markerId: MarkerId('Bedok ActiveSG'),
       position: LatLng(1.3272346640139023, 103.9322438837943),
-      infoWindow: InfoWindow(title: 'Heartbeat @ Bedok ActiveSG Swimming Complex'),
+      infoWindow:
+          InfoWindow(title: 'Heartbeat @ Bedok ActiveSG Swimming Complex'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
         BitmapDescriptor.hueRed,
       ),
@@ -152,7 +145,7 @@ class _MapPageState extends State<MapPage> {
 
     Marker Marker12 = Marker(
       markerId: MarkerId('Choa Chu Kang'),
-      position: LatLng( 1.3911713449646292, 103.74827477545645),
+      position: LatLng(1.3911713449646292, 103.74827477545645),
       infoWindow: InfoWindow(title: 'Choa Chu Kang Swimming Complex'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
         BitmapDescriptor.hueRed,
@@ -302,16 +295,7 @@ class _MapPageState extends State<MapPage> {
     markerss.add(Marker24);
     markerss.add(Marker25);
 
-
-
-
-
-    setState(() {
-      
-    });
-
-
-
+    setState(() {});
   }
 
   void setSourceAndDestinationMarkerIcons() async {
@@ -325,118 +309,92 @@ class _MapPageState extends State<MapPage> {
   }
 
   void setInitialLocation() {
-    currentLocation = LatLng(
-        SOURCE_LOCATION.latitude,
-        SOURCE_LOCATION.longitude
-    );
+    currentLocation =
+        LatLng(SOURCE_LOCATION.latitude, SOURCE_LOCATION.longitude);
 
-    destinationLocation = LatLng(
-        DEST_LOCATION.latitude,
-        DEST_LOCATION.longitude
-    );
+    destinationLocation =
+        LatLng(DEST_LOCATION.latitude, DEST_LOCATION.longitude);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
     this.setSourceAndDestinationMarkerIcons();
-    
+
     CameraPosition initialCameraPosition = const CameraPosition(
         zoom: CAMERA_ZOOM,
         tilt: CAMERA_TILT,
         bearing: CAMERA_BEARING,
-        target: SOURCE_LOCATION
-    );
-    
+        target: SOURCE_LOCATION);
+
     return Scaffold(
-      body:  Stack(
-        children: [
-          Positioned.fill(
-             child: GoogleMap(
-                myLocationEnabled: true,
-                compassEnabled: false,
-                tiltGesturesEnabled: false,
-                markers: markerss.map((e) => e).toSet(),
-                mapType: MapType.normal,
-                initialCameraPosition: initialCameraPosition,
-                onMapCreated: (GoogleMapController controller) {
-
-                  _controller.complete(controller);
-
-
-                },
-
-              )
-          ),
-          Positioned(
-            top: 70,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.all(12),
-              margin: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-              decoration: BoxDecoration(
+        body: Stack(
+      children: [
+        Positioned.fill(
+            child: GoogleMap(
+          myLocationEnabled: true,
+          compassEnabled: false,
+          tiltGesturesEnabled: false,
+          markers: markerss.map((e) => e).toSet(),
+          mapType: MapType.normal,
+          initialCameraPosition: initialCameraPosition,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+        )),
+        Positioned(
+          top: 70,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.all(12),
+            margin: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+            decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: Offset.zero
-                  )
-                ]
-              ),
-              child: Row(
-                children: [
-                  Container(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: Offset.zero)
+                ]),
+            child: Row(
+              children: [
+                Container(
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: DecorationImage(
-                        image: AssetImage('assets/imgs/human_icon.png'),
-                        fit: BoxFit.cover
+                        borderRadius: BorderRadius.circular(50),
+                        image: DecorationImage(
+                            image: AssetImage('assets/imgs/human_icon.png'),
+                            fit: BoxFit.cover),
+                        border: Border.all(color: Colors.blue, width: 1))),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Me',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.grey),
                       ),
-                      border: Border.all(
-                        color: Colors.blue,
-                        width: 1
+                      Text(
+                        'My Location',
+                        style: TextStyle(color: Colors.blue),
                       )
-                    )
+                    ],
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Me',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey
-                          ),
-                        ),
-                        Text('My Location',
-                          style: TextStyle(
-                            color: Colors.blue
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Icon(
-                    Icons.location_pin,
-                    color: Colors.lightGreenAccent[700],
-                    size: 40,
-                  )
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.location_pin,
+                  color: Colors.lightGreenAccent[700],
+                  size: 40,
+                )
+              ],
             ),
           ),
-        ],
-      )
-    );
+        ),
+      ],
+    ));
   }
-
-  
 }

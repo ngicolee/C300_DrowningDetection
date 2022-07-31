@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../widgets/drowncheck.dart';
+
 class MainRegistrationPage extends StatefulWidget {
   @override
   State<MainRegistrationPage> createState() => _MainRegistrationPageState();
@@ -133,6 +135,14 @@ class _MainRegistrationPageState extends State<MainRegistrationPage> {
         }
       } 
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DrownCheck().drownCheck();
+    
   }
 
   @override

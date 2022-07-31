@@ -11,9 +11,10 @@ import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/pages/rtspPage.dart';
-import 'package:c300drowningdetection/pages/smspage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/drowncheck.dart';
 
 class ListItemsPage extends StatelessWidget {
   final String name;
@@ -24,6 +25,7 @@ class ListItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DrownCheck().drownCheck();
     return Scaffold(
       appBar: AppBar(
         title: Text(

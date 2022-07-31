@@ -6,6 +6,7 @@ import 'package:c300drowningdetection/pages/adminpanelpage.dart';
 import 'package:c300drowningdetection/pages/listitempage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/widgets/buttonswidget.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -37,6 +38,13 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
   TextEditingController passwordController = new TextEditingController();
 
   bool isAdmin = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // _checkRole();
+    DrownCheck().drownCheck();
+  }
 
   Widget _buildSingleCont({required String label, required String dataText}) {
     return Card(
@@ -181,16 +189,17 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
                             children: [
                               Text(
                                 "User Rights (Tap here):",
-                                style: TextStyle(
-                                    color: Colors.grey, fontSize: 18
-                                    ),
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 18),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   isAdmin == true ? "Admin" : "Guest",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],

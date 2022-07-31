@@ -12,6 +12,7 @@ import 'package:c300drowningdetection/pages/rtspPage.dart';
 import 'package:c300drowningdetection/pages/samplevideospage.dart';
 import 'package:c300drowningdetection/provider/page_provider.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _AdminPageState extends State<AdminPage> {
     super.initState();
     _checkRole();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    DrownCheck().drownCheck;
   }
 
   void _checkRole() async {

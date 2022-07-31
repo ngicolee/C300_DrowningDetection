@@ -8,6 +8,7 @@ import 'package:c300drowningdetection/pages/poollocationpage.dart';
 import 'package:c300drowningdetection/pages/profilepage.dart';
 import 'package:c300drowningdetection/pages/qrpage.dart';
 import 'package:c300drowningdetection/widgets/categorisedpage.dart';
+import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:flutter/material.dart';
 
 class GuestListItemsPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class GuestListItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DrownCheck().drownCheck();
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -12,6 +12,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/drowncheck.dart';
+
 class PoolLocationPage extends StatefulWidget {
   @override
   State<PoolLocationPage> createState() => _PoolLocationPageState();
@@ -26,6 +28,7 @@ class _PoolLocationPageState extends State<PoolLocationPage> {
   void initState() {
     super.initState();
     _checkRole();
+    DrownCheck().drownCheck;
   }
 
   void _checkRole() async {
