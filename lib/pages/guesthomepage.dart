@@ -81,7 +81,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
 
   bool mapColor = false;
 
-  bool qrColor = false;
+  bool cameraColor = false;
 
   bool aboutColor = false;
 
@@ -117,13 +117,14 @@ class _GuestHomePageState extends State<GuestHomePage> {
       child: ListView(
         children: [
           _buildUserAccountDrawerHeader(),
+
           ListTile(
             selected: homeColor,
             onTap: () {
               setState(() {
                 homeColor = true;
                 mapColor = false;
-                qrColor = false;
+                cameraColor = false;
                 aboutColor = false;
                 attendanceColor = false;
                 profileColor = false;
@@ -138,12 +139,32 @@ class _GuestHomePageState extends State<GuestHomePage> {
             title: Text("Home"),
           ),
           ListTile(
+            selected: cameraColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                mapColor = false;
+                cameraColor = true;
+                aboutColor = false;
+                attendanceColor = false;
+                profileColor = false;
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => DetectionSystemsPage(),
+                  ),
+                );
+              });
+            },
+            leading: Icon(Icons.camera_alt),
+            title: Text("Detection Systems"),
+          ),
+          ListTile(
             selected: mapColor,
             onTap: () {
               setState(() {
                 homeColor = false;
                 mapColor = true;
-                qrColor = false;
+                cameraColor = false;
                 aboutColor = false;
                 attendanceColor = false;
                 profileColor = false;
@@ -157,26 +178,6 @@ class _GuestHomePageState extends State<GuestHomePage> {
             leading: Icon(Icons.map_sharp),
             title: Text("Google Maps"),
           ),
-          // ListTile(
-          //   selected: qrColor,
-          //   onTap: () {
-          //     setState(() {
-          //       homeColor = false;
-          //       mapColor = false;
-          //       qrColor = true;
-          //       aboutColor = false;
-          //       attendanceColor = false;
-          //       profileColor = false;
-          //       Navigator.of(context).pushReplacement(
-          //         MaterialPageRoute(
-          //           builder: (ctx) => QRPage(),
-          //         ),
-          //       );
-          //     });
-          //   },
-          //   leading: Icon(Icons.qr_code),
-          //   title: Text("QR Code Scanner"),
-          // ),
 
           ListTile(
             selected: attendanceColor,
@@ -184,7 +185,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
               setState(() {
                 homeColor = false;
                 mapColor = false;
-                qrColor = false;
+                cameraColor = false;
                 aboutColor = false;
                 attendanceColor = true;
                 profileColor = false;
@@ -204,7 +205,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
               setState(() {
                 homeColor = false;
                 mapColor = false;
-                qrColor = false;
+                cameraColor = false;
                 aboutColor = false;
                 attendanceColor = false;
                 profileColor = true;
@@ -224,7 +225,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
           //     setState(() {
           //       homeColor = false;
           //       mapColor = false;
-          //       qrColor = false;
+          //       cameraColor = false;
           //       aboutColor = true;
           //       attendanceColor = false;
           //       profileColor = false;
