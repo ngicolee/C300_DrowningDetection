@@ -85,7 +85,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
 
   bool aboutColor = false;
 
-  bool contactUsColor = false;
+  bool attendanceColor = false;
 
   bool profileColor = false;
 
@@ -125,7 +125,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 mapColor = false;
                 qrColor = false;
                 aboutColor = false;
-                contactUsColor = false;
+                attendanceColor = false;
                 profileColor = false;
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
@@ -145,7 +145,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 mapColor = true;
                 qrColor = false;
                 aboutColor = false;
-                contactUsColor = false;
+                attendanceColor = false;
                 profileColor = false;
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
@@ -157,55 +157,41 @@ class _GuestHomePageState extends State<GuestHomePage> {
             leading: Icon(Icons.map_sharp),
             title: Text("Google Maps"),
           ),
+          // ListTile(
+          //   selected: qrColor,
+          //   onTap: () {
+          //     setState(() {
+          //       homeColor = false;
+          //       mapColor = false;
+          //       qrColor = true;
+          //       aboutColor = false;
+          //       attendanceColor = false;
+          //       profileColor = false;
+          //       Navigator.of(context).pushReplacement(
+          //         MaterialPageRoute(
+          //           builder: (ctx) => QRPage(),
+          //         ),
+          //       );
+          //     });
+          //   },
+          //   leading: Icon(Icons.qr_code),
+          //   title: Text("QR Code Scanner"),
+          // ),
+
           ListTile(
-            selected: qrColor,
-            onTap: () {
-              setState(() {
-                homeColor = false;
-                mapColor = false;
-                qrColor = true;
-                aboutColor = false;
-                contactUsColor = false;
-                profileColor = false;
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (ctx) => QRPage(),
-                  ),
-                );
-              });
-            },
-            leading: Icon(Icons.qr_code),
-            title: Text("QR Code Scanner"),
-          ),
-          ListTile(
-            selected: aboutColor,
-            onTap: () {
-              setState(() {
-                homeColor = false;
-                mapColor = false;
-                qrColor = false;
-                aboutColor = true;
-                contactUsColor = false;
-                profileColor = false;
-              });
-            },
-            leading: Icon(Icons.info),
-            title: Text("About"),
-          ),
-          ListTile(
-            selected: contactUsColor,
+            selected: attendanceColor,
             onTap: () {
               setState(() {
                 homeColor = false;
                 mapColor = false;
                 qrColor = false;
                 aboutColor = false;
-                contactUsColor = true;
+                attendanceColor = true;
                 profileColor = false;
               });
             },
-            leading: Icon(Icons.phone),
-            title: Text("Contact Us"),
+            leading: Icon(Icons.book),
+            title: Text("Attendance"),
           ),
           ListTile(
             selected: profileColor,
@@ -215,7 +201,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
                 mapColor = false;
                 qrColor = false;
                 aboutColor = false;
-                contactUsColor = false;
+                attendanceColor = false;
                 profileColor = true;
               });
               Navigator.of(context).pushReplacement(
@@ -227,6 +213,21 @@ class _GuestHomePageState extends State<GuestHomePage> {
             leading: Icon(Icons.person),
             title: Text("Profile"),
           ),
+          // ListTile(
+          //   selected: aboutColor,
+          //   onTap: () {
+          //     setState(() {
+          //       homeColor = false;
+          //       mapColor = false;
+          //       qrColor = false;
+          //       aboutColor = true;
+          //       attendanceColor = false;
+          //       profileColor = false;
+          //     });
+          //   },
+          //   leading: Icon(Icons.info),
+          //   title: Text("About"),
+          // ),
           ListTile(
             onTap: () {
               FirebaseAuth.instance.signOut();

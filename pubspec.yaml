@@ -73,6 +73,9 @@ dependencies:
   # Firebase Database
   firebase_database: ^9.0.20
 
+  # Flutter Bar Code Scanner
+  flutter_barcode_scanner: ^2.0.0
+
   # MQTT
   # mqtt_client: ^9.7.0
 

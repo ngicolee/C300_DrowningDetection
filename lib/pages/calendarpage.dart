@@ -82,7 +82,7 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         child: Column(
           children: [
             Container(
@@ -139,9 +139,9 @@ class _CalendarPageState extends State<CalendarPage> {
                       }
                     },
                     child: Text(
-                      "Select a Month",
+                      "Select a Month Here",
                       style: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.MAIN_COLOR,
                           fontSize: screenWidth / 18,
                           fontWeight: FontWeight.bold),
                     ),
@@ -160,9 +160,9 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 5),
             Container(
-              height: screenHeight / 1.45,
+              height: screenHeight / 1.55,
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("users")

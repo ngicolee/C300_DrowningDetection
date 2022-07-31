@@ -44,7 +44,7 @@ class Utils {
       MainLocation(
           color: Colors.purple,
           name: "North-East",
-          imgName: "ComingSoon",
+          imgName: "WhiteBackground",
           direction: "North-East",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: [
@@ -100,7 +100,7 @@ class Utils {
       MainLocation(
           color: Colors.green,
           name: "East",
-          imgName: "ComingSoon",
+          imgName: "WhiteBackground",
           direction: "East",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: [
@@ -156,7 +156,7 @@ class Utils {
       MainLocation(
           color: Colors.lightGreen,
           name: "West",
-          imgName: "ComingSoon",
+          imgName: "WhiteBackground",
           direction: "West",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: [
@@ -248,7 +248,7 @@ class Utils {
       MainLocation(
           color: AppColors.MAIN_COLOR,
           name: "Central",
-          imgName: "ComingSoon",
+          imgName: "WhiteBackground",
           direction: "Central",
           icon: IconFontHelper.MORE_DOTS,
           subCategories: [

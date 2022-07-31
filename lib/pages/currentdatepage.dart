@@ -10,6 +10,7 @@ import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -34,10 +35,167 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
   String checkIn = "--/--";
   String checkOut = "--/--";
   String location = " ";
+  String scanResult = " ";
+  String poolQRCode = " ";
 
   User? currentUser = FirebaseAuth.instance.currentUser;
 
   bool loadPage = false;
+
+  Future<void> scanQRandCheck() async {
+    String result = " ";
+    try {
+      result = await FlutterBarcodeScanner.scanBarcode(
+          '#ffffff', "Cancel QR Code", false, ScanMode.QR);
+    } catch (e) {
+      print("Error");
+    }
+    setState(() {
+      scanResult = result;
+    });
+
+    if (scanResult == poolQRCode) {
+      if (UserModel.lat != 0) {
+        _getLocation();
+
+        QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
+            .instance
+            .collection("users")
+            .where("userId", isEqualTo: userId)
+            .get();
+        for (var element in snap.docs) {
+          if (currentUser?.uid == element.data()["userId"]) {
+            userId = element.data()["userId"];
+          }
+        }
+
+        DocumentSnapshot docSnap = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(snap.docs[0].id)
+            .collection("record")
+            .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+            .get();
+
+        try {
+          String checkIn = docSnap['checkIn'];
+
+          setState(() {
+            checkOut = DateFormat('hh:mm').format(DateTime.now());
+          });
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(snap.docs[0].id)
+              .collection("record")
+              .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+              .update(
+            {
+              'checkIn': checkIn,
+              'date': Timestamp.now(),
+              'checkOut': DateFormat('hh:mm').format(DateTime.now()),
+              'checkOutLocation': location,
+            },
+          );
+        } catch (e) {
+          setState(() {
+            checkIn = DateFormat('hh:mm').format(DateTime.now());
+          });
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(snap.docs[0].id)
+              .collection("record")
+              .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+              .set(
+            {
+              'checkIn': DateFormat('hh:mm').format(
+                DateTime.now(),
+              ),
+              'date': Timestamp.now(),
+              'checkOut': "--/--",
+              'checkInLocation': location,
+            },
+          );
+        }
+      } else {
+        Timer(
+          Duration(seconds: 3),
+          () async {
+            if (UserModel.lat != 0) {
+              _getLocation();
+
+              QuerySnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
+                  .instance
+                  .collection("users")
+                  .where("userId", isEqualTo: userId)
+                  .get();
+              for (var element in snap.docs) {
+                if (currentUser?.uid == element.data()["userId"]) {
+                  userId = element.data()["userId"];
+                }
+              }
+
+              DocumentSnapshot docSnap = await FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(snap.docs[0].id)
+                  .collection("record")
+                  .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+                  .get();
+
+              try {
+                String checkIn = docSnap['checkIn'];
+
+                setState(() {
+                  checkOut = DateFormat('hh:mm').format(DateTime.now());
+                });
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(snap.docs[0].id)
+                    .collection("record")
+                    .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+                    .update(
+                  {
+                    'checkIn': checkIn,
+                    'date': Timestamp.now(),
+                    'checkOut': DateFormat('hh:mm').format(DateTime.now()),
+                    'checkOutLocation': location,
+                  },
+                );
+              } catch (e) {
+                setState(() {
+                  checkIn = DateFormat('hh:mm').format(DateTime.now());
+                });
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(snap.docs[0].id)
+                    .collection("record")
+                    .doc(DateFormat('dd MMMM yyyy').format(DateTime.now()))
+                    .set(
+                  {
+                    'checkIn': DateFormat('hh:mm').format(
+                      DateTime.now(),
+                    ),
+                    'date': Timestamp.now(),
+                    'checkOut': "--/--",
+                    'checkInLocation': location,
+                  },
+                );
+              }
+            }
+          },
+        );
+      }
+    }
+  }
+
+  void _getPoolQRCode() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection("attributes")
+        .doc("Swimming Pool 1")
+        .get();
+
+    setState(() {
+      poolQRCode = snap['qrcode'];
+    });
+  }
 
   void _getLocation() async {
     List<Placemark> placeMark =
@@ -77,6 +235,7 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _getRecords());
     DrownCheck().drownCheck;
+    _getPoolQRCode();
   }
 
   void _getRecords() async {
@@ -273,7 +432,7 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                 }),
             checkOut == "--/--"
                 ? Container(
-                    margin: const EdgeInsets.only(top: 24, bottom: 12),
+                    margin: const EdgeInsets.only(top: 12, bottom: 22),
                     child: Builder(
                       builder: (context) {
                         final GlobalKey<SlideActionState> slideKey =
@@ -445,14 +604,88 @@ class _CurrentDatePageState extends State<CurrentDatePage> {
                     ),
                   )
                 : Container(
-                    margin: EdgeInsets.only(top: 32, bottom: 32),
-                    child: Text(
-                      "You have completed today's attendance!",
-                      style: TextStyle(
-                          color: Colors.black, fontSize: screenWidth / 20),
+                    width: screenWidth,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.MAIN_COLOR,
+                          offset: Offset(2, 2),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                    margin: EdgeInsets.only(top: 32, bottom: 12),
+                    child: Center(
+                      child: Text(
+                        "Completed Today's Attendance",
+                        style: TextStyle(
+                            color: AppColors.MAIN_COLOR,
+                            fontSize: screenWidth / 20),
+                      ),
                     ),
                   ),
-            location != " " ? Text("Location: " + location) : const SizedBox(),
+            location != " "
+                ? Text(
+                    "Location: " + location,
+                    style: TextStyle(
+                      color: AppColors.MAIN_COLOR,
+                    ),
+                  )
+                : const SizedBox(),
+            SizedBox(
+              height: 10,
+            ),
+            checkOut == "--/--"
+                ? GestureDetector(
+                    onTap: () {
+                      scanQRandCheck();
+                    },
+                    child: Container(
+                      height: screenWidth / 2.5,
+                      width: screenWidth / 2,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.MAIN_COLOR,
+                            offset: Offset(2, 2),
+                            blurRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Icon(Icons.crop_square_rounded,
+                                  size: 65, color: AppColors.MAIN_COLOR),
+                              Icon(Icons.camera_alt_rounded,
+                                  size: 25, color: AppColors.MAIN_COLOR),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            child: Text(
+                              checkIn == "--/--"
+                                  ? "Scan to Check In"
+                                  : "Scan to Check Out",
+                              style: TextStyle(
+                                  color: AppColors.MAIN_COLOR,
+                                  fontSize: screenWidth / 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox(),
           ],
         ),
       ),
