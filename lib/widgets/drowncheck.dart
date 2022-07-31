@@ -40,7 +40,7 @@ class DrownCheck extends StatelessWidget {
   }
 
   Future<bool> drownCheck() async {
-    String drown = "0";
+    String drown = "0_All_Clear";
     bool drowning = false;
 
     // DocumentSnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
@@ -56,7 +56,7 @@ class DrownCheck extends StatelessWidget {
       drown = '${event.snapshot.value}';
       print('Event Type: ${event.snapshot.value}');
 
-      if (drown == "1") {
+      if (drown == "1_Drowning_Detected") {
         drowning = true;
         sendPushMessage();
       } else {
