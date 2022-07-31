@@ -68,6 +68,9 @@ dependencies:
   # Flutter Location Notifications
   flutter_local_notifications: ^9.7.0
 
+  # Firebase Database
+  firebase_database: ^9.0.20
+
   # MQTT
   # mqtt_client: ^9.7.0
 

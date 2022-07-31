@@ -8,6 +8,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_database/firebase_database.dart';
 
 class DrownCheck extends StatelessWidget {
   const DrownCheck({Key? key}) : super(key: key);
@@ -47,20 +48,27 @@ class DrownCheck extends StatelessWidget {
     String drown = "0";
     bool drowning = false;
 
-    DocumentSnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
-        .instance
-        .collection("drowning")
-        .doc("SfrIbW6CA8t4ymLTpmQ3")
-        .get();
+    // DocumentSnapshot<Map<String, dynamic>> snap = await FirebaseFirestore
+    //     .instance
+    //     .collection("drowning")
+    //     .doc("SfrIbW6CA8t4ymLTpmQ3")
+    //     .get();
+    // drown = snap['drown'];
+    DatabaseReference ref = FirebaseDatabase.instance.ref("DetectedDrowning");
+    Stream<DatabaseEvent> stream = ref.onValue;
 
-    drown = snap['drown'];
+    stream.listen((DatabaseEvent event) {
+      drown = '${event.snapshot.value}';
+      print('Event Type: ${event.snapshot.value}');
+     
+      if (drown == "1") {
+        drowning = true;
+        sendPushMessage();
+      } else {
+        drowning = false;
+      }
+    });
 
-    if (drown == "1") {
-      drowning = true;
-      sendPushMessage();
-    } else {
-      drowning = false;
-    }
     return drowning;
   }
 

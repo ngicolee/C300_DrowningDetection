@@ -3,7 +3,6 @@
 // import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 //import 'package:c300drowningdetection/pages/mainwelcomepage.dart';
 
-
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/mqt_model.dart';
 
@@ -11,6 +10,7 @@ import 'package:c300drowningdetection/pages/mainloginpage.dart';
 import 'package:c300drowningdetection/pages/testsplashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:month_year_picker/month_year_picker.dart';
@@ -28,7 +28,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseDatabase database = FirebaseDatabase.instance;
   runApp(MyApp());
 }
 
