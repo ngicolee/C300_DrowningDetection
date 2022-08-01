@@ -219,26 +219,26 @@ class _MainHomePageState extends State<MainHomePage> {
           //   leading: Icon(Icons.info),
           //   title: Text("About"),
           // ),
-          ListTile(
-            selected: attendanceColor,
-            onTap: () {
-              setState(() {
-                homeColor = false;
-                mapColor = false;
-                cameraColor = false;
-                aboutColor = false;
-                attendanceColor = true;
-                profileColor = false;
-              });
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => AttendancePage(),
-                ),
-              );
-            },
-            leading: Icon(Icons.book),
-            title: Text("Attendance"),
-          ),
+          // ListTile(
+          //   selected: attendanceColor,
+          //   onTap: () {
+          //     setState(() {
+          //       homeColor = false;
+          //       mapColor = false;
+          //       cameraColor = false;
+          //       aboutColor = false;
+          //       attendanceColor = true;
+          //       profileColor = false;
+          //     });
+          //     Navigator.of(context).pushReplacement(
+          //       MaterialPageRoute(
+          //         builder: (ctx) => AttendancePage(),
+          //       ),
+          //     );
+          //   },
+          //   leading: Icon(Icons.book),
+          //   title: Text("Attendance"),
+          // ),
           ListTile(
             selected: profileColor,
             onTap: () {
@@ -475,10 +475,10 @@ class _MainHomePageState extends State<MainHomePage> {
               _key.currentState?.openDrawer();
             }),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications_none, color: Colors.white),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.notifications_none, color: Colors.white),
+          //   onPressed: () {},
+          // ),
         ],
       ),
       body: Padding(

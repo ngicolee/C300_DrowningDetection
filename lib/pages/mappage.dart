@@ -33,7 +33,7 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     intilize();
     super.initState();
-    const DrownCheck().drownCheck;
+    DrownCheck().drownCheck;
 
     // Setting initial Location
   }

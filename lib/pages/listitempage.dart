@@ -54,9 +54,9 @@ class _ListItemsPageState extends State<ListItemsPage> {
           },
         ),
         actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.notifications_none, color: Colors.white),
-              onPressed: () {}),
+          // IconButton(
+          //     icon: Icon(Icons.notifications_none, color: Colors.white),
+          //     onPressed: () {}),
         ],
       ),
       body: Container(

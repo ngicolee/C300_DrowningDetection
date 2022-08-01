@@ -73,6 +73,9 @@ dependencies:
   # Firebase Database
   firebase_database: ^9.0.20
 
+  # Firebase Analytics
+  firebase_analytics: ^9.3.0
+
   # Flutter Bar Code Scanner
   flutter_barcode_scanner: ^2.0.0
 

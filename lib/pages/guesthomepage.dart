@@ -15,6 +15,7 @@ import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:c300drowningdetection/models/pages.dart';
 import 'package:flutter/services.dart';
@@ -60,7 +61,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
     super.initState();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     // _checkRole();
-    DrownCheck().drownCheck();
+    DrownCheck().drownCheck;
   }
 
   Widget _buildCategoryCards(String image) {
@@ -449,14 +450,14 @@ class _GuestHomePageState extends State<GuestHomePage> {
               _key.currentState?.openDrawer();
             }),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.notifications_none, color: Colors.white),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.search, color: Colors.white),
+          //   onPressed: () {},
+          // ),
+          // IconButton(
+          //   icon: Icon(Icons.notifications_none, color: Colors.white),
+          //   onPressed: () {},
+          // ),
         ],
       ),
       body: Padding(

@@ -102,21 +102,21 @@ class _AdminPageState extends State<AdminPage> {
                     subname: createUser!.subName,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        // Page Route would be changed after completion of 'Pool Locations' pages
-                        builder: (ctx) => AdminDeleteUserPage(),
-                      ),
-                    );
-                  },
-                  child: CategorisedPage(
-                    image: deleteUser!.image,
-                    name: deleteUser!.mainName,
-                    subname: deleteUser!.subName,
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).pushReplacement(
+                //       MaterialPageRoute(
+                //         // Page Route would be changed after completion of 'Pool Locations' pages
+                //         builder: (ctx) => AdminDeleteUserPage(),
+                //       ),
+                //     );
+                //   },
+                //   child: CategorisedPage(
+                //     image: deleteUser!.image,
+                //     name: deleteUser!.mainName,
+                //     subname: deleteUser!.subName,
+                //   ),
+                // ),
               ]),
         ),
       ],

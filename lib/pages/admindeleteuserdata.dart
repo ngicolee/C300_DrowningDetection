@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, unnecessary_new, sized_box_for_whitespace, non_constant_identifier_names
 
 import 'package:c300drowningdetection/helpers/appcolors.dart';
 import 'package:c300drowningdetection/models/usermodel.dart';
 import 'package:c300drowningdetection/pages/adminpanelpage.dart';
-import 'package:c300drowningdetection/pages/guesthomepage.dart' as prefix;
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/widgets/drowncheck.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,14 +10,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
-class AdminEditUserData extends StatefulWidget {
+class AdminDeleteUserData extends StatefulWidget {
   final String uid;
   final String email;
   final String user;
   final String userRights;
   final String phoneNumber;
 
-  const AdminEditUserData(
+  const AdminDeleteUserData(
       {Key? key,
       required this.uid,
       required this.email,
@@ -28,34 +27,20 @@ class AdminEditUserData extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<AdminEditUserData> createState() => _AdminEditUserDataState();
+  State<AdminDeleteUserData> createState() => _AdminDeleteUserDataState();
 }
 
-class _AdminEditUserDataState extends State<AdminEditUserData> {
+class _AdminDeleteUserDataState extends State<AdminDeleteUserData> {
   TextEditingController userRightsController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
   bool isAdmin = false;
-
-  String userRights = "Guest";
 
   @override
   void initState() {
     super.initState();
     // _checkRole();
     DrownCheck().drownCheck();
-  }
-
-  void _checkRole() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    final DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(user?.uid)
-        .get();
-
-    setState(() {
-      userRights = snap["userRights"];
-    });
   }
 
   Widget _buildSingleCont({required String label, required String dataText}) {
@@ -105,6 +90,8 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
               _buildSingleCont(label: "User Name: ", dataText: widget.user),
               _buildSingleCont(
                   label: "Phone Number:", dataText: widget.phoneNumber),
+              _buildSingleCont(
+                  label: "User Rights:", dataText: widget.userRights),
             ],
           ),
         );
@@ -117,30 +104,21 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Admin Panel",
+          "Delete User",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: AppColors.MAIN_COLOR,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            if (userRights == "Admin") {
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => MainHomePage(),
+                  builder: (ctx) => AdminPanelPage(),
                 ),
               );
-            } else if (userRights == "Guest") {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (ctx) => prefix.GuestHomePage(),
-                ),
-              );
-            }
-          },
-        ),
+            }),
       ),
       body: Container(
         height: double.infinity,
@@ -165,73 +143,6 @@ class _AdminEditUserDataState extends State<AdminEditUserData> {
               ),
             ),
             _buildContainer(),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        String role = "";
-                        bool newRole = isAdmin;
-                        if (newRole == false) {
-                          role = "Admin";
-                        } else {
-                          role = "Guest";
-                        }
-
-                        FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(widget.uid)
-                            .update(
-                          {'userRights': role},
-                        );
-                        setState(() {
-                          isAdmin = !isAdmin;
-                        });
-                      },
-                      child: Container(
-                        height: 60,
-                        padding: EdgeInsets.only(left: 10),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "User Rights (Tap here):",
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 18),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  isAdmin == true ? "Admin" : "Guest",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),

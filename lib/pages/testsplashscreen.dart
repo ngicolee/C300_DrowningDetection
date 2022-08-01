@@ -1,7 +1,5 @@
 // ignore_for_file: annotate_overrides, unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, use_build_context_synchronously, avoid_print, unnecessary_brace_in_string_interps, unused_field, unrelated_type_equality_checks, unused_element, unnecessary_string_interpolations
 
-
-
 import 'package:c300drowningdetection/pages/guesthomepage.dart';
 import 'package:c300drowningdetection/pages/mainhomepage.dart';
 import 'package:c300drowningdetection/pages/mainloginpage.dart';
@@ -87,11 +85,12 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
   void loadFirebaseMessaging() async {
     if (!kIsWeb) {
       channel = const AndroidNotificationChannel(
-        'high_importance_channel', // id
-        'High Importance Notifications', // title
-        importance: Importance.high,
-        enableVibration: true,
-      );
+          'high_importance_channel', // id
+          'High Importance Notifications', // title
+          importance: Importance.high,
+          enableVibration: true,
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound('mixkit-siren-tone-1649'));
 
       flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -142,6 +141,7 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
     }
 
     if (!(user!.emailVerified)) {
+      user.sendEmailVerification();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (ctx) => new MainLoginPage(),
@@ -155,23 +155,17 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
       );
     } else {
       if (userRights == "Guest") {
-        // _connect();
         verifyEmail();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) =>
-                // new YourMother(),
-                new GuestHomePage(),
+            builder: (ctx) => new GuestHomePage(),
           ),
         );
       } else if (userRights == "Admin") {
-        // _connect();
         verifyEmail();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (ctx) =>
-                // new YourMother(),
-                new MainHomePage(),
+            builder: (ctx) => new MainHomePage(),
           ),
         );
       } else {
