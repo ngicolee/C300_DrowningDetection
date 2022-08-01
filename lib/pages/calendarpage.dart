@@ -118,7 +118,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                     onSecondary: Colors.white),
                                 textButtonTheme: TextButtonThemeData(
                                   style: TextButton.styleFrom(
-                                      foregroundColor: AppColors.MAIN_COLOR),
+                                      backgroundColor: AppColors.MAIN_COLOR),
                                 ),
                                 textTheme: const TextTheme(
                                   headline4:

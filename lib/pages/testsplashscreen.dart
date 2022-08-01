@@ -156,6 +156,7 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
     } else {
       if (userRights == "Guest") {
         verifyEmail();
+        FirebaseMessaging.instance.subscribeToTopic("Drowning");
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (ctx) => new GuestHomePage(),
@@ -163,6 +164,7 @@ class _TestSplashScreenState extends State<TestSplashScreen> {
         );
       } else if (userRights == "Admin") {
         verifyEmail();
+        FirebaseMessaging.instance.subscribeToTopic("Drowning");
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (ctx) => new MainHomePage(),
